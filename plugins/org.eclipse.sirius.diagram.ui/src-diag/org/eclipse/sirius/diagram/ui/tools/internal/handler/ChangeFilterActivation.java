@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Obeo - initial API and implementation
+ *    SAMSUNG - fix defect 533688 
  *******************************************************************************/
 package org.eclipse.sirius.diagram.ui.tools.internal.handler;
 
@@ -155,6 +156,12 @@ public class ChangeFilterActivation extends AbstractChangeActivation {
             }
         } catch (final InterruptedException e) {
             ConcernService.setCurrentConcern(diagram, oldConcern);
+            //fix defect 533688 (https://bugs.eclipse.org/bugs/show_bug.cgi?id=533688)
+            //base on function setCurrentConcern clear the activatedFilters.
+            //only add abandoned the filters into activatedFilters again.
+            if (activatedFiltersCopy.size() > 0) {
+                activatedFilters.addAll(activatedFiltersCopy);
+            }
         }
     }
 
