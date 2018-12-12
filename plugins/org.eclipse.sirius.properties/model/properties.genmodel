@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2016 Obeo.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;   Obeo - initial API and implementation&#xA;"
+    modelDirectory="/org.eclipse.sirius.properties/src-gen" creationIcons="false"
+    editDirectory="/org.eclipse.sirius.properties.edit/src-gen" editorDirectory=""
+    modelPluginID="org.eclipse.sirius.properties" modelName="Properties" modelPluginClass=""
+    editorPluginClass="" nonNLSMarkers="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" testsDirectory="" testSuiteClass="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editorPluginID="org.eclipse.sirius.properties.editor"
+    testsPluginID="org.eclipse.sirius.properties.editor" runtimeVersion="2.3" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.sirius/model/viewpoint.genmodel#//viewpoint"
+    importOrganizing="true" cleanup="true">
+  <foreignModel>properties.ecore</foreignModel>
+  <genPackages prefix="Properties" basePackage="org.eclipse.sirius" disposableProviderFactory="true"
+      extensibleProviderFactory="true" childCreationExtenders="true" ecorePackage="properties.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="properties.ecore#//FILL_LAYOUT_ORIENTATION">
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//FILL_LAYOUT_ORIENTATION/VERTICAL"/>
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//FILL_LAYOUT_ORIENTATION/HORIZONTAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="properties.ecore#//ToggleStyle">
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//ToggleStyle/TWISTIE"/>
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//ToggleStyle/TREE_NODE"/>
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//ToggleStyle/NONE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="properties.ecore#//TitleBarStyle">
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//TitleBarStyle/TITLE_BAR"/>
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//TitleBarStyle/SHORT_TITLE_BAR"/>
+      <genEnumLiterals ecoreEnumLiteral="properties.ecore#//TitleBarStyle/NO_TITLE"/>
+    </genEnums>
+    <genClasses ecoreClass="properties.ecore#//ViewExtensionDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//ViewExtensionDescription/identifier"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//ViewExtensionDescription/metamodels"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory=""
+          ecoreFeature="ecore:EReference properties.ecore#//ViewExtensionDescription/pages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ViewExtensionDescription/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//PageDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//PageDescription/identifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//PageDescription/labelExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//PageDescription/domainClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//PageDescription/semanticCandidateExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//PageDescription/preconditionExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//PageDescription/groups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//PageDescription/validationSet"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//PageValidationSetDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//PageValidationSetDescription/semanticValidationRules"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//PropertyValidationRule">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//PropertyValidationRule/targets"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//GroupDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupDescription/identifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupDescription/labelExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupDescription/domainClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupDescription/semanticCandidateExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupDescription/preconditionExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupDescription/controls"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupDescription/validationSet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//GroupValidationSetDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupValidationSetDescription/semanticValidationRules"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupValidationSetDescription/propertyValidationRules"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="properties.ecore#//ControlDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//ControlDescription/identifier"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//ContainerDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ContainerDescription/controls"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ContainerDescription/layout"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="properties.ecore#//LayoutDescription"/>
+    <genClasses ecoreClass="properties.ecore#//FillLayoutDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//FillLayoutDescription/orientation"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//GridLayoutDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GridLayoutDescription/numberOfColumns"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GridLayoutDescription/makeColumnsWithEqualWidth"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="properties.ecore#//WidgetDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetDescription/labelExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetDescription/helpExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetDescription/isEnabledExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//TextDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//TextDescription/valueExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//TextDescription/initialOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//TextDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//TextDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//ButtonDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//ButtonDescription/buttonLabelExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ButtonDescription/initialOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ButtonDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ButtonDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//LabelDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//LabelDescription/valueExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//LabelDescription/displayExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//LabelDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//LabelDescription/conditionalStyles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//LabelDescription/actions"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CheckboxDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//CheckboxDescription/valueExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CheckboxDescription/initialOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CheckboxDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CheckboxDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//SelectDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//SelectDescription/valueExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//SelectDescription/initialOperation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//SelectDescription/candidatesExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//SelectDescription/candidateDisplayExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//SelectDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//SelectDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//DynamicMappingFor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//DynamicMappingFor/iterator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//DynamicMappingFor/iterableExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//DynamicMappingFor/ifs"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//DynamicMappingIf">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//DynamicMappingIf/predicateExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//DynamicMappingIf/widget"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//TextAreaDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//TextAreaDescription/lineCount"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//RadioDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//RadioDescription/valueExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//RadioDescription/initialOperation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//RadioDescription/candidatesExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//RadioDescription/candidateDisplayExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//RadioDescription/style"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//RadioDescription/numberOfColumns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//RadioDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//ListDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//ListDescription/valueExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//ListDescription/displayExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ListDescription/onClickOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ListDescription/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ListDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ListDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//OperationDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//OperationDescription/initialOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CustomDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CustomDescription/customExpressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CustomDescription/customOperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CustomDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CustomDescription/conditionalStyles"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CustomExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//CustomExpression/identifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//CustomExpression/customExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CustomOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//CustomOperation/identifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CustomOperation/initialOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//HyperlinkDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//HyperlinkDescription/valueExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//HyperlinkDescription/displayExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//HyperlinkDescription/initialOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//HyperlinkDescription/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//HyperlinkDescription/conditionalStyles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//HyperlinkDescription/actions"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//WidgetStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetStyle/labelFontNameExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetStyle/labelFontSizeExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//WidgetStyle/labelBackgroundColor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//WidgetStyle/labelForegroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetStyle/labelFontFormat"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//TextWidgetStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//TextWidgetStyle/fontNameExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//TextWidgetStyle/fontSizeExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//TextWidgetStyle/backgroundColor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//TextWidgetStyle/foregroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//TextWidgetStyle/fontFormat"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//LabelWidgetStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//LabelWidgetStyle/fontNameExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//LabelWidgetStyle/fontSizeExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//LabelWidgetStyle/backgroundColor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//LabelWidgetStyle/foregroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//LabelWidgetStyle/fontFormat"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CheckboxWidgetStyle"/>
+    <genClasses ecoreClass="properties.ecore#//RadioWidgetStyle"/>
+    <genClasses ecoreClass="properties.ecore#//ButtonWidgetStyle"/>
+    <genClasses ecoreClass="properties.ecore#//SelectWidgetStyle"/>
+    <genClasses ecoreClass="properties.ecore#//CustomWidgetStyle"/>
+    <genClasses ecoreClass="properties.ecore#//ListWidgetStyle"/>
+    <genClasses ecoreClass="properties.ecore#//HyperlinkWidgetStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//HyperlinkWidgetStyle/fontNameExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//HyperlinkWidgetStyle/fontSizeExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//HyperlinkWidgetStyle/backgroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//HyperlinkWidgetStyle/fontFormat"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//GroupStyle">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//GroupStyle/backgroundColor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference properties.ecore#//GroupStyle/foregroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupStyle/fontNameExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupStyle/fontSizeExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupStyle/barStyle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupStyle/toggleStyle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//GroupStyle/expandedByDefault"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="properties.ecore#//WidgetConditionalStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetConditionalStyle/preconditionExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//TextWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//TextWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//LabelWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//LabelWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CheckboxWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CheckboxWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//RadioWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//RadioWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//ButtonWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ButtonWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//SelectWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//SelectWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//CustomWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//CustomWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//ListWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//ListWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//WidgetAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute properties.ecore#//WidgetAction/labelExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//WidgetAction/initialOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//HyperlinkWidgetConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//HyperlinkWidgetConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//GroupConditionalStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference properties.ecore#//GroupConditionalStyle/style"/>
+    </genClasses>
+    <genClasses ecoreClass="properties.ecore#//EditSupport">
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getImage"/>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getText"/>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getText.1">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/getText.1/feature"/>
+      </genOperations>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getTabName"/>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getChoiceOfValues">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/getChoiceOfValues/feature"/>
+      </genOperations>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/isMultiline">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/isMultiline/eStructuralFeature"/>
+      </genOperations>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getDescription">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/getDescription/eStructuralFeature"/>
+      </genOperations>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/getEStructuralFeatures"/>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/setValue">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/setValue/feature"/>
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/setValue/newValue"/>
+      </genOperations>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/needsTextWidget">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/needsTextWidget/eStructuralFeature"/>
+      </genOperations>
+      <genOperations ecoreOperation="properties.ecore#//EditSupport/needsCheckboxWidget">
+        <genParameters ecoreParameter="properties.ecore#//EditSupport/needsCheckboxWidget/eStructuralFeature"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

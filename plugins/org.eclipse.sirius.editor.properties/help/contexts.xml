@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="ViewExtensionDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code ViewExtensionDescription description -->
+   
+   <!-- End of user code ViewExtensionDescription description -->
+   
+      </description>
+   </context>
+   <context id="PageDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code PageDescription description -->
+   
+   <!-- End of user code PageDescription description -->
+   
+      </description>
+   </context>
+   <context id="PageValidationSetDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code PageValidationSetDescription description -->
+   
+   <!-- End of user code PageValidationSetDescription description -->
+   
+      </description>
+   </context>
+   <context id="PropertyValidationRule">
+     <description>
+       
+       Interpreted expressions, requested return type and available variables:
+          - message: a string.
+
+
+         
+   <!-- Start of user code PropertyValidationRule description -->
+   
+   <!-- End of user code PropertyValidationRule description -->
+   
+      </description>
+   </context>
+   <context id="GroupDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code GroupDescription description -->
+   
+   <!-- End of user code GroupDescription description -->
+   
+      </description>
+   </context>
+   <context id="GroupValidationSetDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code GroupValidationSetDescription description -->
+   
+   <!-- End of user code GroupValidationSetDescription description -->
+   
+      </description>
+   </context>
+   <context id="ControlDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code ControlDescription description -->
+   
+   <!-- End of user code ControlDescription description -->
+   
+      </description>
+   </context>
+   <context id="ContainerDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code ContainerDescription description -->
+   
+   <!-- End of user code ContainerDescription description -->
+   
+      </description>
+   </context>
+   <context id="LayoutDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code LayoutDescription description -->
+   
+   <!-- End of user code LayoutDescription description -->
+   
+      </description>
+   </context>
+   <context id="FillLayoutDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code FillLayoutDescription description -->
+   
+   <!-- End of user code FillLayoutDescription description -->
+   
+      </description>
+   </context>
+   <context id="GridLayoutDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code GridLayoutDescription description -->
+   
+   <!-- End of user code GridLayoutDescription description -->
+   
+      </description>
+   </context>
+   <context id="WidgetDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code WidgetDescription description -->
+   
+   <!-- End of user code WidgetDescription description -->
+   
+      </description>
+   </context>
+   <context id="TextDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code TextDescription description -->
+   
+   <!-- End of user code TextDescription description -->
+   
+      </description>
+   </context>
+   <context id="ButtonDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code ButtonDescription description -->
+   
+   <!-- End of user code ButtonDescription description -->
+   
+      </description>
+   </context>
+   <context id="LabelDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code LabelDescription description -->
+   
+   <!-- End of user code LabelDescription description -->
+   
+      </description>
+   </context>
+   <context id="CheckboxDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code CheckboxDescription description -->
+   
+   <!-- End of user code CheckboxDescription description -->
+   
+      </description>
+   </context>
+   <context id="SelectDescription">
+     <description>
+       Represents a collection of candidates used to edit a single or multi-valued property.
+
+       
+         
+   <!-- Start of user code SelectDescription description -->
+   
+   <!-- End of user code SelectDescription description -->
+   
+      </description>
+   </context>
+   <context id="DynamicMappingFor">
+     <description>
+       
+       
+         
+   <!-- Start of user code DynamicMappingFor description -->
+   
+   <!-- End of user code DynamicMappingFor description -->
+   
+      </description>
+   </context>
+   <context id="DynamicMappingIf">
+     <description>
+       
+       
+         
+   <!-- Start of user code DynamicMappingIf description -->
+   
+   <!-- End of user code DynamicMappingIf description -->
+   
+      </description>
+   </context>
+   <context id="TextAreaDescription">
+     <description>
+       Represents a text area in the user interface.
+
+       
+         
+   <!-- Start of user code TextAreaDescription description -->
+   
+   <!-- End of user code TextAreaDescription description -->
+   
+      </description>
+   </context>
+   <context id="RadioDescription">
+     <description>
+       Represents a radio button in the user interface.
+
+       
+         
+   <!-- Start of user code RadioDescription description -->
+   
+   <!-- End of user code RadioDescription description -->
+   
+      </description>
+   </context>
+   <context id="ListDescription">
+     <description>
+       Represents a list in the user interface.
+
+       
+         
+   <!-- Start of user code ListDescription description -->
+   
+   <!-- End of user code ListDescription description -->
+   
+      </description>
+   </context>
+   <context id="OperationDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code OperationDescription description -->
+   
+   <!-- End of user code OperationDescription description -->
+   
+      </description>
+   </context>
+   <context id="CustomDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code CustomDescription description -->
+   
+   <!-- End of user code CustomDescription description -->
+   
+      </description>
+   </context>
+   <context id="CustomExpression">
+     <description>
+       
+       
+         
+   <!-- Start of user code CustomExpression description -->
+   
+   <!-- End of user code CustomExpression description -->
+   
+      </description>
+   </context>
+   <context id="CustomOperation">
+     <description>
+       
+       
+         
+   <!-- Start of user code CustomOperation description -->
+   
+   <!-- End of user code CustomOperation description -->
+   
+      </description>
+   </context>
+   <context id="HyperlinkDescription">
+     <description>
+       
+       
+         
+   <!-- Start of user code HyperlinkDescription description -->
+   
+   <!-- End of user code HyperlinkDescription description -->
+   
+      </description>
+   </context>
+   <context id="WidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code WidgetStyle description -->
+   
+   <!-- End of user code WidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="TextWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code TextWidgetStyle description -->
+   
+   <!-- End of user code TextWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="LabelWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code LabelWidgetStyle description -->
+   
+   <!-- End of user code LabelWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="CheckboxWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code CheckboxWidgetStyle description -->
+   
+   <!-- End of user code CheckboxWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="RadioWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code RadioWidgetStyle description -->
+   
+   <!-- End of user code RadioWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="ButtonWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code ButtonWidgetStyle description -->
+   
+   <!-- End of user code ButtonWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="SelectWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code SelectWidgetStyle description -->
+   
+   <!-- End of user code SelectWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="CustomWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code CustomWidgetStyle description -->
+   
+   <!-- End of user code CustomWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="ListWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code ListWidgetStyle description -->
+   
+   <!-- End of user code ListWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="HyperlinkWidgetStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code HyperlinkWidgetStyle description -->
+   
+   <!-- End of user code HyperlinkWidgetStyle description -->
+   
+      </description>
+   </context>
+   <context id="GroupStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code GroupStyle description -->
+   
+   <!-- End of user code GroupStyle description -->
+   
+      </description>
+   </context>
+   <context id="WidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code WidgetConditionalStyle description -->
+   
+   <!-- End of user code WidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="TextWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code TextWidgetConditionalStyle description -->
+   
+   <!-- End of user code TextWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="LabelWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code LabelWidgetConditionalStyle description -->
+   
+   <!-- End of user code LabelWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="CheckboxWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code CheckboxWidgetConditionalStyle description -->
+   
+   <!-- End of user code CheckboxWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="RadioWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code RadioWidgetConditionalStyle description -->
+   
+   <!-- End of user code RadioWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="ButtonWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code ButtonWidgetConditionalStyle description -->
+   
+   <!-- End of user code ButtonWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="SelectWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code SelectWidgetConditionalStyle description -->
+   
+   <!-- End of user code SelectWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="CustomWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code CustomWidgetConditionalStyle description -->
+   
+   <!-- End of user code CustomWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="ListWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code ListWidgetConditionalStyle description -->
+   
+   <!-- End of user code ListWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="WidgetAction">
+     <description>
+       
+       
+         
+   <!-- Start of user code WidgetAction description -->
+   
+   <!-- End of user code WidgetAction description -->
+   
+      </description>
+   </context>
+   <context id="HyperlinkWidgetConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code HyperlinkWidgetConditionalStyle description -->
+   
+   <!-- End of user code HyperlinkWidgetConditionalStyle description -->
+   
+      </description>
+   </context>
+   <context id="GroupConditionalStyle">
+     <description>
+       
+       
+         
+   <!-- Start of user code GroupConditionalStyle description -->
+   
+   <!-- End of user code GroupConditionalStyle description -->
+   
+      </description>
+   </context>
+</contexts>

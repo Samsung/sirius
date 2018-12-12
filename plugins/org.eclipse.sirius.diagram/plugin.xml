@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+  Copyright (c) 2007, 2015 THALES GLOBAL SERVICES and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+
+  Contributors:
+       Obeo - Initial API and implementation
+-->
+
+<plugin>
+   <extension-point id="diagramTypeProvider" name="%extension-point.diagramTypeProvider.name" schema="schema/diagramTypeProvider.exsd"/>
+   <extension-point id="canonicalSynchronizerFactoryOverride" name="%extension-point.canonicalSynchronizerFactoryOverride.name" schema="schema/canonicalSynchronizerFactoryOverride.exsd"/>
+   <extension-point id="bundledImageShape" name="%extension-point.bundleImageShape.name" schema="schema/bundledImageShape.exsd"/>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      <?gmfgen generated="false"?>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <specializationType
+               id="org.eclipse.sirius.diagram.DDiagram_1000"
+               name="%metatype.name.DDiagram_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               edithelperadvice="org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelperAdvice">
+               <specializes id="org.eclipse.sirius.diagram.DDiagram_3001"/>
+            <param name="semanticHint" value="1000"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.DNode_2001"
+               name="%metatype.name.DNode_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DNode"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.DNodeContainer_2002"
+               name="%metatype.name.DNodeContainer_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DNodeContainer"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <specializationType
+               id="org.eclipse.sirius.diagram.DNodeList_2003"
+               name="%metatype.name.DNodeList_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.sirius.diagram.DNodeList_3009"/>
+            <param name="semanticHint" value="2003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <specializationType
+               id="org.eclipse.sirius.diagram.DNode_3001"
+               name="%metatype.name.DNode_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.sirius.diagram.DNode_2001"/>
+            <param name="semanticHint" value="3001"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.BundledImage_3004"
+               name="%metatype.name.BundledImage_3004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="BundledImage"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.Dot_3002"
+               name="%metatype.name.Dot_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Dot"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.GaugeCompositeStyle_3006"
+               name="%metatype.name.GaugeCompositeStyle_3006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GaugeCompositeStyle"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.Square_3003"
+               name="%metatype.name.Square_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Square"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.Ellipse_3016"
+               name="%metatype.name.Ellipse_3016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Ellipse"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3016"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.Lozenge_3017"
+               name="%metatype.name.Lozenge_3017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Lozenge"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.WorkspaceImage_3005"
+               name="%metatype.name.WorkspaceImage_3005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="WorkspaceImage"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.Note_3013"
+               name="%metatype.name.Note_3013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Note"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3013"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.CustomStyle_3014"
+               name="%metatype.name.CustomStyle_3014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CustomStyle"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3014"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <specializationType
+               id="org.eclipse.sirius.diagram.DNode_3007"
+               name="%metatype.name.DNode_3007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.sirius.diagram.DNode_2001"/>
+            <param name="semanticHint" value="3007"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <specializationType
+               id="org.eclipse.sirius.diagram.DNodeContainer_3008"
+               name="%metatype.name.DNodeContainer_3008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.sirius.diagram.DNodeContainer_2002"/>
+            <param name="semanticHint" value="3008"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.DNodeList_3009"
+               name="%metatype.name.DNodeList_3009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DNodeList"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.DNodeListElement_3010"
+               name="%metatype.name.DNodeListElement_3010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DNodeListElement"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="3010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <specializationType
+               id="org.eclipse.sirius.diagram.DNode_3012"
+               name="%metatype.name.DNode_3012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.sirius.diagram.DNode_2001"/>
+            <param name="semanticHint" value="3012"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.DEdge_4001"
+               name="%metatype.name.DEdge_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DEdge"
+               edithelper="org.eclipse.sirius.diagram.internal.edit.helpers.SiriusBaseEditHelper">
+            <param name="semanticHint" value="4001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.BracketEdge_4002"
+               name="%metatype.name.BracketEdge_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DEdge">
+            <param name="semanticHint" value="4002"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes
+         type="text"
+         extension="aird">
+      </fileTypes>
+   </extension>
+   
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+
+             <metamodel nsURI="http://www.eclipse.org/sirius/diagram/1.1.0">
+         <metamodelType
+               id="org.eclipse.sirius.diagram.DDiagram_3001"
+               name="%metatype.name.DDiagram_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DDiagram"
+               edithelper="org.eclipse.sirius.diagram.business.internal.edit.helpers.DDiagramEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+	</extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated diagram -->
+      <package
+            uri="http://www.eclipse.org/sirius/diagram/1.1.0"
+            class="org.eclipse.sirius.diagram.DiagramPackage"
+            genModel="model/diagram.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated diagram -->
+      <package
+            uri="http://www.eclipse.org/sirius/diagram/description/1.1.0"
+            class="org.eclipse.sirius.diagram.description.DescriptionPackage"
+            genModel="model/diagram.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated diagram -->
+      <package
+            uri="http://www.eclipse.org/sirius/diagram/description/style/1.1.0"
+            class="org.eclipse.sirius.diagram.description.style.StylePackage"
+            genModel="model/diagram.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated diagram -->
+      <package
+            uri="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0"
+            class="org.eclipse.sirius.diagram.description.tool.ToolPackage"
+            genModel="model/diagram.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated diagram -->
+      <package
+            uri="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0"
+            class="org.eclipse.sirius.diagram.description.filter.FilterPackage"
+            genModel="model/diagram.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated diagram -->
+      <package
+            uri="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0"
+            class="org.eclipse.sirius.diagram.description.concern.ConcernPackage"
+            genModel="model/diagram.genmodel"/>
+   </extension>
+   
+  <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+		id="org.eclipse.sirius.diagram.category"
+		mandatory="false"
+		name="%category.siriusValidation.name">   
+			<![CDATA[Sirius]]>
+      </category>	
+      <constraintProvider
+            cache="false"            
+            mode="Batch">
+         <package namespaceUri="http://www.eclipse.org/sirius/diagram/1.1.0"/>
+         <constraints categories="org.eclipse.sirius.diagram.category">
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.constraints.ErrorConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%constraint.siriusValidationError.name"
+                  id="org.eclipse.sirius.diagram.category.validation.error"
+                  statusCode="1">
+               <description>%constraint.siriusValidationError.description
+               </description>
+               <message>
+                  %constraint.siriusValidationError.message
+               </message>               
+               <target class="DDiagramElement"/>
+               <target class="DDiagram"/>
+            </constraint>
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.constraints.WarningConstraint"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%constraint.siriusValidationWarningname"
+                  id="org.eclipse.sirius.diagram.category.validation.warning"
+                  statusCode="1">
+               <description>%constraint.siriusValidationWarning.description
+               </description>
+               <message>
+                  %constraint.siriusValidationWarning.message
+               </message>               
+               <target class="DDiagramElement"/>
+               <target class="DDiagram"/>
+            </constraint>
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.constraints.InfoConstraint"
+                  severity="INFO"
+                  mode="Batch"
+                  name="%constraint.siriusValidationInfo.name"
+                  id="org.eclipse.sirius.diagram.category.validation.info"
+                  statusCode="1">
+               <description>%constraint.siriusValidationInfo.description
+               </description>
+               <message>
+                  %constraint.siriusValidationInfo.message
+               </message>               
+               <target class="DDiagramElement"/>
+               <target class="DDiagram"/>
+            </constraint>
+         </constraints>
+      </constraintProvider>      
+  </extension>   
+  <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="%category.siriusDiagramConstraints.name"
+            id="org.eclipse.sirius.diagram.constraints"/>
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package namespaceUri="http://www.eclipse.org/sirius/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/description/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/description/style/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/diagram/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/diagram/description/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/diagram/description/style/1.1.0"/>
+         <constraints categories="org.eclipse.sirius.diagram.constraints">
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.DiagramMandatoryDomainClassConstraint"
+                  id="org.eclipse.sirius.diagram.constraints.MandatoryDomainClass"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.mandatoryDomainClass.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.mandatoryDomainClass.message
+               </message>
+               <description>
+                  %constraint.mandatoryDomainClass.description
+               </description>
+            </constraint>
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ExistingDomainClassConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%constraint.validDomainClass.name"
+                  id="org.eclipse.sirius.diagram.constraints.ValidDomainClass"
+                  statusCode="1">
+               <description>
+                  %constraint.validDomainClass.description
+               </description>
+               <message>
+                  %constraint.validDomainClass.message
+               </message>
+            </constraint>
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ExistingDefaultLayerConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%constraint.defaultLayerExists.name"
+                  id="org.eclipse.sirius.diagram.constraints.DiagramHasDefaultLayer"
+                  statusCode="1">
+               <description>
+                  %constraint.defaultLayerExists.description
+               </description>
+               <message>
+                  %constraint.defaultLayerExists.message
+               </message>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.BlankCandidatesExpressionWithRecursiveMappingConstraint"
+                  id="org.eclipse.sirius.diagram.constraints.BlankCandidatesExpressionWithRecursiveMapping"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.candidateExpressionExistsForRecursiveMapping.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.candidateExpressionExistsForRecursiveMapping.message
+               </message>
+               <description>
+                  %constraint.candidateExpressionExistsForRecursiveMapping.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.RegionMappingCardinalityConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.regionMappingCardinality.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.regionMappingCardinality.message
+               </message>
+               <description>
+                  %constraint.regionMappingCardinality.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.CompartmentContainmentConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.compartmentRecursion.name"
+                  severity="WARNING"
+                  statusCode="1">
+               <message>
+                  %constraint.compartmentRecursion.message
+               </message>
+               <description>
+                  %constraint.compartmentRecursion.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.ReuseContainersInContainerListConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.reuseContainersInContainerList.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.reuseContainersInContainerList.message
+               </message>
+               <description>
+                  %constraint.reuseContainersInContainerList.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.ContainersInContainerListConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.containersInContainerList.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.containersInContainerList.message
+               </message>
+               <description>
+                  %constraint.containersInContainerList.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.NoReusedNodesInRegionContainerConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.noReusedNodesInRegionContainer.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.noReusedNodesInRegionContainer.message
+               </message>
+               <description>
+                  %constraint.noReusedNodesInRegionContainer.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.NoReusedBorderedNodesInRegion"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.noReusedBorderedNodesInRegion.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.noReusedBorderedNodesInRegion.message
+               </message>
+               <description>
+                  %constraint.noReusedBorderedNodesInRegion.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.NoMappingFilterOnRegionsConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.noMappingFilterOnRegions.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.noMappingFilterOnRegions.message
+               </message>
+               <description>
+                  %constraint.noMappingFilterOnRegions.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.RegionStyleConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.regionStyle.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+            %constraint.regionStyle.message
+               </message>
+               <description>
+            %constraint.regionStyle.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.NoSubNodesInRegionContainerConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.noSubNodesInRegionContainer.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.noSubNodesInRegionContainer.message
+               </message>
+               <description>
+                  %constraint.noSubNodesInRegionContainer.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ContainerMappingChildrenPresentationConstraints"
+                  id="org.eclipse.sirius.diagram.constraints.NoBorderedNodesInRegion"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.noBorderedNodesInRegion.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.noBorderedNodesInRegion.message
+               </message>
+               <description>
+                  %constraint.noBorderedNodesInRegion.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.RequiredEdgeStyleDescriptionSizeExpressionConstraint"
+                  id="org.eclipse.sirius.diagram.constraints.MissingRequiredEdgeSizeExpressionConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.missingRequiredEdgeSizeExpression.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.missingRequiredEdgeSizeExpression.message
+               </message>
+               <description>
+                  %constraint.missingRequiredEdgeSizeExpression.description
+               </description>
+            </constraint>
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.EdgeMappingCycleConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%constraint.edgeMappingCycle.name"
+                  id="org.eclipse.sirius.diagram.constraints.EdgeMappingCycle"
+                  statusCode="1">
+               <description>
+                  %constraint.edgeMappingCycle.description
+               </description>
+               <message>
+                  %constraint.edgeMappingCycle.message
+               </message>
+            </constraint>
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.DiagramExistingExpressionVariablesConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%constraint.validVariable.name"
+                  id="org.eclipse.sirius.constraints.ValidAcceleoVariable"
+                  statusCode="1">
+               <description>
+                  %constraint.validVariable.description
+               </description>
+               <message>
+                  %constraint.validVariable.message
+               </message>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.RepresentationExtensionDescriptionRegexConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.RepresentationExtensionDescriptionRepresentationNameConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.representationExtensionDescriptionRepresentationName.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.representationExtensionDescriptionRepresentationName.message
+               </message>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.ValidStyleConstraint"
+                  id="org.eclipse.sirius.constraints.ValidStyleConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validStyle.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validStyle.message
+               </message>
+               <description>
+                  %constraint.validStyle.description
+               </description>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="%category.siriusDiagramConstraints.name"
+            id="org.eclipse.sirius.diagram.constraints"/>
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package namespaceUri="http://www.eclipse.org/sirius/description/tool/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0"/>
+         <constraints categories="org.eclipse.sirius.diagram.constraints">
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.PreconditionForDndToolsConstraint"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%constraint.preconditionForDndTools.name"
+                  id="org.eclipse.sirius.diagram.constraints.PreconditionForDndTools"
+                  statusCode="1">
+               <description>
+                  %constraint.preconditionForDndTools.description
+               </description>
+               <message>
+                  %constraint.preconditionForDndTools.message
+               </message>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.MappingForReconnectToolsConstraint"
+                  id="org.eclipse.sirius.diagram.constraints.MappingsForReconnectionTools"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.mappingsForReconnectionTools.name"
+                  severity="WARNING"
+                  statusCode="1">
+               <description>
+                  %constraint.mappingsForReconnectionTools.description
+               </description>
+               <message>
+                  %constraint.mappingsForReconnectionTools.message
+               </message>
+            </constraint>            
+         </constraints>
+      </constraintProvider>
+   </extension>
+   
+   <extension 
+         point="org.eclipse.emf.ecore.uri_mapping">
+      <mapping
+          source="environment:/diagram"
+          target="platform:/plugin/org.eclipse.sirius.diagram/model/DiagramEnvironment.odesign">
+    </mapping>
+ </extension>
+ 
+    <extension point="org.eclipse.core.runtime.preferences">
+      <?gmfgen generated="true"?>
+      <initializer class="org.eclipse.sirius.diagram.internal.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+   
+   
+  <extension
+        point="org.eclipse.sirius.dialect">
+     <dialect
+           class="org.eclipse.sirius.diagram.business.internal.dialect.DiagramDialect"></dialect>
+  </extension>
+  
+  <extension
+        point="org.eclipse.sirius.externalJavaAction">
+     <javaActions
+           actionClass="org.eclipse.sirius.diagram.tools.internal.actions.pinning.PinElementsAction"
+           id="org.eclipse.sirius.diagram.tools.internal.actions.pinning.pinElementsActionId">
+     </javaActions>
+     <javaActions
+           actionClass="org.eclipse.sirius.diagram.tools.internal.actions.pinning.UnpinElementsAction"
+           id="org.eclipse.sirius.diagram.tools.internal.actions.pinning.unpinElementsActionId">
+     </javaActions>
+  </extension>
+  <extension
+        point="org.eclipse.sirius.migrationParticipant">
+     <participant
+           class="org.eclipse.sirius.diagram.business.internal.migration.ComputedStyleDescriptionCachePackingFileMigrationParticipant"
+           kind="RepresentationsFile">
+     </participant>
+     <participant
+           class="org.eclipse.sirius.diagram.business.internal.migration.GMFLabelStyleMigrationParticipant"
+           kind="RepresentationsFile">
+     </participant>
+     <participant
+           class="org.eclipse.sirius.diagram.business.internal.migration.FilterVariableValueMigrationParticipant"
+           kind="RepresentationsFile">
+     </participant>
+     <participant
+           class="org.eclipse.sirius.diagram.business.internal.migration.VariableMigrationParticipant"
+           kind="VSM">
+     </participant>
+     <participant
+           class="org.eclipse.sirius.diagram.business.internal.migration.NoteAttachmentWithoutSourceOrTargetMigrationParticipant"
+           kind="RepresentationsFile">
+     </participant>
+  </extension>
+  <extension
+        point="org.eclipse.sirius.mmdescriptor">
+     <descriptorprovider
+           class="org.eclipse.sirius.diagram.business.internal.dialect.DiagramMetamodelsProvider">
+     </descriptorprovider>
+  </extension>
+  <extension
+        point="org.eclipse.sirius.migrationParticipant">
+  </extension>
+  
+</plugin>

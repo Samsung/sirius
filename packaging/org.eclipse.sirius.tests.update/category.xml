@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://www.eclipse.org/sirius">
+      Sirius Tests
+   </description>
+   <feature id="org.eclipse.sirius.tests" version="0.0.0">
+      <category name="Sirius.Tests"/>
+   </feature>
+   <feature id="org.eclipse.sirius.tests.source" version="0.0.0">
+      <category name="Sirius.Tests.Source"/>
+   </feature>
+   <category-def name="Sirius.Tests" label="Sirius Automated Tests">
+      <description>
+         Automated Tests for the Sirius Modeling Platform
+      </description>
+   </category-def>
+   <category-def name="Sirius.Tests.Source" label="Sirius Automated Tests (Sources)">
+      <description>
+         Automated Tests for the Sirius Modeling Platform, with Sources
+      </description>
+   </category-def>
+</site>

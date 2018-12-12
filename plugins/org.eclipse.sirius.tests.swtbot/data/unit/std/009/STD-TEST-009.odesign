@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="ASCII"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" documentation="uml2 modeler" name="uml2 modeler" version="10.1.3.201511131800">
+  <ownedViewpoints documentation="Initialize an UML Analysis" name="UML Analysis workspace" modelFileExtension="uml">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" documentation="Fake ViewPointDescription - factorize elements" name="Reused Description" domainClass="Model">
+      <toolSection documentation="reused tools" name="reused tools">
+        <ownedTools xsi:type="tool:DirectEditLabel" documentation="A basic Direct Edit tool for NamedElement" name="NamedElementDirectEdit">
+          <mask mask="{0}"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:arg0"/>
+          </initialOperation>
+        </ownedTools>
+        <subSections documentation="available details tools" name="details">
+          <ownedTools xsi:type="tool:DiagramCreationDescription" documentation="Create a use case diagram" name="Use Case Diagram" browseExpression="var:self" diagramDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']">
+            <initialOperation/>
+            <containerViewVariable name="containerView"/>
+            <representationNameVariable name="diagramName"/>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DiagramCreationDescription" documentation="Create a new Class Diagram" name="Class Diagram" browseExpression="var:self" diagramDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']">
+            <initialOperation/>
+            <containerViewVariable name="containerView"/>
+            <representationNameVariable name="diagramName"/>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DiagramCreationDescription" documentation="Create a new Component Diagram" name="Component Diagram" browseExpression="var:self">
+            <initialOperation/>
+            <containerViewVariable name="containerView"/>
+            <representationNameVariable name="diagramName"/>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DiagramCreationDescription" name="Sequence Diagram" browseExpression="aql:self.ownedBehavior->filter(interactions::Interaction)->last()" diagramDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:containerView.target">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Interaction" referenceName="ownedBehavior">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.eContainer().name + ' Interaction ' +self.eContainer().ownedBehavior->filter(interactions::Interaction)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+            <containerViewVariable name="containerView"/>
+            <representationNameVariable name="diagramName"/>
+          </ownedTools>
+        </subSections>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='PD_D%26D_Package']" documentation="Diagram for Packages" name="Package Diagram" domainClass="Model" preconditionExpression="">
+      <containerMappings name="PD_Package" detailDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Component%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@toolSection/@ownedTools[name='Object%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Use%20Case%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Class%20Diagram']" preconditionExpression="aql:container = self.eContainer()" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.eContents()->filter(ecore::EPackage)" documentation="Mapping to create packages." domainClass="Package" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='PD_D%26D_Package']" reusedContainerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Diagram']/@containerMappings[name='PD_Package']">
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" labelSize="10">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+      </containerMappings>
+      <toolSection name="package tools">
+        <subSections name="create">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" documentation="Tool to create a package" name="Package" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Diagram']/@containerMappings[name='PD_Package']">
+            <variable name="container"/>
+            <viewVariable/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Package" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Package' + self.eContainer().eContents()->filter(uml::Package)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+        <subSections name="drag &amp; drop">
+          <ownedTools xsi:type="tool:ContainerDropDescription" documentation="Tool to Drag &amp; Drop a Package" name="PD_D&amp;D_Package" forceRefresh="true" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Diagram']/@containerMappings[name='PD_Package']">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:MoveElement" newContainerExpression="var:newSemanticContainer" featureName="packagedElement"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Package Hierarchy" domainClass="Model" defaultConcern="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@concerns/@ownedConcernDescriptions.0" init="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@toolSection/@ownedTools[name='InitHierarchy']">
+      <filters xsi:type="filter:CompositeFilterDescription" name="Hide containment">
+        <filters xsi:type="filter:MappingFilter" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@edgeMappings[name='PH_Containment']"/>
+      </filters>
+      <concerns documentation="Filters">
+        <ownedConcernDescriptions name="Default"/>
+        <ownedConcernDescriptions name="Show Imports" filters="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@filters[name='Hide%20containment']"/>
+      </concerns>
+      <layout xsi:type="description_1:OrderedTreeLayout" childrenExpression="aql:self.eContents()->filter(uml::Package)" nodeMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@nodeMappings[name='PH_Package']"/>
+      <nodeMappings name="PH_Package" detailDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@toolSection/@ownedTools[name='StateMachine'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Component%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@toolSection/@ownedTools[name='Object%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Use%20Case%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Class%20Diagram']" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="feature:eAllContents" domainClass="Package">
+        <style xsi:type="style:BundledImageDescription" labelSize="10" sizeComputationExpression="4">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+        </style>
+        <conditionnalStyles predicateExpression="aql:self.eContents()->filter(uml::Classifier)->size() > 0">
+          <style xsi:type="style:BundledImageDescription" labelSize="10">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </conditionnalStyles>
+      </nodeMappings>
+      <edgeMappings name="PH_Containment" deletionDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@toolSection/@ownedTools[name='Delete%20a%20contained%20in%20edge']" semanticCandidatesExpression="feature:eAllContents" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@nodeMappings[name='PH_Package']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@nodeMappings[name='PH_Package']" targetFinderExpression="feature:eContainer">
+        <style lineStyle="dash" routingStyle="tree" foldingStyle="TARGET">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="PH_Import" semanticCandidatesExpression="feature:eAllContents" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@nodeMappings[name='PH_Package']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@nodeMappings[name='PH_Package']" targetFinderExpression="aql:self.importedPackage" sourceFinderExpression="feature:eContainer" domainClass="PackageImport" useDomainElement="true">
+        <style lineStyle="dot">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription showIcon="false">
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <toolSection>
+        <ownedTools xsi:type="tool:NodeCreationDescription" name="Package" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@nodeMappings[name='PH_Package']">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="Package" referenceName="packagedElement">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'New package ' + self.eContainer().eContents()->filter(uml::Package)->size()"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:EdgeCreationDescription" name="Contained in" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@edgeMappings[name='PH_Containment']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/Association.gif">
+          <sourceVariable name="source"/>
+          <targetVariable name="target"/>
+          <sourceViewVariable name="sourceView"/>
+          <targetViewVariable name="targetView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="packagedElement" valueExpression="var:source"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete a contained in edge">
+          <element name="element"/>
+          <elementView name="elementView"/>
+          <containerView/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+              <subModelOperations xsi:type="tool_1:MoveElement" newContainerExpression="aql:self.eContainerOrSelf(uml::Model)" featureName="packagedElement"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:EdgeCreationDescription" name="Import" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']/@edgeMappings[name='PH_Import']">
+          <sourceVariable name="source"/>
+          <targetVariable name="target"/>
+          <sourceViewVariable name="sourceView"/>
+          <targetViewVariable name="targetView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+              <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PackageImport" referenceName="packageImport">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="importedPackage" valueExpression="var:target"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:DiagramCreationDescription" name="InitHierarchy" precondition="aql:self.eContainer() = null" diagramDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Package%20Hierarchy']">
+          <initialOperation/>
+          <containerViewVariable name="containerView"/>
+          <representationNameVariable name="diagramName"/>
+        </ownedTools>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='UC_D%26D_Actor']" documentation="Diagram for Use Cases" name="Use Case Diagram" initialisation="true" domainClass="Package">
+      <nodeMappings name="UCD_Actor" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="feature:eAllContents" documentation="Mapping to create actors" domainClass="Actor">
+        <style xsi:type="style:WorkspaceImageDescription" labelSize="10" resizeKind="NSEW" arcWidth="1" arcHeight="1" workspacePath="/org.eclipse.sirius.tests.swtbot/images/Actor.png">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+        </style>
+      </nodeMappings>
+      <edgeMappings name="UCD_Association" semanticCandidatesExpression="aql:self.eResource().getContent()->first().eAllContents(uml::Association)" semanticElements="aql:OrderedSet{self.memberEnd,self}" documentation="Mapping to create associations between actors and use cases" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@nodeMappings[name='UCD_Actor']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']" targetFinderExpression="aql:self.memberEnd.type" sourceFinderExpression="aql:self.memberEnd.type" targetExpression="var:self" domainClass="Association" useDomainElement="true">
+        <style targetArrow="NoDecoration" sizeComputationExpression="2">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription showIcon="false" labelExpression="aql:''">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="UCD_Extend" semanticCandidatesExpression="aql:self.eResource().getContent()->first().eAllContents(uml::Extend)" semanticElements="aql:OrderedSet{self,self.extension,self.extendedCase}" documentation="Mapping to create Extends" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']" targetFinderExpression="aql:self.extendedCase" sourceFinderExpression="aql:self.extension" targetExpression="var:self" domainClass="Extend" useDomainElement="true" pathExpression="">
+        <style lineStyle="dash">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription labelSize="10" showIcon="false" labelExpression="aql:'&#xab; extend &#xbb;'">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="UCD_Include" semanticCandidatesExpression="aql:self.eResource().getContent()->first().eAllContents(uml::Include)" semanticElements="aql:OrderedSet{self ,self.includingCase ,self.addition}" documentation="Mapping to create includes" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']" targetFinderExpression="aql:self.addition" sourceFinderExpression="aql:self.includingCase" targetExpression="var:self" domainClass="Include" useDomainElement="true">
+        <style lineStyle="dash">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription labelSize="10" showIcon="false" labelExpression="&#xab; include &#xbb;">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="UCD_Generalization" semanticCandidatesExpression="aql:self.eResource().getContent()->first().eAllContents(uml::Actor).generalization" semanticElements="" documentation="Mapping to create generalizations" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@nodeMappings[name='UCD_Actor']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@nodeMappings[name='UCD_Actor']" targetFinderExpression="aql:self.general" sourceFinderExpression="aql:self.specific" targetExpression="var:self" domainClass="Generalization" useDomainElement="true">
+        <style sizeComputationExpression="2">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription showIcon="false" labelExpression="aql:''">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <containerMappings name="UCD_Subject" preconditionExpression="aql:container = self.eContainer()" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.eContents()->filter(uml::Component)" documentation="Display subjects of this diagram." domainClass="Component" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='UC_D%26D_UseCase']">
+        <subNodeMappings name="UCD_UseCase" preconditionExpression="aql:self.subject->includes(container)" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.eResource().getContent()->first().eAllContents(uml::UseCase)->select( e | e.subject->includes(self))" documentation="Mapping to create Use Cases" domainClass="UseCase">
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="10" sizeComputationExpression="14" labelPosition="node" resizeKind="NSEW" arcWidth="1" arcHeight="1" workspacePath="/org.eclipse.sirius.tests.swtbot/images/UseCase.png">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </subNodeMappings>
+      </containerMappings>
+      <toolSection name="use case tools">
+        <subSections name="drag &amp; drop">
+          <ownedTools xsi:type="tool:ContainerDropDescription" documentation="A Drag &amp; Drop tool to add actors" name="UC_D&amp;D_Actor" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@nodeMappings[name='UCD_Actor']">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:newSemanticContainer"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerDropDescription" documentation="Tool to drag &amp; drop a use case" name="UC_D&amp;D_UseCase" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:For" expression="aql:current->filter(uml::UseCase)->select( e | not e.subject->includes(newSemanticContainer))">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="subject" valueExpression="var:newSemanticContainer"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+        <subSections documentation="Tools to create elements" name="create">
+          <ownedTools xsi:type="tool:NodeCreationDescription" documentation="Create an actor" name="Actor" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@nodeMappings[name='UCD_Actor']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Actor" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Actor' + self.eContainer().eContents()->filter(uml::Actor)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" documentation="Create a new Use Case" name="Use Case" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']/@subNodeMappings[name='UCD_UseCase']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:container.eContainerOrSelf(uml::Package)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="UseCase" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'UseCase' + self.eContainerOrSelf(uml::Package).name + self.eContainerOrSelf(uml::Package).eContents()->filter(uml::UseCase)->size()"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="subject" valueExpression="var:container"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" documentation="Create a new Subject" name="Subject" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@containerMappings[name='UCD_Subject']">
+            <variable name="container"/>
+            <viewVariable/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Component" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:self.eContainerOrSelf(Package).name + ' Subject'"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Tool to create an Association between an Actor and an Use Case." name="Association" precondition="aql:preSource.oclIsKindOf(uml::Actor)  and  preTarget.oclIsKindOf(uml::UseCase)" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@edgeMappings[name='UCD_Association']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainer(ecore::EPackage)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Association" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Property" referenceName="ownedEnd">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="var:source"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Property" referenceName="ownedEnd">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="var:target"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Association_' + source.name + '_to_' + target.name"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Create an Extend" name="Extend" precondition="preSource.oclIsKindOf(uml::UseCase) and preTarget.oclIsKindOf(uml::UseCase)" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@edgeMappings[name='UCD_Extend']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Extend" referenceName="extend">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="extension" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="extendedCase" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Create an Include" name="Include" precondition="preSource.oclIsKindOf(uml::UseCase) and preTarget.oclIsKindOf(uml::UseCase)" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@edgeMappings[name='UCD_Include']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Include" referenceName="include">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="includingCase" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="addition" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Tool to create a Generalization" name="Generalization" precondition="aql:preSource.oclIsKindOf(uml::Actor) and preTarget.oclIsKindOf(uml::Actor)" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Use%20Case%20Diagram']/@edgeMappings[name='UCD_Generalization']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Generalization" referenceName="generalization">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="general" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='CD_D%26D_Interface'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='CD_D%26D_Class'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='CD_D%26D_Package']" documentation="Description to edit class diagrams" name="Class Diagram" initialisation="true" domainClass="Package" preconditionExpression="aql:self.oclIsKindOf(uml::Model)">
+      <edgeMappings name="CD_Generalization_Class_To_Class" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Classifier).generalization" semanticElements="" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetFinderExpression="aql:self.general" sourceFinderExpression="aql:self.specific" targetExpression="" domainClass="Generalization" useDomainElement="true" pathExpression="">
+        <style sizeComputationExpression="2">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CD_Generalization_Interface_To_Interface" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Interface).generalization" semanticElements="" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetFinderExpression="aql:self.general" sourceFinderExpression="aql:self.specific" targetExpression="" domainClass="Generalization" useDomainElement="true" pathExpression="">
+        <style sizeComputationExpression="2">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CD_InterfaceRealization" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Class).interfaceRealization" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetFinderExpression="aql:self.contract" sourceFinderExpression="aql:self.implementingClassifier" targetExpression="" domainClass="InterfaceRealization" useDomainElement="true">
+        <style lineStyle="dash" sizeComputationExpression="2">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CD_Dependency_Class_To_Class" preconditionExpression="aql:self.oclIsKindOf(uml::InterfaceRealization)" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Class).clientDependency" semanticElements="var:self" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetFinderExpression="aql:self.supplier" sourceFinderExpression="aql:self.client" targetExpression="var:self" domainClass="Dependency" useDomainElement="true">
+        <style lineStyle="dash">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CD_Dependency_Class_To_Interface" preconditionExpression="aql:self.oclIsKindOf(uml::InterfaceRealization)" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Class).clientDependency" semanticElements="var:self" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetFinderExpression="aql:self.supplier" sourceFinderExpression="aql:self.client" targetExpression="var:self" domainClass="Dependency" useDomainElement="true">
+        <style lineStyle="dash">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CD_Dependency_Interface_To_Class" preconditionExpression="aql:self.oclIsKindOf(uml::InterfaceRealization)" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Interface).clientDependency" semanticElements="var:self" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']" targetFinderExpression="aql:self.supplier" sourceFinderExpression="aql:self.client" targetExpression="var:self" domainClass="Dependency" useDomainElement="true">
+        <style lineStyle="dash">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CD_Dependency_Interface_To_Interface" preconditionExpression="aql:self.oclIsKindOf(uml::InterfaceRealization)" semanticCandidatesExpression="aql:viewpoint.eAllContents(viewpoint::DSemanticDecorator).target->filter(uml::Interface).clientDependency" semanticElements="var:self" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" targetFinderExpression="aql:self.supplier" sourceFinderExpression="aql:self.client" targetExpression="var:self" domainClass="Dependency" useDomainElement="true">
+        <style lineStyle="dash">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <containerMappings name="CD_Package" detailDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@toolSection/@ownedTools[name='Object%20Diagram'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Class%20Diagram']" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:(self.eContents()->filter(uml::Package) + self.packageImport.importedPackage)->asSet()" documentation="Mapping to create packages" domainClass="Package" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='CD_D%26D_Package'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='CD_D%26D_Interface'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@toolSection/@subSections[name='drag%20%26%20drop']/@ownedTools[name='CD_D%26D_Class']" reusedContainerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Package'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']">
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+      </containerMappings>
+      <containerMappings name="CD_Class" detailDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@subSections[name='details']/@ownedTools[name='Sequence%20Diagram']" preconditionExpression="aql:self.oclIsKindOf(uml::Class) or self.oclIsKindOf(uml::DataType)" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.ownedType->asSet() - self.ownedType->filter(uml::Component)" documentation="Mapping to create classes" domainClass="Class">
+        <subNodeMappings name="CD_Property" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.name" documentation="Mapping to create attributes" domainClass="Property">
+          <style xsi:type="style:BundledImageDescription" labelExpression="aql:self.visibility.visibilityToString() + ' ' + self.name + ' : ' + self.type.name" sizeComputationExpression="2">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </subNodeMappings>
+        <subNodeMappings name="CD_Operation" preconditionExpression="aql:container = self.eContainer()" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.ownedOperation" domainClass="Operation">
+          <style xsi:type="style:BundledImageDescription" labelExpression="aql:self.name + '(' +self.parametersToString() + ') : ' + self.type.name" sizeComputationExpression="2">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </subNodeMappings>
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+        <conditionnalStyles predicateExpression="aql:self.isAbstract">
+          <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>italic</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </conditionnalStyles>
+      </containerMappings>
+      <containerMappings name="CD_Interface" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.ownedType" documentation="Mapping to create interfaces" domainClass="Interface" reusedNodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']/@subNodeMappings[name='CD_Operation']" childrenPresentation="List">
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+        <conditionnalStyles predicateExpression="aql:self.isAbstract">
+          <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>italic</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </conditionnalStyles>
+      </containerMappings>
+      <containerMappings name="CD_Enumeration" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.ownedType->filter(uml::Enumeration)" semanticElements="" domainClass="Enumeration" childrenPresentation="List">
+        <subNodeMappings name="CD_EnumerationLiteral" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.ownedLiteral" domainClass="EnumerationLiteral">
+          <style xsi:type="style:BundledImageDescription" labelAlignment="LEFT" sizeComputationExpression="2">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </subNodeMappings>
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+        <conditionnalStyles predicateExpression="aql:self.isAbstract">
+          <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>italic</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </conditionnalStyles>
+      </containerMappings>
+      <toolSection name="class tools">
+        <subSections name="create">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" documentation="Create a Package" name="Package" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Package']">
+            <variable name="container"/>
+            <viewVariable/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Package" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Package' + self.eContainer().eContents()->filter(uml::Package)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" documentation="Create a Class" name="Class" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']">
+            <variable name="container"/>
+            <viewVariable/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Class" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Class' + self.eContainer().eContents()->filter(uml::Class)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" documentation="Create a new Interface" name="Interface" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Interface" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Interface' + self.eContainer().eContents()->filter(uml::Interface)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Enumeration" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Enumeration']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Enumeration" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Enumeration' + self.eContainer().ownedType->filter(uml::Enumeration)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" documentation="Create a new Property" name="Property" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']/@subNodeMappings[name='CD_Property']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Property" referenceName="ownedAttribute">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Attribute' + self.eContainer().eContents()->filter(uml::Property)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Operation" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']/@subNodeMappings[name='CD_Operation']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Operation" referenceName="ownedOperation">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Operation' + self.eContainer().eContents()->filter(uml::Operation)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Enumeration Literal" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Enumeration']/@subNodeMappings[name='CD_EnumerationLiteral']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="EnumerationLiteral" referenceName="ownedLiteral">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'EnumerationLiteral' + self.eContainer().ownedLiteral->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Create a new Association" name="Association">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainer(ecore::EPackage)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Association" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Property" referenceName="ownedEnd">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:target.name.toLowerFirst()"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="var:target"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Property" referenceName="ownedEnd">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:source.name.toLowerFirst()"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="var:source"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="navigableOwnedEnd" valueExpression="aql:self.memberEnd->first()"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Association"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Generalization" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_Generalization_Class_To_Class'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_Generalization_Interface_To_Interface']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Generalization" referenceName="generalization">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="general" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Create a new Interface Realization" name="Interface Realization" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_InterfaceRealization']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="InterfaceRealization" referenceName="interfaceRealization">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="contract" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" documentation="Create a new Dependency" name="Dependency" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_Dependency_Class_To_Class'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_Dependency_Class_To_Interface'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_Dependency_Interface_To_Class'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@edgeMappings[name='CD_Dependency_Interface_To_Interface']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainer(ecore::EPackage)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Dependency" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="client" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="supplier" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+        <subSections name="wizard">
+          <ownedTools xsi:type="tool_1:SelectionWizardDescription" documentation="Imports one or many packages." name="Import Package" precondition="aql:containerView.target->filter(uml::Package)->size() = 1" forceRefresh="true" candidatesExpression="aql:self.eResource().getContent()->first().eAllContents(uml::Package) - (containerView.eContainerOrSelf(ViewPoint).target.eAllContents(uml::Package) + containerView.target.packageImport.getImportedPackage + containerView.target.ancestors()->filter(uml::Package))" multiple="true">
+            <element name="element"/>
+            <containerView name="containerView"/>
+            <container name="container"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:For" expression="var:element" iteratorName="selectedPackage">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="PackageImport" referenceName="packageImport">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="importedPackage" valueExpression="var:selectedPackage"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+        <subSections name="drag &amp; drop">
+          <ownedTools xsi:type="tool:ContainerDropDescription" name="CD_D&amp;D_Class" forceRefresh="true" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Class']">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:MoveElement" newContainerExpression="var:newSemanticContainer" featureName="packagedElement"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerDropDescription" documentation="Tool to Drag &amp; Drop a Package" name="CD_D&amp;D_Package" forceRefresh="true" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Package']">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:MoveElement" newContainerExpression="var:newSemanticContainer" featureName="packagedElement"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerDropDescription" name="CD_D&amp;D_Interface" forceRefresh="true" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Class%20Diagram']/@containerMappings[name='CD_Interface']" moveEdges="true">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:MoveElement" newContainerExpression="var:newSemanticContainer" featureName="packagedElement"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@toolSection/@ownedTools[name='Drop%20Interface%20on%20canvas']" name="Component Diagram" domainClass="Package">
+      <nodeMappings name="CO_Interface" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.eContainerOrSelf(uml::Model).eAllContents(uml::Interface)" createElements="false" domainClass="Interface">
+        <style xsi:type="style:BundledImageDescription" showIcon="false" shape="dot">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelFormat>italic</labelFormat>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+        </style>
+      </nodeMappings>
+      <edgeMappings name="CO_Usage" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="feature:eAllContents" semanticElements="var:self" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@nodeMappings[name='CO_Interface']" targetFinderExpression="aql:self.supplier" sourceFinderExpression="feature:eContainer" domainClass="Usage" useDomainElement="true">
+        <style lineStyle="dot" sizeComputationExpression="2" routingStyle="manhattan">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CO_Realization" semanticCandidatesExpression="feature:eAllContents" semanticElements="var:self" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@nodeMappings[name='CO_Interface']" targetFinderExpression="aql:self.supplier" sourceFinderExpression="feature:eContainer" domainClass="InterfaceRealization" useDomainElement="true">
+        <style sizeComputationExpression="2" routingStyle="manhattan">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CO_Redefined" semanticCandidatesExpression="feature:eAllContents" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']/@borderedNodeMappings[name='CO_Port']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']/@borderedNodeMappings[name='CO_Port']" targetFinderExpression="aql:self.redefinedPort" sourceFinderExpression="var:self" domainClass="Port">
+        <style lineStyle="dot">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription showIcon="false">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <edgeMappings name="CO_RedefinedImport" semanticCandidatesExpression="feature:eAllContents" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']/@borderedNodeMappings[name='CO_Port']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_ImportedComponent']/@borderedNodeMappings[name='CO_PortImport']" targetFinderExpression="aql:self.redefinedPort" sourceFinderExpression="var:self" domainClass="Port">
+        <style lineStyle="dot">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription showIcon="false">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <containerMappings name="CO_Component" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.eContents()->filter(uml::Component)" domainClass="Component" dropDescriptions="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@toolSection/@ownedTools[name='CO_D%26D_Drop_Port']" reusedContainerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']">
+        <borderedNodeMappings name="CO_Port" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.ownedAttribute" domainClass="Port">
+          <style xsi:type="style:BundledImageDescription" showIcon="false" sizeComputationExpression="2">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+          <conditionnalStyles predicateExpression="aql:self.redefinedPort->size() > 0">
+            <style xsi:type="style:BundledImageDescription">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+        </borderedNodeMappings>
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" labelSize="10" backgroundStyle="GradientTopToBottom">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+      </containerMappings>
+      <containerMappings name="CO_ImportedComponent" semanticCandidatesExpression="aql:self.eContainerOrSelf(uml::Model).eAllContents(uml::Component) - self.eAllContents(uml::Component)" createElements="false" domainClass="Component" reusedContainerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_ImportedComponent']">
+        <borderedNodeMappings name="CO_PortImport" semanticCandidatesExpression="aql:self.ownedAttribute" domainClass="Port">
+          <style xsi:type="style:BundledImageDescription" showIcon="false" sizeComputationExpression="2">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+          <conditionnalStyles predicateExpression="aql:self.redefinedPort->size() > 0">
+            <style xsi:type="style:BundledImageDescription">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+        </borderedNodeMappings>
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" labelSize="10" backgroundStyle="GradientTopToBottom">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+      </containerMappings>
+      <toolSection name="component tools">
+        <ownedTools xsi:type="tool:ContainerCreationDescription" name="Component" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="Component" referenceName="packagedElement">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Component"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:NodeCreationDescription" name="Port" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']/@borderedNodeMappings[name='CO_Port']">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="Port" referenceName="ownedAttribute">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Port"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:NodeCreationDescription" name="Interface" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@nodeMappings[name='CO_Interface']">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="Interface" referenceName="packagedElement">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Interface"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop Interface on canvas" forceRefresh="true" dragSource="PROJECT_EXPLORER">
+          <oldContainer name="oldSemanticContainer"/>
+          <newContainer name="newSemanticContainer"/>
+          <element name="element"/>
+          <newViewContainer name="newContainerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element"/>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:EdgeCreationDescription" name="Usage" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@edgeMappings[name='CO_Usage']">
+          <sourceVariable name="source"/>
+          <targetVariable name="target"/>
+          <sourceViewVariable name="sourceView"/>
+          <targetViewVariable name="targetView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+              <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Usage" referenceName="packagedElement">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="supplier" valueExpression="var:target"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:EdgeCreationDescription" name="Realization" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@edgeMappings[name='CO_Realization']">
+          <sourceVariable name="source"/>
+          <targetVariable name="target"/>
+          <sourceViewVariable name="sourceView"/>
+          <targetViewVariable name="targetView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+              <subModelOperations xsi:type="tool_1:CreateInstance" typeName="InterfaceRealization" referenceName="interfaceRealization">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="supplier" valueExpression="var:target"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:EdgeCreationDescription" name="Redefined" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@edgeMappings[name='CO_Redefined'] //@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@edgeMappings[name='CO_RedefinedImport']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/Association.gif">
+          <sourceVariable name="source"/>
+          <targetVariable name="target"/>
+          <sourceViewVariable name="sourceView"/>
+          <targetViewVariable name="targetView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="redefinedPort" valueExpression="var:target"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:ContainerDropDescription" name="CO_D&amp;D_Drop_Port" mappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Component%20Diagram']/@containerMappings[name='CO_Component']/@borderedNodeMappings[name='CO_Port']">
+          <oldContainer name="oldSemanticContainer"/>
+          <newContainer name="newSemanticContainer"/>
+          <element name="element"/>
+          <newViewContainer name="newContainerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:newSemanticContainer">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="ownedPort" valueExpression="aql:self.element"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="State Machine Diagram" domainClass="StateMachine">
+      <edgeMappings name="SM_Transition" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="feature:eAllContents" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@containerMappings[name='SM_Region']/@subNodeMappings[name='SM_State']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@containerMappings[name='SM_Region']/@subNodeMappings[name='SM_State']" targetFinderExpression="aql:self.target" sourceFinderExpression="aql:self.source" domainClass="Transition" useDomainElement="true">
+        <style sizeComputationExpression="2" routingStyle="manhattan">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription labelSize="10">
+            <labelFormat>italic</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+        <conditionnalStyles predicateExpression="aql:self.eContents()->size() > 0">
+          <style sizeComputationExpression="[eContents()->size()/]">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="10">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </conditionnalStyles>
+      </edgeMappings>
+      <containerMappings name="SM_Region" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="feature:eAllContents" domainClass="Region">
+        <subNodeMappings name="SM_State" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.subvertex" domainClass="Vertex">
+          <style xsi:type="style:BundledImageDescription" labelSize="10" showIcon="false" sizeComputationExpression="4">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+          <conditionnalStyles predicateExpression="aql:self.oclIsKindOf(uml::Pseudostate)">
+            <style xsi:type="style:BundledImageDescription" labelSize="10" shape="ring">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.oclIsKindOf(uml::FinalState)">
+            <style xsi:type="style:BundledImageDescription" labelSize="10" shape="dot">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+        </subNodeMappings>
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" labelSize="10" backgroundStyle="GradientTopToBottom">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelFormat>bold</labelFormat>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+      </containerMappings>
+      <toolSection name="state machine tools">
+        <ownedTools xsi:type="tool:NodeCreationDescription" name="State" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@containerMappings[name='SM_Region']/@subNodeMappings[name='SM_State']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/State.gif">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="State" referenceName="subvertex">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New State"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:NodeCreationDescription" name="FinalState" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@containerMappings[name='SM_Region']/@subNodeMappings[name='SM_State']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/FinalState.gif">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="FinalState" referenceName="subvertex">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New State"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:NodeCreationDescription" name="PseudoState" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@containerMappings[name='SM_Region']/@subNodeMappings[name='SM_State']" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/Pseudostate.gif">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="Pseudostate" referenceName="subvertex">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New State"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:ContainerCreationDescription" name="Region" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@containerMappings[name='SM_Region']">
+          <variable name="container"/>
+          <viewVariable name="containerView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="Region" referenceName="region">
+              <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Region"/>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:EdgeCreationDescription" name="Transition" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']/@edgeMappings[name='SM_Transition']">
+          <sourceVariable name="source"/>
+          <targetVariable name="target"/>
+          <sourceViewVariable name="sourceView"/>
+          <targetViewVariable name="targetView"/>
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainerOrSelf(uml::Region)">
+              <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Transition" referenceName="transition">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Transition"/>
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="source" valueExpression="var:source"/>
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="target" valueExpression="var:target"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </ownedTools>
+        <ownedTools xsi:type="tool:DiagramCreationDescription" documentation="Create a new StateMachine" name="StateMachine" browseExpression="aql:self.eContents()->filter(uml::StateMachine)->last())" diagramDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='State%20Machine%20Diagram']">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:containerView.target">
+              <subModelOperations xsi:type="tool_1:CreateInstance" typeName="StateMachine" referenceName="packagedElement">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New StateMachine"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+          <containerViewVariable name="containerView"/>
+          <representationNameVariable name="diagramName"/>
+        </ownedTools>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Sequence Diagram" domainClass="Interaction">
+      <nodeMappings name="SD_Lifeline" semanticCandidatesExpression="aql:self.lifeline" domainClass="Lifeline">
+        <borderedNodeMappings name="SD_ExecutionSpecification" semanticCandidatesExpression="aql:self.coveredBy" domainClass="BehaviorExecutionSpecification" reusedBorderedNodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']/@nodeMappings[name='SD_Lifeline']/@borderedNodeMappings[name='SD_ExecutionSpecification']">
+          <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="aql:''" sizeComputationExpression="1" labelPosition="node" resizeKind="NORTH_SOUTH" arcWidth="1" arcHeight="1" workspacePath="/org.eclipse.sirius.tests.swtbot/images/es.png">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </borderedNodeMappings>
+        <style xsi:type="style:CustomStyleDescription" sizeComputationExpression="6" labelPosition="node" resizeKind="NSEW" id="air.uml2.LifelineStyle">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+        </style>
+      </nodeMappings>
+      <edgeMappings name="SD_Message_Lifeline_To_Lifeline" labelDirectEdit="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Reused%20Description']/@toolSection/@ownedTools[name='NamedElementDirectEdit']" semanticCandidatesExpression="aql:self.message" semanticElements="aql:OrderedSet{self , self.sendEvent , self.receiveEvent}" documentation="Show all messages between two lifelines." sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']/@nodeMappings[name='SD_Lifeline']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']/@nodeMappings[name='SD_Lifeline']" targetFinderExpression="aql:self.receiveEvent.covered" sourceFinderExpression="aql:self.sendEvent.covered" targetExpression="var:self" domainClass="Message" useDomainElement="true" pathExpression="">
+        <style routingStyle="manhattan">
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </edgeMappings>
+      <toolSection name="Sequence diagram tools">
+        <subSections name="create">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Lifeline" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']/@nodeMappings[name='SD_Lifeline']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Lifeline" referenceName="lifeline">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Lifeline"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Message" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']/@edgeMappings[name='SD_Message_Lifeline_To_Lifeline']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainerOrSelf(interactions::Interaction)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Message" referenceName="message">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="New Message"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="MessageOccurrenceSpecification" referenceName="fragment">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="covered" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="message" valueExpression="aql:source.eContainerOrSelf(interactions::Interaction).message->last()"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="send event"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.message->last()">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="sendEvent" valueExpression="aql:self.interaction.fragment->last()"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="MessageOccurrenceSpecification" referenceName="fragment">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="covered" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="message" valueExpression="aql:source.eContainerOrSelf(interactions::Interaction).message->last()"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="receive event"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.message->last()">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="receiveEvent" valueExpression="aql:self.interaction.fragment->last()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Behavior Execution Specification" nodeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Sequence%20Diagram']/@nodeMappings[name='SD_Lifeline']/@borderedNodeMappings[name='SD_ExecutionSpecification']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:container.eContainerOrSelf(interactions::Interaction)">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="BehaviorExecutionSpecification" referenceName="fragment"/>
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:containerView.ancestors()->including(containerView)->select( e | e.target.oclIsKdinfOf(uml::Lifeline)).target">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="coveredBy" valueExpression="aql:self.eContainerOrSelf(interactions::Interaction).fragment->last()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" documentation="Diagrams to show instances and relation between them." name="Object Diagram" domainClass="Package">
+      <edgeMappings name="OD_Slot" semanticCandidatesExpression="aql:self.packagedElement->filter(uml::InstanceSpecification).slot->select( e | e.value->filter(InstanceValue)->size() > 0)" semanticElements="aql:Sequence{self} + Sequence{self.definingFeature}" sourceMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@containerMappings[name='OD_InstanceSpecification']" targetMapping="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@containerMappings[name='OD_InstanceSpecification']" targetFinderExpression="aql:self.value->filter(uml::InstanceValue).instance" sourceFinderExpression="aql:self.owningInstance" domainClass="Slot" useDomainElement="true">
+        <style>
+          <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          <centerLabelStyleDescription labelExpression="aql:self.definingFeature.name">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </centerLabelStyleDescription>
+        </style>
+      </edgeMappings>
+      <containerMappings name="OD_InstanceSpecification" semanticCandidatesExpression="aql:self.packagedElement" semanticElements="" domainClass="InstanceSpecification" childrenPresentation="List">
+        <subNodeMappings name="OD_SimpleSlot" semanticCandidatesExpression="feature:eAllContents" semanticElements="aql:self.slot->select( e | e.values->filter(uml::InstanceValue)->size() = 0)" domainClass="Slot"/>
+        <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" labelExpression="aql:self.name + ' : ' + self.classifier->first().name">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+        </style>
+      </containerMappings>
+      <toolSection name="object diagram tools">
+        <ownedTools xsi:type="tool:DiagramCreationDescription" name="Object Diagram" diagramDescription="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']">
+          <initialOperation/>
+          <containerViewVariable name="containerView"/>
+          <representationNameVariable name="diagramName"/>
+        </ownedTools>
+        <subSections name="create">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Instance Specification" containerMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@containerMappings[name='OD_InstanceSpecification']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="InstanceSpecification" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'InstanceSpecification' + self.eContainer().packagedElement->filter(uml::InstanceSpecification)->size()"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Reference Value" edgeMappings="//@ownedViewpoints[name='UML%20Analysis%20workspace']/@ownedRepresentations[name='Object%20Diagram']/@edgeMappings[name='OD_Slot']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Slot" referenceName="slot">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="InstanceValue" referenceName="value">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="instance" valueExpression="var:target"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </subSections>
+      </toolSection>
+    </ownedRepresentations>
+  </ownedViewpoints>
+</description:Group>

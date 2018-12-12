@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Writing_Queries</title>
+		<link type="text/css" rel="stylesheet" href="../../resources/bootstrap.css"/>
+		<link type="text/css" rel="stylesheet" href="../../resources/custom.css"/>
+	</head>
+	<body>
+		<h1 id="WritingQueriesandInterpretedExpressions">Writing Queries and Interpreted Expressions</h1>
+		<ol class="toc" style="list-style: disc;">
+			<li>
+				<a href="#WritingQueriesandInterpretedExpressions">Writing Queries and Interpreted Expressions</a>
+				<ol style="list-style: disc;">
+					<li>
+						<a href="#introduction">Introduction</a>
+					</li>
+					<li>
+						<a href="#general">General Rules</a>
+					</li>
+					<li>
+						<a href="#specialized">Using the Specialized interpreters</a>
+					</li>
+					<li>
+						<a href="#aql">Using AQL</a>
+					</li>
+					<li>
+						<a href="#acceleo">Using Acceleo</a>
+					</li>
+					<li>
+						<a href="#ocl">Using Raw OCL</a>
+					</li>
+					<li>
+						<a href="#custom">Providing a Custom Language</a>
+					</li>
+					<li>
+						<a href="#service_methods">Writing Java Services</a>
+					</li>
+					<li>
+						<a href="#standard_services">Standard Services</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#editing_domain_services">Editing Domain Services and EMF Edit Integration</a>
+							</li>
+						</ol>
+					</li>
+				</ol>
+			</li>
+		</ol>
+		<h2 id="introduction">Introduction</h2>
+		<p>Many parts of a 
+			<em>VSM</em> require you to provide 
+			<em>interpreted expressions</em>, which will be evaluated at runtime to provide a behavior specific to your domain and representations. Some of these expressions return model elements (in which case we call them 
+			<em>queries</em>), while others simply produce text (for example the expressions used for labels), but the principles stay the same.
+		</p>
+		<p>Sirius does not force the use of a specific language to write these queries. Currently, three different languages are provided by default, and if you have specific needs, you can extend the system and  
+			<a href="#custom">provide your own</a>. You can use several different languages inside the same VSM (but only one in each expression).
+		</p>
+		<p>Whatever the language(s) you use, because they are all optional from Sirius&#8217;s point of view, make sure the Viewpoint Specification Project which contains your VSMs explicitly depends on the Sirius plug-in which provides supports for these languages. Otherwise when you modelers are deployed to end-users you can not be sure the proper support will be available. The 
+			<em>Viewpoint Specification Projects</em> which are created using the standard wizard are pre-configured to use AQL (
+			<em>Acceleo Query Language</em>), which is the recommended language as of Sirius 3.1. See the sections below for each of the standard languages for the name of the Sirius support plug-ins to depend on if you use the language.
+		</p>
+		<h2 id="general">General Rules</h2>
+		<p>Some general rules are independent of the language details.</p>
+		<p>
+			<strong>Auto-completion.</strong> First, in the 
+			<em>VSM</em> editor, any field in the property view which has a yellow background is an interpreted expression.  In these fields, auto-completion can be triggered by hitting 
+			<em>Ctrl+Space</em>. 
+		</p>
+		<p>
+			<img border="0" src="images/emptyFieldAutoCompletion.jpg"/>
+		</p>
+		<p>The completion will correspond to the empty expression for the installed query language (e.g. 
+			<b>aql:</b> for AQL). It will also place the cursor at the expected place where it is ready to start typing the expression.
+		</p>
+		<p>
+			<img border="0" src="images/emptyExpressionCursor.jpg"/>
+		</p>
+		<p>When hitting auto-completion on an empty expression, the first completion proposal will correspond to the variables which are available in the expression&#8217;s context, and the rest correspond to all the features, services, etc. which are available on the current element.</p>
+		<p>
+			<img border="0" src="images/emptyExpressionAutoCompletion.jpg"/>
+		</p>
+		<p>Sometimes Sirius is not able to statically determine the precise type of the model elements on which an expression will be evaluated. In that case, it assumes a plain 
+			<em>EObject</em>. This means you will not get completion proposals specific to your custom types, and that if you use features or services which are not available on 
+			<em>EObject</em>, the VSM&#8217;s validation will fail. To prevent this, if you know the precise type of the elements and the language supports it, add a cast operation to tell Sirius the actual type (e.g. <code>aql:filter(packageName::ExpectedType).theRestOfTheExpression</code> if using AQL for example.
+		</p>
+		<p>
+			<strong>The Interpreter view.</strong> The 
+			<em>Interpreter</em> view can be used to develop complex expressions interactively. The view can work in either the native 
+			<em>Acceleo</em> mode (corresponding to Acceleo 3/MTL) or in the 
+			<em>Sirius</em> mode. In the 
+			<em>Sirius</em> mode, you can use any of the languages supported by Sirius, but you lose the benefits of syntax coloring.
+		</p>
+		<p>To use the 
+			<em>Interpreter</em> view, simply open a Sirius representation, select and element in it (for example a shape on a diagram), and type some expression in the view&#8217;s upper text field. The result of the expression (a set of model elements or a string) will appear in the lower part of the view. If you select a different element, the result will automatically be re-evaluated in the context of the new element.
+		</p>
+		<p>
+			<img border="0" src="images/viewpoint_interpreter.png"/>
+		</p>
+		<p>
+			<em>Warning:</em> When using the 
+			<em>Interpreter</em> view from an element selected in a Sirius representation, the context of the expression is 
+			<strong>not</strong> the 
+			<em>semantic</em> element, but the 
+			<em>view</em> model element used internally by Sirius. To access the semantic element you must use the view&#8217;s 
+			<code>target</code> reference. More concretely, imagine you have a Sirius diagram representing UML classes with nodes. If you select a class and enter <code>aql:self</code> in the interpreter view, the result will not be a UML 
+			<code>Class</code> element, but a 
+			<code>DNode</code> (the type used internally by Sirius to represent graphical nodes). To get the UML class, you must enter <code>aql:self.target</code> (or the equivalent in other languages). Keep this in mind when using the 
+			<em>Interpreter</em> view to develop expressions you want to use inside a VSM: most expressions defined in the VSM will be evaluated in the context of a semantic element, so you will need to add/remove 
+			<code>target</code> references when switching between the two.
+		</p>
+		<p>
+			<strong>Determinism.</strong> In general, you should try to ensure that your queries are deterministic, i.e. from the same input model they should always return the same result, and in the same order (if returning collections of elements). Otherwise, each time a representation is refreshed it might become dirty (as Sirius will see the order difference as a change) or even visually unstable (i.e. elements shown in a different order). There are several things to be aware of in order to ensure determinism in your queries:
+		</p>
+		<ul>
+			<li>At the meta-model level, if you control it, make sure any derived feature always return its values in the same order. If you do not control the meta-model and it has unordered references which can cause problems (UML is an example), you can impose your own ordering by sorting the elements whenever they are used in a Sirius query.</li>
+			<li>At the Sirius query level, make sure you call only operations which are deterministic in the query language(s) you use. Unfortunately, this information is not often documented in the query languages semantics, so some trial and error experimentation is required for now. </li>
+			<li>At the service level, if you create your own 
+				<a href="#service_methods">Java services</a>, make sure to use data structures which ensure a fixed iteration order, like 
+				<code>LinkedHashSet</code> instead of 
+				<code>HashSet</code> for example.
+			</li>
+		</ul>
+		<h2 id="specialized">Using the Specialized interpreters</h2>
+		<p>Sirius provides several specialized interpreters to handle more efficiently some forms of simple expressions which can occur very often in a typical VSM. Each interpreter focuses on a very limited case, and none supports complex expressions. This allows them to be very fast, but it requires that you use them explicitly when possible. All these interpreters are available by default in Sirius, you do not need to declare additional dependencies in your VSM project to be able to use them.</p>
+		<ul>
+			<li>
+				<strong>
+					<code>var:</code>
+				</strong> This interpreter can only do direct access to the value of a named variable. For example, instead of <code>aql:containerView</code> (using AQL), the equivalent using the specialized interpreter would be 
+				<code>var:containerView</code>. As a special case, the pseudo-variable 
+				<code>self</code> is available to access the current element (the evaluation context): 
+				<code>var:self</code> is equivalent to <code>aql:self</code> in AQL.
+			</li>
+			<li>
+				<strong>
+					<code>feature:</code>
+				</strong> This interpreter can only do direct access to a named feature of the current element. For example, instead of <code>aql:self.name</code>, the equivalent using this interpreter would be 
+				<code>feature:name</code>. Note that if your metamodel generated code was generated with feature delegation set to Reflective, the feature interpreter will return the raw value of the attribute (as seen by 
+				<code>eGet</code>), bypassing any custom getter implementation you provided. This interpreter also supports the following pseudo-features:
+				<ul>
+					<li>
+						<code>feature:eContainer</code> returns the container of the current element (or 
+						<code>null</code> if there is none). This is equivalent to <code>aql:self.eContainer()</code>.
+					</li>
+					<li>
+						<code>feature:eContents</code> returns the direct contents of the current element (or an empty collection if there is none). This is equivalent to <code>aql:self.eContents()</code>.
+					</li>
+					<li>
+						<code>feature:eAllContents</code> returns all the elements directly and indirectly contained inside the current element (or an empty collection if there is none). This is equivalent to <code>aql:self.eAllContents()</code>.
+					</li>
+					<li>
+						<code>feature:eCrossReferences</code> returns all the model elements which are directly referenced by the current element (or an empty collection if there is none). This is equivalent to <code>[self.eCrossReferences()/] using Acceleo 3/MTL</code>.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<strong>
+					<code>service:</code>
+				</strong> This interpreter can be used to directly invoke a service method (i.e. a Java method that follows conventions for 
+				<a href="#service_methods">service methods</a> ) on the current element. For example, assuming the service class 
+				<a href="#ecore_services">
+					<code>EcoreServices</code>
+				</a> has been correctly registered in the VSM, the expression 
+				<code>service:getEClasses</code> (note the absence of parenthesis) will invoke the 
+				<code>getEClasses</code> on the current element if it is an instance of 
+				<code>EPackage</code>.
+				<ul>
+					<li>The service interpreter supports parameters, but only variables can be used as parameter (no literals or complex expressions), for example: 
+						<code>service:serviceName(view, diagram)</code>.
+					</li>
+					<li>You can use the service interpreter not only on the current context by using a variable name before calling the service, for example: 
+						<code>service:myVariableName.serviceName</code>.
+					</li>
+					<li>For efficiency reasons, if multiple services match the expression, the first one found is used. There is no real polymorphism management.</li>
+				</ul>
+			</li>
+		</ul>
+		<h2 id="aql">Using AQL</h2>
+		<p>Starting from Sirius 3.1, 
+			<em>AQL</em> (Acceleo Query Language, first introduced in Sirius 3.0) is the recommended language to write queries/interpreted expressions. AQL is similar to Acceleo 3/MTL, but simpler and provides much better performance in the Sirius context. AQL expressions start with the 
+			<code>aql:</code> prefix and have a syntax similar to Acceleo (without the enclosing 
+			<code>[../]</code> brackets). The main differences between the two languages are:
+		</p>
+		<ul>
+			<li>Feature access must 
+				<strong>always</strong> explicitly specify the target object, even if the target is 
+				<code>self</code>. This means an Acceleo expression like <code>[name/]</code> which accesses the 
+				<code>name</code> attribute of the current element translates in AQL as 
+				<code>aql:self.name</code>. The expression 
+				<code>aql:name</code> with no explicit receiver will always be interpreted as an access to the 
+				<code>name</code> variable, and may result in an error if the variable in question is not defined. 
+			</li>
+			<li>&#8220;Lambda&#8221; expressions must always declare their parameters and use them explicitly. Again, there is no implicit 
+				<code>self</code> in such a context. For example: <code>[self.eContents()&#45;&gt;select(name.startsWith(&apos;A&apos;))/]</code> becomes <code>aql:self.eContents()&#45;&gt;select(i | i.name.startsWith(&apos;A&apos;))</code> with an explicit declaration and usage of 
+				<code>i</code> in AQL.
+			</li>
+			<li>AQL is more persmissive in terms of missing/empty intermediate results in complex expressions: 
+				<code>aql:self.anEmptyReference.somethingElse</code> will not result in an error as the equivalent Acceleo (or OCL) expression would, but simply return an empty result.
+			</li>
+			<li>AQL provides different services/methods by default compared to Acceleo. In general the set of default services in AQL is better suited to the typically use cases encountered in Sirius.</li>
+		</ul>
+		<p>See <a href="https://www.eclipse.org/acceleo/documentation/aql.html" target="_blank">the AQL documentation</a> for more details about the language itself, the full list of standard services, and the differences with Acceleo/MTL.</p>
+		<p>
+			<em>Note:</em> Viewpoint Specification Projects created with the default wizard will be already setup to use it. Otherwise you need to add a dependency to the 
+			<code>org.eclipse.sirius.common.acceleo.aql</code> plug-in to ensure AQL support will be available wherever your modelers are used. When 
+			<strong>developing</strong> new VSMs which use AQL, it is recommended to have the  
+			<code>org.eclipse.sirius.common.acceleo.aql.ide</code> plug-in installed as it provides specification-time features like expression completion. However, 
+			<code>org.eclipse.sirius.common.acceleo.aql.ide</code> is not needed at runtime for the resulting modelers to function.
+		</p>
+		<p>
+			<em>Note:</em> Several services like olcIsKindOf() or filter() use type literals and will require to explicitly reference the known meta-models as dependencies to work. It is recommended to add the corresponding meta-models plug-ins to the dependencies of the Viewpoint Specific Project.
+		</p>
+		<h2 id="acceleo">Using Acceleo</h2>
+		<p>Acceleo 3 implements the MTL standard, and provides a query language similar to OCL (with some extensions). It provides relatively good static validation and auto-completion when editing your expressions, but AQL is even better, and faster. For new modelers, prefer AQL over Acceleo/MTL. If you have existing modelers which use Acceleo/MTL, converting them to use AQL is relatively straightforward, see <a href="https://www.eclipse.org/acceleo/documentation/aql.html#MigratingfromMTLqueries" target="_blank">the AQL documentation</a> for details.</p>
+		<p>Acceleo expressions are enclosed in brackets: <code>[theExpression/]</code>. Inside the brackets you can write any valid Acceleo expression, including using 
+			<code>if</code> and 
+			<code>let</code> statements, for example. See <a href="https://wiki.eclipse.org/Acceleo" target="_blank">the Acceleo documentation</a> for the exact syntax and semantics of the language.
+		</p>
+		<p>Note that  Acceleo expressions used inside VSMs 
+			<strong>must</strong> be enclosed inside a single bracket. It is not currently possible to mix Acceleo expressions and fixed text (like 
+			<code>"prefix[someExpression/]suffix"</code>). Instead, you can use Acceleo&#8217;s string manipulation operations to obtain the same result: <code>[&apos;prefix&apos; + someExpression + &apos;suffix&apos;/]</code>). Related to this, auto-completion only works if you are inside a well-formed bracket (i.e. <code>[&lt;cursor&gt;/]</code>); if you have simply opened the bracket but not closed it (i.e. <code>[&lt;cursor&gt;</code>), completion will not be available.
+		</p>
+		<p>Acceleo expressions can transparently invoke methods from Java classes which follow the 
+			<a href="#service_methods">service methods</a> conventions and have been properly declared in the VSM. Note that currently this only works if the Java service class is in the same project as the 
+			<em>VSM</em>. You can also invoke Acceleo 
+			<em>queries</em> defined in 
+			<code>.mtl</code> files in your Viewpoint Specification Project. For this to work, your Viewpoint Specification Project should be an Acceleo Generator project, you can convert the project with the 
+			<em>Configure &gt; Toggle Acceleo Nature</em> contextual menu. If you want to use queries from 
+			<code>.mtl</code> files in you Sirius project, the parent 
+			<em>Viewpoint</em> element must have a 
+			<em>Java Extension</em> element which references the MTL file, using the 
+			<code>com::example::domain::design::module</code> syntax (note that the qualified name does not contain the 
+			<code>.mtl</code> or 
+			<code>.emtl</code> file extension). Also make sure to read <a href="http://www.obeonetwork.com/page/building-an-acceleo-generator"  target="_blank">http://www.obeonetwork.com/page/building-an-acceleo-generator</a> to ensure the project is built correctly, or the queries defined in the 
+			<code>.mtl</code> files may not be available when the project is deployed as a plug-in.
+		</p>
+		<p>
+			<em>Note:</em> due to an incompatible change in serialization format in EMF 2.9, if you use external 
+			<code>.mtl</code> files in your modeler definitions and build your modeler plug-ins using EMF 2.9 or later, the resulting modeler will not work with previous versions of EMF (as the resulting 
+			<code>.emtl</code> files will not load correctly with EMF 2.8 and earlier). For reference, EMF 2.9 corresponds to Eclipse 4.3 (Kepler). 
+		</p>
+		<p>Acceleo is very precise (and  very demanding) about the types of elements your queries are executed on. This generally means you get good auto-completion and useful validation and diagnostics. However sometimes Sirius is not able to statically determine the precise type of the model elements on which an expression will be evaluated. In that case, it assumes a plain 
+			<em>EObject</em>. If you know the actual type which will be used, prefix your expression with 
+			<code>filter(ExpectedType)</code> to help Sirius. Note that if the actual type at runtime is not compatible with 
+			<code>ExpectedType</code>, the rest of your expression will silently be ignored.
+		</p>
+		<p>In the context of Sirius, you have access to a special feature which can be used to follow &#8220;back-links&#8221; or &#8220;cross-references&#8221;. From a given model element, this allows you to easily (and efficiently) find all the elements which refer to it in the scope of the models and representations in the same modeling project. This feature is available through the 
+			<code>eInverse()</code> method, which can be used on any model element inside an Acceleo expression.
+		</p>
+		<p>Note that in most cases, expressions in Sirius are evaluated in a context where 
+			<em>variables</em> are defined. For example, most expressions inside tool definitions have access to variables telling them which elements the tool has been applied on. In some cases, the names of these variable can conflict with names of features in your meta-model. The evaluation rules of Acceleo (OCL actually) give precedence to variables, so it is recommended to always prefix accesses to your meta-model features with 
+			<code>self</code> (or another expression) to avoid ambiguity. As a concrete example, say you have an expression 
+			<code>"[target/]"</code> that you expect to access the 
+			<code>target</code> feature of one of your object. If evaluated in a context where a 
+			<code>target</code> variable exist, the value of the expression will be the value of the variable, 
+			<em>not</em> the value of the object&#8217;s property. To avoid ambiguity, always use expressions of the form 
+			<code>"[self.target/]"</code> in such cases.
+		</p>
+		<p>
+			<em>Note:</em> Due to internal changes in the Eclipse Equinox runtime, starting with Eclipse Luna (4.4) it is impossible to evaluate Java services from an Acceleo 3 expression if the Java service is defined directly in the workspace. This only affect specifiers (not end-users). When developing modelers which use Acceleo expressions and rely on Java services, you must launch an Eclipse runtime from your development environement to test the resulting modeler in a context where the service is available as part of a deployed plug-in. Starting with Sirius 3.0 you can also use the AQL language instead, which has a syntax very similar to Acceleo 3/MTL, but does not have this limitation regarding services in the workspace.
+		</p>
+		<h2 id="ocl">Using Raw OCL</h2>
+		<p>Sirius also supports raw OCL expressions, but this support is deprecated and will be removed in future versions. OCL expressions must be prefixed with 
+			<code>ocl:</code>. If you use it your Sirius project must declare a dependency to the 
+			<code>org.eclipse.sirius.common.ocl</code> plug-in to ensure OCL support will be available wherever your modelers are used.
+		</p>
+		<p>It is highly recommended that you use Acceleo, which implemented the MTL standard and is a super-set of the OCL language, instead of raw OCL.</p>
+		<h2 id="custom">Providing a Custom Language</h2>
+		<p>Sirius allows you to provide your own language implementations, if you have very specific needs or want to reuse an existing custom language. Note that Sirius must be able to syntactically and unambiguously determine from an expression which language it is written in (to send it to the appropriate interpreter). The simplest way to achieve this is to define a prefix (like 
+			<code>ocl:</code> for OCL) so that expressions written in your language can be distinguished from expressions written in any of the others.
+		</p>
+		<p>To provide your custom language, you must 
+			<em>at least</em> implement the 
+			<code>org.eclipse.sirius.common.expressionInterpreter</code> extension point, and provide an implementation of the 
+			<code>org.eclipse.sirius.common.tools.api.interpreter.IInterpreter</code> interface. The example below shows how the Acceleo interpreter is registered. The 
+			<code>AcceleoMTLInterpreterProvider</code> is the one which implements the 
+			<code>IInterpreter</code> interface.
+		</p>
+		<pre><code>   &lt;extension point="org.eclipse.sirius.common.expressionInterpreter"
+              id="org.eclipse.sirius.common.acceleo.mtl.AcceleoMTLInterpreter"&gt;
+      &lt;expressionInterpreterProvider
+            interpreterProviderClass="org.eclipse.sirius.common.acceleo.mtl.business.internal.interpreter.AcceleoMTLInterpreterProvider" /&gt;
+   &lt;/extension&gt;
+</code></pre>
+		<p>You can also optionally provide support for auto-completion for your language by implementing the 
+			<code>org.eclipse.sirius.common.proposalProvider</code> extension point and providing an implementation of 
+			<code>org.eclipse.sirius.common.tools.api.contentassist.IProposalProvider</code> interface. For example, here is how the completion support for Acceleo is registered (
+			<code>AcceleoProposalProvider</code> is the class which implements the 
+			<code>IProposalProvider</code> interface):
+		</p>
+		<pre><code>   &lt;extension point="org.eclipse.sirius.common.proposalProvider"&gt;
+      &lt;proposalProvider
+            class="org.eclipse.sirius.common.acceleo.mtl.ide.AcceleoProposalProvider"
+            interpreter="org.eclipse.sirius.common.acceleo.mtl.AcceleoMTLInterpreter" /&gt;
+   &lt;/extension&gt;
+</code></pre>
+		<h2 id="service_methods">Writing Java Services</h2>
+		<p>Query languages may support the notion of 
+			<em>Java services</em>, which are methods written in Java that can be transparently invoked from interpreted expressions in Sirius. Acceleo 3 includes this support. All you need to do is to create a Java class whose methods follow some conventions (described below) in your Viewpoint Specification Project, and declare the class (using its fully qualified Java name) in the VSM. You can then use the services defined in that class in any of you interpreted expressions written in either Acceleo or another language which supports services (refer to the query language&#8217;s documentation for details).
+		</p>
+		<p>A service is simply a public Java methods which follows some conventions:</p>
+		<ul>
+			<li>The class containing the method must be public and have a default constructor which takes no argument.</li>
+			<li>The class can contain many public methods (static or not), each of which will be visible as a service if they follow the right conventions.</li>
+			<li>A service method must take at least one parameter, which should be an EMF type (i.e. 
+				<code>EObject</code> or a sub-type of 
+				<code>EObject</code>).
+			</li>
+			<li>A service method may take more parameters, which can be:
+				<ul>
+					<li>strings</li>
+					<li>numbers</li>
+					<li>EMF types (i.e. 
+						<code>EObject</code> or a sub-type)
+					</li>
+					<li>Java collections of EMF types (note that array types are 
+						<strong>not</strong> supported).
+					</li>
+				</ul>
+			</li>
+			<li>A service method may return a value, which can have the same kinds of types as parameters.</li>
+		</ul>
+		<p>Here is an example of a Java service:</p>
+		<pre><code id="ecore_services">public class EObjectServices {
+    public List&lt;EClass&gt; getEClasses(EPackage ePackage) {
+        List&lt;EClass&gt; eClasses = new ArrayList&lt;EClass&gt;();
+        // The service code. 
+        return eClasses;
+    }
+}
+</code></pre>
+		<p>Once a service has been defined and its class is registered in your VSM, you can invoke it in the expressions of languages which support it  like this: <code>[aFamily.getFamiliesContainingParents()/]</code>. (using Acceleo syntax) The invocation looks as if the service was a normal feature of the 
+			<code>Family</code> type. When the service is invoked, the model element on which it is invoked is used as the first argument to the Java method. If arguments are passed in the expression, they are mapped to the second, third, etc. parameters of the Java method, assuming the types are compatible. The result of evaluating a service invocation is the result of the Java method.
+		</p>
+		<p>
+			<em>Warning:</em> Java service methods should be stateless. There is no guarantee that two successive invocations of the same service method on two model elements (or even on the same one) will use the same instance of the service class.
+		</p>
+		<p>
+			<em>Warning:</em> There are currently some limitations on the use of Java services from Acceleo:
+		</p>
+		<ul>
+			<li>primitive types can not be used as arguments or return types for service methods invoked from Acceleo 3 expressions. The workaround is to use the corresponding wrapper type (e.g. 
+				<code>Integer</code> instead of 
+				<code>int</code>).
+			</li>
+			<li>service methods invoked from Acceleo 3 expressions can not return 
+				<code>void</code>. You can return any value instead, for example target argument (the service method&#8217;s first parameter). 
+			</li>
+		</ul>
+		<h2 id="standard_services">Standard Services</h2>
+		<p>Sirius provides some standard services that can be used from any VSM simply by adding the appropriate reference (as a 
+			<em>Java Extension</em>) to the implementation class&#8217;s fully qualified name. When using such a service class, make sure your 
+			<em>Viewpoint Specification Project</em> has a dependency towards the Sirius plug-in which provides said class.
+		</p>
+		<h3 id="editing_domain_services">Editing Domain Services and EMF Edit Integration</h3>
+		<p>Starting from Sirius 4.0, the 
+			<code>org.eclipse.sirius.ext.emf.edit</code> plug-in provides the 
+			<code>org.eclipse.sirius.ext.emf.edit.EditingDomainServices</code> service class which can be referenced from any VSM (once properly declared). This class provides a large set of methods which give access to many useful features of the 
+			<em>EMF Edit</em> framework, in particular all kinds of 
+			<em>Item Providers</em>, in a way that is directly accessible as service invocations from interpreted expressions.
+		</p>
+		<h4 id="GeneralEditingDomainrelatedServices">General EditingDomain-related Services</h4>
+		<p>The following general services are made available:</p>
+		<ul>
+			<li>
+				<code>getEditingDomain(EObject)</code>
+			</li>
+			<li>
+				<code>isStale(EObject)</code>
+			</li>
+			<li>
+				<code>isControlled(EObject)</code>
+			</li>
+			<li>
+				<code>getAdapterFactory(EObject)</code>
+			</li>
+			<li>
+				<code>getAdapter(EObject, Class)</code>
+			</li>
+		</ul>
+		<h4 id="ItemProvidersServices">Item Providers Services</h4>
+		<p>Most public methods of the following interfaces are available as services on any 
+			<code>EObject</code> (typically from a Sirius session):
+		</p>
+		<ul>
+			<li>
+				<code>org.eclipse.emf.edit.provider.IItemLabelProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.IItemColorProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.IItemFontProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.IStructuredItemContentProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.ITreeItemContentProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.ITableItemLabelProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.ITableItemColorProvider</code>
+			</li>
+			<li>
+				<code>org.eclipse.emf.edit.provider.ITableItemFontProvider</code>
+			</li>
+		</ul>
+		<p>In all cases, a 
+			<code>getXXXProvider()</code> service method is also made available (for example 
+			<code>getLabelProvider(EObject)</code>, which returns the item provider itself (or 
+			<code>null</code>). The item provider is located using the 
+			<code>ItemProviderAdapter</code> returned by the 
+			<code>AdapterFactory</code> associated to the element&#8217;s editing domain. This assumes said domain is an 
+			<code>AdapterFactoryEditingDomain</code> (which is true in practice in Sirius, which uses a 
+			<code>TransactionalEditingDomain</code> that inherits from this).
+		</p>
+		<p>All service methods return an explicit 
+			<code>null</code> value (or 
+			<code>false</code> for services that return a boolean) if the corresponding item provider could not be found. Note that this is indistinguishable from an item provider method which actually returns 
+			<code>null</code> or 
+			<code>false</code>.
+		</p>
+		<h4 id="ItemPropertyRelatedServices">Item Property-Related Services</h4>
+		<p>The 
+			<code>IItemPropertySource</code> associated with an element and its 
+			<code>IItemPropertyDescriptors</code> can be obtained using the following services:
+		</p>
+		<ul>
+			<li>
+				<code>getItemPropertySource(EObject)</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptors(EObject)</code> to obtain 
+				<strong>all</strong> the 
+				<code>IItemPropertyDescriptor</code> of the element.
+			</li>
+			<li>
+				<code>getPropertyDescriptorForFeature(EObject, String)</code> to obtain the 
+				<code>IItemPropertyDescriptor</code> of an element&#8217;s specific feature
+			</li>
+		</ul>
+		<p>The following services, which all take a feature name as a second argument (the first explicit one when invoked as a service) give access to the corresponding methods in the 
+			<code>IItemPropertyDescriptor</code> associated to the corresponding element&#8217;s feature:
+		</p>
+		<ul>
+			<li>
+				<code>getPropertyDescriptorPropertyValue()</code>
+			</li>
+			<li>
+				<code>isPropertyDescriptorPropertySet()</code>
+			</li>
+			<li>
+				<code>canSetPropertyDescriptorProperty()</code>
+			</li>
+			<li>
+				<code>resetPropertyDescriptorPropertyValue()</code>
+			</li>
+			<li>
+				<code>setPropertyDescriptorPropertyValue()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorCategory()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorDescription()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorDisplayName()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorFilterFlags()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorHelpContextIds()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorId()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorLabelProvider()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorFeature()</code>
+			</li>
+			<li>
+				<code>isPropertyDescriptorMany()</code>
+			</li>
+			<li>
+				<code>getPropertyDescriptorChoiceOfValues()</code>
+			</li>
+			<li>
+				<code>isPropertyDescriptorMultiLine()</code>
+			</li>
+			<li>
+				<code>isPropertyDescriptorSortChoices()</code>
+			</li>
+		</ul>
+		<h4 id="CommandrelatedServices">Command-related Services</h4>
+		<p>A series of service methods can be used to invoke the standard EMF Commands available from 
+			<code>ItemProviderAdapter</code> 's various 
+			<code>createXXXCommand()</code> methods. Note that contrary to the 
+			<code>createXXXCommand()</code> methods which simply returns a 
+			<code>Command</code> instance, the service methods exposed in this class will directly 
+			<strong>execute</strong> the command on the editing domains 
+			<code>CommandStack</code>.
+			<br/>Their names follow the 
+			<code>perfomXXXCommand()</code> pattern to reflect this. They all return the 
+			<code>self</code> element (the 
+			<code>EObject</code> on which the service was invoked.
+		</p>
+		<p>The command-related services available are:</p>
+		<ul>
+			<li>
+				<code>performSetCommand()</code>
+			</li>
+			<li>
+				<code>performUnsetCommand()</code>
+			</li>
+			<li>
+				<code>performAddCommand()</code>
+			</li>
+			<li>
+				<code>performRemoveCommand()</code>
+			</li>
+			<li>
+				<code>performReplaceCommand()</code>
+			</li>
+			<li>
+				<code>performMoveCommand()</code>
+			</li>
+		</ul>
+		<p>The implementation of these services delegate to the 
+			<code>ItemProviderAdapter.createCommand()</code> method, so any customization made in the 
+			<code>ItemProviderAdapter</code> 's implementation will be taken into account.
+		</p>
+	</body>
+</html>

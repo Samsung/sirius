@@ -1,0 +1,1315 @@
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Properties_View_Description</title>
+		<link type="text/css" rel="stylesheet" href="../../resources/bootstrap.css"/>
+		<link type="text/css" rel="stylesheet" href="../../resources/custom.css"/>
+	</head>
+	<body>
+		<h1 id="SpecifyingPropertiesViews">Specifying Properties Views</h1>
+		<ol class="toc" style="list-style: disc;">
+			<li>
+				<a href="#SpecifyingPropertiesViews">Specifying Properties Views</a>
+				<ol style="list-style: disc;">
+					<li>
+						<a href="#introduction">Introduction</a>
+					</li>
+					<li>
+						<a href="#properties_view_description">Properties View Description</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#common_attributes">Common Attributes</a>
+							</li>
+							<li>
+								<a href="#additional_services">Additional Services</a>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<a href="#pages">Pages</a>
+					</li>
+					<li>
+						<a href="#groups">Groups</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#group_styles">Group Styles</a>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<a href="#widgets">Widgets</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#text">Text / Text area</a>
+							</li>
+							<li>
+								<a href="#button">Button</a>
+							</li>
+							<li>
+								<a href="#label">Label</a>
+							</li>
+							<li>
+								<a href="#checkbox">Checkbox</a>
+							</li>
+							<li>
+								<a href="#select">Select</a>
+							</li>
+							<li>
+								<a href="#radio_group">Radio Group</a>
+							</li>
+							<li>
+								<a href="#hyperlink">Hyperlink</a>
+							</li>
+							<li>
+								<a href="#reference">Reference</a>
+							</li>
+							<li>
+								<a href="#list">List</a>
+							</li>
+							<li>
+								<a href="#basic_custom_widgets">Basic Custom Widgets</a>
+							</li>
+							<li>
+								<a href="#advanced_custom_widgets">Advanced Custom Widgets</a>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<a href="#dynamic_mappings">Dynamic Mappings</a>
+					</li>
+					<li>
+						<a href="#containers_and_layout">Containers and Layout</a>
+					</li>
+					<li>
+						<a href="#styling">Styling</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#widgets_styles">Widgets styles</a>
+							</li>
+							<li>
+								<a href="#colors">Colors</a>
+							</li>
+							<li>
+								<a href="#conditional_styles">Conditional Styles</a>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<a href="#validation_rules">Validation rules</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#page_semantic_validation_rule">Page semantic validation rule</a>
+							</li>
+							<li>
+								<a href="#group_semantic_validation_rule">Group semantic validation rule</a>
+							</li>
+							<li>
+								<a href="#group_property_validation_rule">Group property validation rule</a>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<a href="#extension_points">Extension Points</a>
+						<ol style="list-style: disc;">
+							<li>
+								<a href="#advanced_custom_widgets_extension_points">Extension Points for Advanced Custom Widgets</a>
+							</li>
+							<li>
+								<a href="#tab_filtering">Tab Filtering</a>
+							</li>
+						</ol>
+					</li>
+				</ol>
+			</li>
+		</ol>
+		<h2 id="introduction">Introduction</h2>
+		<p>Starting from version 4.0, Sirius supports the definition of properties views with many features like complex styling, validation, context etc.</p>
+		<p>Properties views are defined inside the VSM in a way that is similar to other Sirius representations. The configuration elements in the VSM identify a sub-set of the elements in the semantic model to which they apply, and associate to them widgets, which will be visible in the Eclipse 
+			<em>Properties View</em> to view and edit the elements&#8217;s properties.
+		</p>
+		<p>The configuration 
+			<em>maps</em> semantic elements onto some properties view elements. At runtime, each active properties element (pages, groups, widgets) will produce zero or more elements in the properties view, depending on how many semantic elements currently match the properties element&#8217;s definition. Whenever the current selection changes Sirius will automatically re-compute which elements should appear in the properties view according to the active widgets, and create or remove the necessary elements in the properties view.
+		</p>
+		<p>Sirius properties view are enabled whenever the selected element is part of an opened session, i.e. any element selected inside a Sirius editor or from the 
+			<em>Model Explorer</em> view on an opened session.
+		</p>
+		<p>Note that if you have the (optional) support for Sirius-defined properties views correctly installed but do not specify anything inside your VSMs, Sirius will apply default generic rules to provide a canonical properties view for your model elements. As soon as you specify your own configuration, as described in this document, the default rules will be ignored in favor of yours. See 
+			<a href="#default_rules">below</a> for how both approaches can be combined.
+		</p>
+		<h2 id="properties_view_description">Properties View Description</h2>
+		<p>Properties view are configured by creating a 
+			<em>Properties View Description</em> element (directly under the top-level 
+			<a href="../general/Specifying_Viewpoints.html#vsm_organization">
+				<em>Group</em>
+			</a> element of the VSM) and its sub-elements (which describe the widgets, the actions, the layout, etc.).
+		</p>
+		<p>Like many elements inside a 
+			<a href="../../Glossary.html#VSM">
+				<em>VSM</em>
+			</a>, 
+			<em>View Extension Description</em> have an optional 
+			<em>Identifier</em>, which should be unique.
+		</p>
+		<p>Inside a 
+			<em>Properties View Description</em> element, you can create:
+		</p>
+		<ul>
+			<li>
+				<a href="#pages">
+					<em>Pages</em>
+				</a>, which correspond to &#8220;tabs&#8221;;
+			</li>
+			<li>
+				<a href="#groups">
+					<em>Groups</em>
+				</a>, which represent named sections inside a page/tab which contain the actual widgets;
+			</li>
+		</ul>
+		<p>It is recommended that the 
+			<em>Properties View Description</em> be explicitly associated with the meta-model(s) of the semantic elements it will represent. You can add referenced meta-models from different sources in the 
+			<em>Metamodels</em> property section of the 
+			<em>Properties View Description</em>. Sirius will work even without this association, but setting it explicitly will give you better feedback when validating your 
+			<a href="../../Glossary.html#VSM">
+				<em>VSM</em>
+			</a>.
+		</p>
+		<p>The descriptions for all the different types of properties view elements share the same common principles:</p>
+		<ul>
+			<li>Some of the elements of the semantic model are selected, using a combination of configuration attributes (see below). These elements are called 
+				<em>targets</em>, and each one has a single widget of this type representing it.
+			</li>
+			<li>The graphical aspect of the properties view is defined by a 
+				<em>style</em>. Sirius provides a rich set of possible styles, which are described later in this document.
+			</li>
+			<li>Optionally, a behavior for the properties view element depending on the widget kind can be defined (edition for text field, on click action for hyperlink or buttons...).</li>
+		</ul>
+		<p id="context">
+			<strong>Context.</strong> Each properties view element is defined in a 
+			<em>context</em> in the VSM. At runtime, the corresponding 
+			<em>context element</em> would be the semantic element associated to the properties view element description. This context element is used as a starting point to determine which instances of a properties view element description should be created on the properties view:
+		</p>
+		<ol>
+			<li>First, the 
+				<em>Semantic Candidates Expression</em> of the description is evaluated, starting from the context element. It should return a set (possibly empty) of elements in the semantic model.
+			</li>
+			<li>This list of candidates is then filtered using the 
+				<em>Domain Class</em> specified in the description: only the candidates which are instance of the specified class are retained.
+			</li>
+			<li>Finally, the optional 
+				<em>Precondition Expression</em> of the element is evaluated, once for each of the remaining candidates. It should return a boolean value. Only the candidates for which the predicate returns a true value are kept and will actually produce an element on the properties view.
+			</li>
+		</ol>
+		<p>This order of evaluation should be kept in mind when specifying properties view. In particular, to avoid performance issues you should:</p>
+		<ul>
+			<li>Limit the number of model elements with 
+				<em>Semantic Candidate Expression</em>.
+			</li>
+			<li>Avoid testing instances type in 
+				<em>Semantic Candidate Expression</em> (this will be done anyway when filtering the 
+				<em>Domain Class</em>).
+			</li>
+			<li>Use the most specific type in 
+				<em>Domain Class</em>.
+			</li>
+			<li>Avoid navigation and long computations in 
+				<em>Precondition Expression</em>.
+			</li>
+		</ul>
+		<p>
+			<strong>Properties View Elements Definition.</strong> Properties views support several different types of elements, which are described in the following sections. They are:
+		</p>
+		<ul>
+			<li>
+				<a href="#pages">pages</a>, which represent properties view 
+				<strong>Tab</strong> that can contain sections.
+			</li>
+			<li>
+				<a href="#groups">groups</a>, which represent properties view 
+				<strong>Section</strong> that can contain widgets.
+			</li>
+			<li>
+				<a href="#widgets">widgets</a> describe the different kind of widgets supported, like texts, buttons, labels, checkboxes, radio groups...
+			</li>
+			<li>
+				<a href="#dynamic_mappings">dynamic mappings</a> are used for advanced scenarios where the set of widgets to display can not be known statically, but instead must be computed at runtime.
+			</li>
+			<li>
+				<a href="#containers">containers and layout</a> are used to organize and layout multiple related widgets.
+			</li>
+		</ul>
+		<p id="default_rules">
+			<strong>Default Properties View Rules.</strong> When no properties view definition is found for an element selected by the user, Sirius will apply default rules which attempt to give a usable (if generic) result for most user models. As soon as you define 
+			<em>some</em> custom rules for your modelers, 
+			<em>only</em> these custom rules will apply, and the default ones will be ignored. If you want to mix the default rules for some of your elements and custom ones only for some specific types, you can:
+		</p>
+		<ul>
+			<li>Import a copy of the default rules model inside your VSM: from the top-level element of the VSM model, select 
+				<em>New &gt; Default Properties View Description</em>.
+			</li>
+			<li>Add your custom rules (pages and groups) and optionally update the default ones to not apply for the elements for which you provide more specific views (typically by modifying the 
+				<em>Precondition Expression</em> of the default 
+				<em>Page</em>).
+			</li>
+		</ul>
+		<p>
+			<strong>Legacy Sirius Tabs.</strong> By default, the legacy 
+			<em>Semantic</em> and 
+			<em>Default</em> tabs which show the raw properties of the selected element in a plain property grid are still visible even when you have defined custom properties views (the 
+			<em>Semantic</em> tab is visible when the selection is from a Sirius representation; the 
+			<em>Default</em> tab is shown when selecting from the 
+			<em>Model Explorer</em>). If you want to hide these legacy tabs and only show your custom tabs, you can do so by changing the preferences in the 
+			<em>Sirius &gt; Sirius Properties View</em> category.
+		</p>
+		<h3 id="common_attributes">Common Attributes</h3>
+		<p>The following attributes are mostly shared by all the properties view element description (page, group, container, widget).</p>
+		<p id="identifier">
+			<strong>Identifier.</strong> Each properties view element description defines an optional attribute 
+			<em>Identifier</em>. It can be used to distinguish elements of the same type in the VSM editor, and in advanced customization scenarios where the VSM model is programmatically accessed/modified.
+		</p>
+		<p id="domain_class">
+			<strong>Domain Class.</strong> The optional 
+			<em>Domain Class</em> attribute is the type of semantic elements which are represented by the properties view element definition. The syntax for the domain class name can be the basic name, like 
+			<code>Package</code>, a qualified name using name of the EMF EPackage which defines the type, like 
+			<code>uml.Package</code>, or a fully qualified URI like 
+			<code>http://www.eclipse.org/uml2/3.0.0/UML#//Package</code>.
+			<br/>An empty 
+			<em>Domain Class</em> means that the element being defined will be applicable to any model element of any type. By default, new properties view elements can be created on 
+			<em>any</em> instance of the 
+			<em>Domain Class</em>.
+		</p>
+		<p id="precondition_expression">
+			<strong>Precondition Expression.</strong> You can use the 
+			<em>Precondition Expression</em> to change this. If such an expression is specified, it will be evaluated in the 
+			<a href="#context">context</a> of the semantic element the user has selected, and only if the expression returns 
+			<code>true</code> will the properties view element be applied to that semantic element.
+		</p>
+		<p id="label_expression">
+			<strong>Label Expression.</strong> This expression is used to compute the text of the label describing the element (which will typically appear on the left of a widget). The 
+			<em>Label expression</em> is evaluated in the context of the semantic element and should return a string. If the expression is not specified, the default label is empty.
+		</p>
+		<p id="help_expression">
+			<strong>Help Expression.</strong> The help text of a properties view element is specified using the 
+			<em>Help expression</em>, which is evaluated in the context of the semantic element and should return a string. It will appear as a tooltip on the question-mark icon associated to a widget.
+		</p>
+		<p id="is_enabled_expression">
+			<strong>Is Enabled Expression.</strong> Each widget can be enabled or disabled (making it visible but read-only) . The 
+			<em>Is Enabled Expression</em> is evaluated in the context of the semantic element and should return a boolean. It the expression is not specified it defaults to 
+			<em>true</em> (meaning the widget is enabled).
+		</p>
+		<p id="semantic_candidate_expression">
+			<strong>Semantic Candidate Expression.</strong> The 
+			<em>Semantic Candidate Expression</em> defines the model element represented by the properties view element.
+		</p>
+		<p id="styles">
+			<strong>Styles.</strong> Each kind of properties view element supports a rich set of possible 
+			<a href="#styling">styles</a>.
+		</p>
+		<p>To find some documentation for each properties, you can also refer to the tool-tips available directly in the editor on the &#8220;question mark&#8221; icon of each property.</p>
+		<p>Here is an example of a widget configuration (a single-line 
+			<a href="#text">text</a> in this case) which illustrates some of the common attributes:
+		</p>
+		<p>
+			<img border="0" src="images/basic-properties-example-vsm.png"/>
+		</p>
+		<p>The 
+			<em>Text Element Name (non-editable)</em> element has the exact same configuration except that its 
+			<em>Label Expression</em> is 
+			<code>Name (read-only):</code> and its 
+			<em>Is Enabled Expression</em> is set to 
+			<code>aql:false</code>.
+		</p>
+		<p>Here is the resulting properties view rendered for a diagram element:</p>
+		<p>
+			<img border="0" src="images/basic-properties-example-diagram.png"/> 
+		</p>
+		<p>We see both label expressions on the left of each widget, help icons which show the computed 
+			<em>Help Expression</em> when the user leaves the mouse pointer on them, and the actual widgets. The second text widget is disabled (visible thanks to the light blue background) because of its  
+			<em>Is Enabled Expression</em>.
+		</p>
+		<h3 id="additional_services">Additional Services</h3>
+		<p>Beside 
+			<code>self</code>, which represents the current context element on which an expression is evaluated, every expression defined inside a 
+			<em>Property View Description</em> has access to an additional special variable named 
+			<code>input</code>, which offers some additional services. For a given user selection, the value of 
+			<code>input</code> is the same everywhere inside a 
+			<em>Property View Description</em>; it corresponds to a descriptor of what the user select and can be used to obtain contextual information.
+		</p>
+		<p>
+			<strong>Services on 
+				<code>input</code>.
+			</strong>
+		</p>
+		<ul>
+			<li>
+				<code>input.getOriginalSelection()</code>: returns the original, raw element selected by the user before any unwrapping or interpretation. This may not be a model element; for Sirius diagrams for example this will be an 
+				<code>EditPart</code>.
+			</li>
+			<li>
+				<code>input.getSemanticElement()</code>: returns the main semantic element associated with the selection. This will correspond to the 
+				<code>self</code> variable inside a 
+				<em>Page</em>, but inside a group 
+				<code>self</code> may have a different value is 
+				<em>Semantic Candidate Expressions</em> were used, so this service can be used to obtain the &#8220;original self&#8221; from anywhere.
+			</li>
+			<li>
+				<code>input.getAllSemanticElements()</code>: returns 
+				<em>all</em> the semantic model elements associated with the selection, not just the main one. This will include additional 
+				<code>DRepresentationElement#semanticElements</code> if there are any.
+			</li>
+			<li>
+				<code>input.emfEditServices(EObject)</code>: provides a handle to invoke &#8220;EMF Edit&#8221;-related services on the model element specified in argument. See below for the list of services that can be called on the result.
+			</li>
+			<li>
+				<code>input.context()</code>: provides a handle to invoke additional services to obtain more information about the overall context of the selection. See below fot the list of services that can be called on the result.
+			</li>
+		</ul>
+		<p>
+			<strong>Services on 
+				<code>input.emfEditServices(EObject)</code>.
+			</strong> In the descriptions below, 
+			<code>obj</code> designates the 
+			<code>EObject</code> instance which was passed to 
+			<code>emfEditServices()</code>.
+		</p>
+		<ul>
+			<li>
+				<code>getChoiceOfValues(EStructuralFeature)</code>: returns all the possible values for the specified feature of 
+				<code>obj</code>, as defined by its 
+				<code>IItemPropertyDescriptor</code>. 
+			</li>
+			<li>
+				<code>getDescription(EStructuralFeature)</code>: returns the (textual) description of the specified feature of 
+				<code>obj</code>, as defined by its 
+				<code>IItemPropertyDescriptor</code>.
+			</li>
+			<li>
+				<code>getEStructuralFeatures()</code>: returns all the features of 
+				<code>obj</code> that would be shown in the properties view by default. This ignores transient, derived and containment features.
+			</li>
+			<li>
+				<code>getImage()</code>: returns the image (icon) to use for 
+				<code>obj</code>, as defined by its 
+				<code>IItemLabelProvider</code>.
+			</li>
+			<li>
+				<code>getText()</code>: returns the textual representation to use for 
+				<code>obj</code>, as defined by its 
+				<code>IItemLabelProvider</code>.
+			</li>
+			<li>
+				<code>getText(EStructuralFeature)</code>: returns the &#8220;display name&#8221; of the specified feature of 
+				<code>obj</code>, as defined by its 
+				<code>IItemPropertyDescriptor</code>, or the textual representation of the feature itself (as defined by its own 
+				<code>IItemLabelProvider</code>) if no display name is defined.
+			</li>
+			<li>
+				<code>isMultiline(EStructuralFeature)</code>: checks whether the specified feature of 
+				<code>obj</code> (which is assumed to be textual) should be represented on muliple lines, as defined by its 
+				<code>IItemPropertyDescriptor.isMultiLine()</code> method.
+			</li>
+			<li>
+				<code>needsCheckboxWidget(EStructuralFeature)</code>: checks whether the specified feature of 
+				<code>obj</code> can be represented by a checkbox widget (i.e. it is a single-valued 
+				<code>boolean</code> or 
+				<code>java.lang.Boolean</code>).
+			</li>
+			<li>
+				<code>needsTextWidget(EStructuralFeature)</code>: checks whether the specified feature of 
+				<code>obj</code> can be represented by a text (or text area) widget (i.e. it is a single-valued string, number or date). 
+			</li>
+			<li>
+				<code>setValue(EStructuralFeature, Object)</code>: sets the value of the specified feature of 
+				<code>obj</code> to the given value. This is a thin wrapper around 
+				<code>EObject.eSet()</code> and should only be used inside widget actions as it modifies the model. It only handles basic cases; explicit model operations or custom services should be prefered if possible.
+			</li>
+		</ul>
+		<p>
+			<strong>Services on 
+				<code>input.context()</code>.
+			</strong>
+		</p>
+		<ul>
+			<li>
+				<code>mainSemanticElement()</code>: returns the main semantic element associated with the selection. This is equivalent to 
+				<code>input.getSemanticElement()</code>.
+			</li>
+			<li>
+				<code>allSemanticElements()</code>: returns 
+				<em>all</em> the semantic model elements associated with the selection, not just the main one. This is equivalent to  
+				<code>input.getAllSemanticElements()</code>.
+			</li>
+			<li>
+				<code>representation()</code>: returns the 
+				<code>DRepresentation</code> instance in which the current input was selected, or 
+				<em>null</em> if the element was selected from the 
+				<em>Model Explorer</em>.
+			</li>
+			<li>
+				<code>semanticDecorator()</code>: returns the 
+				<code>DSemanticDecorator</code> instance which was selected.
+			</li>
+			<li>
+				<code>session()</code>: return the 
+				<code>Session</code> in the context of which the selection was done. This is a Java object which can only be used by additional (custom) Java services.
+			</li>
+		</ul>
+		<h2 id="pages">Pages</h2>
+		<p>A 
+			<em>Page</em> is used to represent a 
+			<strong>Tab</strong> in the properties view.
+		</p>
+		<p>
+			<img alt="Properties can be organized in separate tabs, defined by Page Description elements" title="Properties can be organized in separate tabs, defined by Page Description elements" border="0" src="images/pages.png"/> 
+		</p>
+		<p>Pages are configured by creating a 
+			<em>Page</em> element inside a 
+			<em>Properties View Description</em>. In the illustration above, the two pages 
+			<em>General</em> and 
+			<em>Hierarchy</em> have been defined from the VSM. They appear above the standard tabs provided by Sirius (
+			<em>Semantic</em>, 
+			<em>Advanced</em>, etc.).
+		</p>
+		<p>Much like the other properties view elements, you must specify the 
+			<a href="#identifier">
+				<em>Identifier</em>
+			</a>, 
+			<a href="#domain_class">
+				<em>Domain Class</em>
+			</a>, 
+			<a href="#precondition_expression">
+				<em>Precondition Expression</em>
+			</a>, 
+			<a href="#label_expression">
+				<em>Label Expression</em>
+			</a>, 
+			<a href="#semantic_candidate_expression">
+				<em>Semantic Candidate Expression</em>
+			</a>.
+		</p>
+		<p>The definition of a page follows the general rules described 
+			<a href="#properties_view_description">above</a> to determine the semantic elements for which a page should be created.
+		</p>
+		<p>A page&#8217;s content is defined by the 
+			<a href="#groups">
+				<em>Groups</em>
+			</a> it references, which are defined directly under the 
+			<em>Properties View Description</em>. The groups are ordered in the page accordingly to their order in the groups reference list in the VSM.
+		</p>
+		<h2 id="groups">Groups</h2>
+		<p>A 
+			<em>Group</em> is used to represent a 
+			<strong>Section</strong> in a properties view tab.
+		</p>
+		<p>
+			<img alt="Inside a tab, properties can be grouped in foldable sections" title="Inside a tab, properties can be grouped in foldable sections" border="0" src="images/groups.png"/>
+		</p>
+		<p>Groups are configured by creating a 
+			<em>Group</em> element inside a 
+			<em>Properties View Description</em>. Groups will only be visible inside a tab if they are referenced by the corresponding 
+			<em>Page</em>. By default, a newly created 
+			<em>Group</em> element is not part of any page, so you 
+			<em>must</em> add it explicitly to the 
+			<em>Pages</em> where it should appear. A single 
+			<em>Group</em> definition can be referenced in as many 
+			<em>Page</em> definition as needed; this allows sharing common sections between different pages.
+		</p>
+		<p>Much like the other properties view elements, you must specify the 
+			<a href="#identifier">
+				<em>Identifier</em>
+			</a>, 
+			<a href="#domain_class">
+				<em>Domain Class</em>
+			</a>, 
+			<a href="#precondition_expression">
+				<em>Precondition Expression</em>
+			</a>, 
+			<a href="#label_expression">
+				<em>Label Expression</em>
+			</a>, 
+			<a href="#semantic_candidate_expression">
+				<em>Semantic Candidate Expression</em>
+			</a>, 
+			<a href="#styles">
+				<em>Styles</em>
+			</a>, 
+			<a href="#conditional_styles">
+				<em>Conditional Styles</em>
+			</a>.
+		</p>
+		<p>The definition of a group follows the general rules described 
+			<a href="#properties_view_description">above</a> to determine the semantic elements for which a group should be created.
+		</p>
+		<p>A group can contain 
+			<a href="#widgets">
+				<em>widgets</em>
+			</a>, 
+			<a href="#containers">
+				<em>containers</em>
+			</a> to organize them, and 
+			<a href="#validation_rules">
+				<em>validation rules</em>
+			</a>, all of which are defined inside the group description (
+			<em>New Widget &gt; Container|Text...</em> and 
+			<em>New &gt; Group Validations</em>, respectively).
+		</p>
+		<h3 id="group_styles">Group Styles</h3>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a>. This section only presents the aspects which are specific to groups.
+		</p>
+		<p>For groups you can define the following style attributes:</p>
+		<ul>
+			<li>
+				<em>Background Color</em>: You can specify the background color using 
+				<a href="#colors">colors</a> from the standard or user-defined palette.
+			</li>
+			<li>
+				<em>Bar Style</em>: Is used to define the section style. There are 3 different styles: 
+				<code>TITLE BAR</code>, 
+				<code>SHORT TITLE BAR</code>, 
+				<code>NO TITLE</code> (see the first table below for illusrations of these styles).
+			</li>
+			<li>
+				<em>Expanded by Default</em>: This flag is used to define if the section should be initialy expanded or collapsed.
+			</li>
+			<li>
+				<em>Font Name Expression</em>: Is used to computes the name of the font to use.
+			</li>
+			<li>
+				<em>Font size Expression</em>: Indicates the font size to use in points.
+			</li>
+			<li>
+				<em>Foreground Color</em>: You can specify the foreground color using 
+				<a href="#colors">color</a> from the standard or user-defined palette.
+			</li>
+			<li>
+				<em>Toggle style</em>: Is used to define the style of the toggle. There are 3 different toggles: 
+				<code>TWISTIE</code>, 
+				<code>TREE NODE</code>, 
+				<code>NONE</code> (see the second table below for illusrations of these styles).
+			</li>
+		</ul>
+		<p>The following tables illustrate the different 
+			<em>Bar Style</em> and 
+			<em>Toggle Style</em> available on groups:
+		</p>
+		<table class="table table-striped table-condensed">
+			<tr>
+				<td>
+					<img border="0" src="images/group-style-titlebar.png"/>
+				</td>
+				<td>
+					<img border="0" src="images/group-style-short-titlebar.png"/>
+				</td>
+				<td>
+					<img border="0" src="images/group-style-no-title.png"/>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<code>TITLE BAR</code>
+				</th>
+				<th>
+					<code>SHORT TITLE BAR</code>
+				</th>
+				<th>
+					<code>NO TITLE</code>
+				</th>
+			</tr>
+		</table>
+		<table class="table table-striped table-condensed">
+			<tr>
+				<td>
+					<img border="0" src="images/group-style-toggle-twistie.png"/>
+				</td>
+				<td>
+					<img border="0" src="images/group-style-toggle-treenode.png"/>
+				</td>
+				<td>
+					<img border="0" src="images/group-style-toggle-none.png"/>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<code>TWISTIE</code>
+				</th>
+				<th>
+					<code>TREE NODE</code>
+				</th>
+				<th>
+					<code>NONE</code>
+				</th>
+			</tr>
+		</table>
+		<h2 id="widgets">Widgets</h2>
+		<p>A widget is used to represent model elements in the properties view and, for most of them, to allow users to edit said elements. Widgets can appear directly inside a group, a 
+			<a href="#dynamic_mappings">dynamic mapping</a> or inside a 
+			<a href="#containers">container</a>, in which case you can specify a specific 
+			<a href="#containers">layout</a> which will be used to graphically organize all the widgets inside the container.
+		</p>
+		<p>The definition of a widget follows the general rules described 
+			<a href="#properties_view_description">above</a> to determine the semantic elements for which a widget should be created.
+		</p>
+		<p>Much like the other properties view elements, you can specify the widget&#8217;s 
+			<a href="#label_expression">
+				<em>Label Expression</em>
+			</a>, 
+			<a href="#help_expression">
+				<em>Help Expression</em>
+			</a>,  
+			<a href="#is_enabled_expression">
+				<em>Is Enabled Expression</em>
+			</a>, 
+			<a href="#styles">
+				<em>Styles</em>
+			</a>, 
+			<a href="#conditional_styles">
+				<em>Conditional Styles</em>
+			</a>.
+		</p>
+		<h3 id="text">Text / Text area</h3>
+		<p>A 
+			<em>Text</em> widget is used to represent a 
+			<strong>single line text</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>
+			<img border="0" src="images/widget-text.png"/>
+		</p>
+		<p>A 
+			<em>Text Area</em> is used to represent a 
+			<strong>multiple lines text</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>
+			<img border="0" src="images/widget-textarea.png"/>
+		</p>
+		<p>The definition of a text/text area follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a text should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For texts and text areas, you must define the 
+			<em>Value Expression</em> which is used to compute the text displayed in the text field and should return a string. If the expression is not specified, the default value is an empty string. The expression is evaluated in the context of the semantic target element.
+		</p>
+		<p>For text areas, you must define the 
+			<em>Line Count</em> which represents the height of the text area in number of lines.
+		</p>
+		<h4 id="edit_text">Text Edition</h4>
+		<p>To define the behavior of the text when a change occurs, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element directly contained inside the widget, using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>.
+		</p>
+		<p>The operations defined under the 
+			<em>Begin</em> can use the 
+			<code>newValue</code> variable which represents the value entered by the user (as a string). The root operation is executed in the context of the semantic target element.
+		</p>
+		<p>Sirius automatically invokes the edit operation when the focus leaves the widget. For single-line 
+			<em>Text</em> widgets, the edit operation is also triggered when the user hits 
+			<em>Enter</em>. Note that if an error occurs while executing the edit operation, the whole effect of the operation on the underlying model is cancelled, and an error is logged.
+		</p>
+		<h4 id="text_styles">Text/Text Area Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets. This section only presents the aspects which are specific to texts.
+		</p>
+		<p>One of the responsibility of texts styles is to describe how text fields will be formated. The following properties are available :</p>
+		<ul>
+			<li>
+				<em>Font Name Expression</em>: Is used to compute the name of the font to use for the text field.
+			</li>
+			<li>
+				<em>Font Size Expression</em> : Indicates the font size to use in points.
+			</li>
+			<li>
+				<em>Background Color</em>: You can specify the background color of the text field using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Foreground Color</em>: You can specify the foreground color of the text field using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Font Format</em>: Is used to specify the font style attributes (Bold and/or Italic and/or Underline and/or Strike through).
+			</li>
+		</ul>
+		<p>Here are examples of text and text area widgets with some of their style attributes customized:</p>
+		<p>
+			<img alt="Text and TextArea widgets with customized style" title="Text and TextArea widgets with customized style" border="0" src="images/widget-text-styling.png"/>
+		</p>
+		<h3 id="button">Button</h3>
+		<p>A 
+			<em>Button</em> is used to represent a 
+			<strong>button</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>, that can be used to trigger an arbitrary (configurable) operation on the model.
+		</p>
+		<p>
+			<img alt="Example of a button widget" title="Example of a button widget" border="0" src="images/widget-button.png"/>
+		</p>
+		<p>The definition of a button follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a button should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For buttons, you must define the 
+			<em>Button Label Expression</em> which is used to compute the label displayed on the button and should return a string. If the expression is not specified, the default value is the empty string.
+		</p>
+		<h4 id="pushed_button">Behavior executed on click</h4>
+		<p>To define the behavior of the button when it is clicked, simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>. The root operation is executed in the context of the semantic target element.
+		</p>
+		<h4 id="button_styles">Button Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets.
+		</p>
+		<h3 id="label">Label</h3>
+		<p>A 
+			<em>Label</em> is used to represent a 
+			<strong>non editable text</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>Here is an example which shows two label widgets:</p>
+		<p>
+			<img alt="Examples of label widgets" title="Examples of label widgets" border="0" src="images/widget-label.png"/>
+		</p>
+		<p>The definition of a label follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a label should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For labels, you must define the 
+			<em>Value Expression</em> which is used to compute the text displayed in the description. The 
+			<em>Value Expression</em> can return any kind of object but the result displayed will be the result of a call to 
+			<code>Object.toString()</code>. If you want to customize how the result will be displayed, you can return a string in the value expression or use the 
+			<em>Display Expression</em>. The 
+			<em>Display Expression</em> will have access to the result of the 
+			<em>Value Expression</em> using the variable 
+			<code>value</code> and it should return a string. If the expression is not specified, the default value is the empty string.
+		</p>
+		<h4 id="label_actions">Widget Actions</h4>
+		<p>A 
+			<em>Label</em> can optionally define one or more 
+			<em>Widget Actions</em>, which are created as children element of the 
+			<em>Label</em> element (
+			<em>New &gt; Widget Action</em>). Each action has a 
+			<em>Label Expression</em> and a behavior defined by 
+			<a href="../general/Model_Operations.html">model operations</a> contained inside. If present, actions will be rendered as buttons on the right of the label itself. The button&#8217;s text is defined by the 
+			<em>Label Expression</em>, and its behavior when pushed by the model operations.
+		</p>
+		<h4 id="label_styles">Label Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets. This section only presents the aspects which are specific to texts.
+		</p>
+		<p>One of the responsibility of labels styles is to describe how descriptions will be formated. The following properties are available :</p>
+		<ul>
+			<li>
+				<em>Font Name Expression</em>: Is used to compute the name of the font to use for the description.
+			</li>
+			<li>
+				<em>Font Size Expression</em> : Indicates the font size to use in points.
+			</li>
+			<li>
+				<em>Background Color</em>: You can specify the background color of the description using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Foreground Color</em>: You can specify the foreground color of the description using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Font Format</em>: Is used to specify the font style attributes (Bold and/or Italic and/or Underline and/or Strike through).
+			</li>
+		</ul>
+		<p>
+			<img alt="Example of labels with customized style" title="Example of labels with customized style" border="0" src="images/widget-label-styling.png"/>
+		</p>
+		<h3 id="checkbox">Checkbox</h3>
+		<p>A 
+			<em>Checkbox</em> is used to represent a 
+			<strong>checkbox</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>
+			<img alt="Examples of checkbox widgets" title="Examples of checkbox widgets" border="0" src="images/widget-checkbox.png"/>
+		</p>
+		<p>The definition of a checkbox follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a checkbox should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For checkboxes, you must define the 
+			<em>Value Expression</em> which is used to compute the checked/unchecked state of the checkbox and so should return a boolean (return 
+			<em>true</em> to display the checkbox checked).
+		</p>
+		<h4 id="checkbox_change_value">Change value</h4>
+		<p>To define the behavior of the checkbox when the user clicks on it, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>.
+		</p>
+		<p>The operations defined under the 
+			<em>Begin</em> can use the 
+			<code>newValue</code> variable which represents the value set by the user as a boolean; it will be 
+			<em>true</em> if the checkbox was unchecked before, and the user clicked on it to check it, 
+			<em>false</em> otherwise. Note that if an error occurs while executing the edit operation, the whole effect of the operation on the underlying model is canelled, and an error is logged.
+		</p>
+		<h4 id="checkbox_styles">Checkbox Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets.
+		</p>
+		<h3 id="select">Select</h3>
+		<p>A 
+			<em>Select</em> is used to represent a 
+			<strong>combo box</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>
+			<img alt="Example of a select widget" title="Example of a select widget" border="0" src="images/widget-select.png"/>
+		</p>
+		<p>The definition of a select follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a select should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For selects, you must define :</p>
+		<ul>
+			<li>the 
+				<em>Candidates Expression</em> which is used to compute the candidates available in the combo and should return a list of elements from which the user can select the select&#8217;s value.
+			</li>
+			<li>the 
+				<em>Candidate Display Expression</em> which is used to compute the label displayed for each possible candidate in the combo and so should return a string. The 
+				<em>Candidate Display Expression</em> can use the 
+				<code>candidate</code> variable which represents the element currently evaluated.
+			</li>
+			<li>the 
+				<em>Value Expression</em> which is used to compute the element selected in the combo and should return an object, which should be an element of the collection returned by 
+				<em>Candidates Expression</em>.
+			</li>
+		</ul>
+		<h4 id="select_change_value">Change value</h4>
+		<p>To define the behavior of the 
+			<em>Select</em> when the user selects a different element, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>.
+		</p>
+		<p>The expressions defined under the 
+			<em>Begin</em> can use the 
+			<code>newValue</code> variable which represents the value selected by the user. Note that if an error occurs while executing the edit operation, the whole effect of the operation on the underlying model is cancelled, and an error is logged.
+		</p>
+		<h4 id="select_styles">Select Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets.
+		</p>
+		<h3 id="radio_group">Radio Group</h3>
+		<p>A 
+			<em>Radio</em> is used to represent a 
+			<strong>radio group</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>
+			<img alt="Example of a radio group widget" title="Example of a radio group widget" border="0" src="images/widget-radio.png"/>
+		</p>
+		<p>The definition of a radio group follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a radio group should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For radio groups, you must define :</p>
+		<ul>
+			<li>the 
+				<em>Candidates Expression</em> which is used to compute the candidates available in the radio group and should return a list of elements from which the user can select the radio group’s value.
+			</li>
+			<li>the 
+				<em>Candidate Display Expression</em> which is used to compute the label displayed for each possible candidate in the radio group and so should return a string. The 
+				<em>Candidate Display Expression</em> can use the 
+				<code>candidate</code> variable which represents the element currently evaluated.
+			</li>
+			<li>the 
+				<em>Value Expression</em> which is used to compute the element selected in the radio group and should return an object, which should be an element of the collection returned by 
+				<em>Candidates Expression</em>.
+			</li>
+		</ul>
+		<h4 id="radio_change_value">Change value</h4>
+		<p>To define the behavior of the radio group when the selection changes, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>.
+		</p>
+		<p>The expressions defined under the 
+			<em>Begin</em> can use the 
+			<code>newValue</code> variable which represents the value selected by the user. Note that if an error occurs while executing the edit operation, the whole effect of the operation on the underlying model is cancelled, and an error is logged.
+		</p>
+		<h4 id="radio_styles">Radio Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets.
+		</p>
+		<h3 id="hyperlink">Hyperlink</h3>
+		<p>A 
+			<em>Hyperlink</em> is used to represent an 
+			<strong>hyperlink</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>
+			<img alt="Example of an hyperlink widget" title="Example of an hyperlink widget" border="0" src="images/widget-hyperlink.png"/>
+		</p>
+		<p>The definition of an hyperlink follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which an hyperlink should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For hyperlinks, you must define the 
+			<em>Value Expression</em> which is used to compute the hyperlink displayed. The 
+			<em>Value Expression</em> can return any kind of object but the result displayed will be the result of a call to 
+			<em>java.lang.Object#toString()</em>. If you want to customize how the result will be displayed, you can return a String in the value expression or use the 
+			<em>Display Expression</em>. The 
+			<em>Display Expression</em> will have access to the result of the 
+			<em>Value Expression</em> using the variable named 
+			<code>value</code> and it should return a String.
+		</p>
+		<h4 id="hyperlink_click_on_value">Behavior executed on click</h4>
+		<p>To define the behavior of the hyperlink when it is clicked, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>.
+		</p>
+		<h4 id="hyperlink_actions">Widget Actions</h4>
+		<p>A 
+			<em>Hyperlink</em> can optionally define one or more 
+			<em>Widget Actions</em>, which are created as children element of the 
+			<em>Hyperlink</em> element (
+			<em>New &gt; Widget Action</em>). Each action has a 
+			<em>Label Expression</em> and a behavior defined by 
+			<a href="../general/Model_Operations.html">model operations</a> contained inside. If present, actions will be rendered as buttons on the right of the label itself. The button&#8217;s text is defined by the 
+			<em>Label Expression</em>, and its behavior when pushed by the model operations.
+		</p>
+		<h4 id="hyperlink_styles">Hyperlink Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets. This section only presents the aspects which are specific to hyperlinks.
+		</p>
+		<p>One of the responsibility of hyperlinks styles is to describe how hyperlinks will be formated. The following properties are available :</p>
+		<ul>
+			<li>
+				<em>Font Name Expression</em>: Is used to compute the name of the font to use for the text field.
+			</li>
+			<li>
+				<em>Font Size Expression</em> : Indicates the font size to use in points.
+			</li>
+			<li>
+				<em>Background Color</em>: You can specify the background color of the text field using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Font Format</em>: Is used to specify the font style attributes (Bold and/or Italic and/or Strike through).
+			</li>
+		</ul>
+		<h3 id="reference">Reference</h3>
+		<p>A 
+			<em>Reference</em> is used to represent the value of a reference in the model.
+		</p>
+		<p>The configuration of the 
+			<em>Reference</em> widget is minimal. Beside the standard properties available on all widgets like 
+			<em>Label Expression</em>, 
+			<em>Help Expression</em> and 
+			<em>Is Enabled Expression</em>, you only need to specify:
+		</p>
+		<ul>
+			<li>
+				<em>Reference Owner Expression</em>: optional, defaults to 
+				<code>var:self</code>. If specified, the reference to display will be looked on the element returned by the expression instead of the current one.
+			</li>
+			<li>
+				<em>Reference Name Expression</em>: this should return a string which designates the name of the 
+				<em>EReference</em> to display. It can be a fixed string or a computed expression.
+			</li>
+		</ul>
+		<p>The 
+			<em>Reference</em> widget&#8217;s appearance will depend whether the reference to display is single-valued or multi-valued:
+		</p>
+		<p>
+			<img alt="A Reference widget displaying a single-valued reference" title="A Reference widget displaying a single-valued reference" border="0" src="images/reference-single-value.png"/>
+		</p>
+		<p>
+			<img alt="A Reference widget displaying a multi--valued reference" title="A Reference widget displaying a multi--valued reference" border="0" src="images/reference-multiple-value.png"/>
+		</p>
+		<p>As mentioned above, the configurability of the 
+			<em>Reference</em> widget is minimal, it determines all of its behavior using the standard EMF features:
+		</p>
+		<ul>
+			<li>the value of the reference is obtained reflectively using 
+				<code>eGet</code>.
+			</li>
+			<li>the textual representation and icon of the value(s) of the reference are determined automatically using the corresponding 
+				<code>IItemLabelProvider</code>.
+			</li>
+			<li>the behavior of the action buttons is hard-coded to perform the standard operation when selecting a diffrente value (from an existing element in the model), creating a new instance to set as the value, removing an element, or moving up/down the elements in a multi-valued reference.</li>
+		</ul>
+		<p>If you need more specific behavior, you need to use either an 
+			<em>Hyperlink</em> (for single values) or a 
+			<em>List</em> widget (for multiple values) with custom actions implementing the required behavior.
+		</p>
+		<h4 id="reference_styles">Reference Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets.
+		</p>
+		<h3 id="list">List</h3>
+		<p>A 
+			<em>List</em> is used to represent a 
+			<strong>list with buttons</strong> in a 
+			<a href="#groups">group</a> or in a 
+			<a href="#containers">container</a>.
+		</p>
+		<p>Depending on the parameters configuration the list widget will be represented thanks to a list and multiple buttons when 
+			<a href="#list_actions">
+				<em>Widget Actions</em>
+			</a> are defined.
+		</p>
+		<p>The definition of a list follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a list should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For lists, you must define:</p>
+		<ul>
+			<li>the 
+				<em>Value Expression</em> which is used to compute the element to display and should return an object.
+			</li>
+			<li>the 
+				<em>Display Expression</em> which is used to compute the text displayed in the text field and should return a string. It is evaluated in the context of the semantic target element and has access to the variable 
+				<code>value</code> which corresponds to the element to display.
+			</li>
+			<li>the 
+				<a href="#list_actions">
+					<em>Widget Actions</em>
+				</a> are used to associate some buttons to the text field.
+			</li>
+		</ul>
+		<h4 id="list_on_click_operation">Behavior executed on click</h4>
+		<p>To define the behavior, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>. A variable named 
+			<code>onClickEventKind</code> is available to determine if the operation has been triggered by a single click or double click. In case of a single click, the variable has the value &#8220;SINGLE_CLICK&#8221; and &#8220;DOUBLE_CLICK&#8221; in case of a double click.
+		</p>
+		<p>The expressions defined under the 
+			<em>Begin</em> can use the 
+			<code>selection</code> variable which represents the values selected by the user. This variable will contain the list of the values selected.
+		</p>
+		<h4 id="list_actions">Widget actions</h4>
+		<p>A list can contain 
+			<em>actions</em> which represent 
+			<strong>buttons</strong> associated to the list field.
+		</p>
+		<p>For actions, you must define the 
+			<em>Label Expression</em> which is used to compute the label displayed on the button and should return a string. If the expression is not specified, the default value is equal to 
+			<code>...</code>.
+		</p>
+		<h4 id="list_action_pushed_button">Action Pushed Button</h4>
+		<p>To define the behavior of the button when is pushed, you simply specify the behavior associated to the edition inside the 
+			<em>Begin</em> element using all the standard 
+			<a href="../general/Model_Operations.html">model operations</a>.
+		</p>
+		<p>The expressions defined under the 
+			<em>Begin</em> can use the 
+			<code>selection</code> variable which represents the values selected by the user in the list field. Note that 
+			<code>selection</code> is always a collection, even if only a single element is currently selected.
+		</p>
+		<h4 id="list_styles">List Styles</h4>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets.
+		</p>
+		<h3 id="basic_custom_widgets">Basic Custom Widgets</h3>
+		<p>A 
+			<em>Custom Description</em> is used when none of the predefined styles correspond to your need. Custom widgets are implemented in Java and use the 
+			<code>org.eclipse.eef.ide.ui.eefLifecycleManagerProvider</code> extension point.
+		</p>
+		<p>The definition of a custom widget follows the general rules described 
+			<a href="#widgets">above</a> to determine the semantic elements for which a custom widget should be created. It is evaluated in the context of the semantic target element.
+		</p>
+		<p>For custom widgets, the 
+			<em>Identifier</em> is mandatory. It is used to find the widget contributed with the extension point.
+		</p>
+		<p>See 
+			<a href="../../developer/extensions-properties_provide_custom_widget_basic.html">the reference documentation</a> for how to actually implement your own basic custom widgets.
+		</p>
+		<h5 id="basic_custom_widgets_expression">Custom Expression/Operation</h5>
+		<p>When you define a custom widget, it is possible to define some custom expression or operation which will be used by the custom widget implementation. 
+			<br/>In this case, the 
+			<em>Identifier</em> is mandatory. It would be used in the Java code to find the expression/operation contributed with the VSM.
+		</p>
+		<h5 id="basic_custom_widgets_styles">Custom Styles</h5>
+		<p>See the 
+			<a href="#styling">styles</a> section for a general presentation of how styles are defined, including 
+			<a href="#conditional_styles">conditional styles</a> and 
+			<a href="#widgets_styles">widgets styles</a> section to find details on what is specific to widgets. This section only presents the aspects which are specific to texts.
+		</p>
+		<h3 id="advanced_custom_widgets">Advanced Custom Widgets</h3>
+		<p>Basic custom widgets need to be configured using very generic 
+			<em>Custom Expression/Operation</em>, which makes them different and harder to use than the standard ones. Any configuration property which would be directly accessible in the VSM editor&#8217;s property sheet on a standard widget will need a specific 
+			<em>Custom Expression</em> with the exact expected identifier.
+		</p>
+		<p>It is possible to improve custom widgets to be better integrated with the VSM editor, to the point that their configuration looks and feels like for any of the standard ones. For the specifier point of view, the configuration of these widgets follows the same principles as for the default ones.</p>
+		<p>See 
+			<a href="../../developer/extensions-properties_provide_custom_widget_advanced.html">the reference documentation</a> for how to actually implement your own advanced custom widgets.
+		</p>
+		<h2 id="dynamic_mappings">Dynamic Mappings</h2>
+		<p>Dynamic mappings are used for advanced scenarios where the set of widgets to display can not be known statically, but instead must be computed at runtime. A dynamic mapping contains conditional widgets definition, each of which may be instanciated zero or multiple times at runtime.</p>
+		<p>A 
+			<em>Dynamic Mapping For</em> can appear directly inside a group description, or inside a 
+			<a href="#containers">container</a>, in which case you can specify a specific 
+			<a href="#containers">layout</a>. You must specify an 
+			<em>Iterable Expression</em> which computes a list of elements to iterate over. The 
+			<em>Iterator</em> property must also be defined and corresponds to the name of the iteration variable that will be accessible inside the 
+			<em>For</em>. Inside the 
+			<em>Dynamic Mapping For</em> you can create any number of 
+			<em>Dynamic Mapping If</em>, which defines a 
+			<em>Predicate Expression</em> and can contain 
+			<strong>one widget</strong>.
+		</p>
+		<p>At runtime, for a given input element selected by the user, Sirius will evaluate the 
+			<em>iterable expression</em>, and then for each of the elements returned will instanciate the widgets defined inside 
+			<em>Dynamic Mapping If</em> whose predicate holds true.
+		</p>
+		<p>The dynamic mapping mechanism is the one used by Sirius to provide by default properties view even if you do not specify any 
+			<em>Properties View Description</em> in your VSM.
+			<br/>If we take one of the default rules implemented by Sirius we have:
+		</p>
+		<ul>
+			<li>a 
+				<em>Dynamic Mapping For</em> defining as 
+				<em>Iterable Expression</em> : 
+				<code>aql:self.eClass().eAllStructuralFeatures</code> which means get all the structural features available for the current eClass.
+			</li>
+			<li>an 
+				<em>Iterator</em> set to 
+				<code>eStructuralFeature</code>.
+				<ul>
+					<li>a 
+						<em>Dynamic Mapping If</em> with the 
+						<em>Predicate Expression</em> equals to 
+						<code>aql:eStructuralFeature.eType.instanceTypeName = 'java.lang.String'</code> which means that we just keep the structural features serialized as a String. Notice that in the predicate expression we use the variable 
+						<code>eStructuralFeature</code> which was defined as the 
+						<em>Iterator</em>.
+						<ul>
+							<li>in this case we will represent the structural feature with a 
+								<em>Text widget</em> for which we set:
+								<ul>
+									<li>
+										<em>Label expression</em>: 
+										<code>aql:eStructuralFeature.name.toUpperFirst() + ':'</code> which means get the name of the structural feature, capitalize the first letter and add 
+										<code>:</code> at the end.
+									</li>
+									<li>
+										<em>Value Expression</em>: 
+										<code>aql:self.eGet(eStructuralFeature.name)</code> which means get the value associated to the given structural feature.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p>Thanks to this mechanism we defined that all the 
+			<code>String</code> elements in our metamodel will be represented with a text field.
+		</p>
+		<h2 id="containers_and_layout">Containers and Layout</h2>
+		<p>Sirius provides a default algorithm to perform an automatic layout of all the controls in a properties view. If the default algorithm does not fit your needs, you can specify some parameters for alternate layouts directly inside the VSM. To do this you must first create a 
+			<em>Container</em> which will contains all the widgets to which the layout will apply, and then create and configure the layout to be used by the container to organize its children widgets:
+		</p>
+		<p id="fill_layout">
+			<em>Fill layout</em> can organize elements inside the container either horizontally or vertically (configurable on the 
+			<em>Fill layout</em> element).
+		</p>
+		<p id="grid_layout">
+			<em>Grid layout</em> can organize elements using a fixed number of column (configurable on the 
+			<em>Grid layout</em> element), which can optionally be made to all have the same width.
+		</p>
+		<h2 id="styling">Styling</h2>
+		<p>Styles define the graphical appearance of properties view elements. Sirius supports a rich set of possible styles, including 
+			<a href="#conditional_styles">conditional styles</a> which can dynamically change depending on the current state of the underlying model elements. If no style is defined a default style is applied by Sirius.
+			<br/>It is possible to re-define the default style by creating a style under the properties view element description. 
+		</p>
+		<h3 id="widgets_styles">Widgets styles</h3>
+		<p>One of the responsibility of widgets styles is to describe how labels will be formated. The following properties are available :</p>
+		<ul>
+			<li>
+				<em>Label Font Name Expression</em>: Is used to compute the name of the font to use for the label.
+			</li>
+			<li>
+				<em>Label Font Size Expression</em> : Indicates the font size to use in points.
+			</li>
+			<li>
+				<em>Label Background Color</em>: You can specify the background color of the label using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Label Foreground Color</em>: You can specify the foreground color of the label using 
+				<a href="#colors">color</a> sub-elements.
+			</li>
+			<li>
+				<em>Label Font Format</em>: Is used to specify the font style attributes (Bold and/or Italic and/or Underline and/or Strike through).
+			</li>
+		</ul>
+		<p>
+			<img alt="Examples of the style customizations possible on labels" title="Examples of the style customizations possible on labels" border="0" src="images/label-styles.png"/>
+		</p>
+		<h3 id="colors">Colors</h3>
+		<p>Whenever you have to specify colors for a style, you can use either one of the pre-defined system colors or one which you have defined yourself in a 
+			<em>Users Color Palette</em>. See 
+			<a href="../general/Colors.html">the general section on colors</a> for more details.
+		</p>
+		<h3 id="conditional_styles">Conditional Styles</h3>
+		<p>Conditional styles make it possible to support different graphical aspects for a single properties view element. The actual style used to render an element is determined dynamically depending on the current state of the models elements.</p>
+		<p>To use conditional styling, you must add one or several conditional styles. Each conditional style is associated to a condition specified as a predicate. If there are conditional styles on a properties view element, their conditions are tested in their order of appearance in the description. The first one for which the condition is true is selected. If none of the conditional styles condition is true, the default style is used instead.</p>
+		<h2 id="validation_rules">Validation rules</h2>
+		<p>There are three kind of validation rules that can be specified. The main difference between the various kind of validation rules available is the location of the validation messages (on a page, a group or a widget). All the validation rules can contains audits used to determine if the validation rule has been broken thanks to an 
+			<code>auditExpression</code> which should return a boolean indicating if the validation of the rule is a success. The validation rules can also contain fixes in order to fix the issue found. Those validation fixes have a name and a fix expression which will be executed once the end user selects a quick fix. The fix expression does not have to return anything. All of those expressions have access to the variables 
+			<code>self</code>, the result of the semantic candidate expression of the page or group and 
+			<code>input</code> the input of the view.
+		</p>
+		<h3 id="page_semantic_validation_rule">Page semantic validation rule</h3>
+		<p>The page semantic validation rule is used to define a validation rule linked to a page.</p>
+		<h3 id="group_semantic_validation_rule">Group semantic validation rule</h3>
+		<p>The group semantic validation rule is used to define a validation rule linked to a group.</p>
+		<h3 id="group_property_validation_rule">Group property validation rule</h3>
+		<p>The group property validation rule is used to define a validation rule linked to a specific widget.</p>
+		<h2 id="extension_points">Extension Points</h2>
+		<h3 id="advanced_custom_widgets_extension_points">Extension Points for Advanced Custom Widgets</h3>
+		<p>Integrating and advanced custom widget implementation requires extending several extension points:</p>
+		<ul>
+			<li>
+				<code>org.eclipse.emf.edit.childCreationExtenders</code>: When generating the metamodel for the custom configuration DSL of your widget, make sure EMF&#8217;s 
+				<code>childCreationExtenders</code> mechanism is properly configured so that the Sirus VSM editor will see your custom widget type and allow them to be created in the 
+				<em>New</em> context menu.
+			</li>
+			<li>
+				<code>org.eclipse.sirius.ui.properties.descriptionConverter</code>: This extension point allows you to particpate in the conversion of the Sirius-side VSM model into the EEF DSL. With this mechanism, you can translate for the EEF runtime new elements that you have contributed in the Sirius Properties DSL.
+			</li>
+			<li>
+				<code>org.eclipse.sirius.ui.properties.descriptionLinkResolver</code>: This extension point may be needed in complement to the 
+				<code>descriptionConverter</code> if some post-transformation step is needed on your transformed model to perform global link resolution.
+			</li>
+		</ul>
+		<p>Please refer to the documentation for each of these for more details. And 
+			<a href="../../developer/extensions-properties_provide_custom_widget_advanced.html">the reference documentation</a> for the full details on how to actually implement your own advanced custom widgets.
+		</p>
+		<h3 id="tab_filtering">Tab Filtering</h3>
+		<p>The EEF runtime used internally by Sirius to render the properties views has programmatic support for filtering property tabs that you may want to hide in your context. For example you may want to filter out some legacy tabs defined statically if you provide alternative versions defined dynamically in Sirius.</p>
+		<p>This feature is not currently exposed via the Sirius VSMs, but you can still use it by implementing the 
+			<code>org.eclipse.eef.properties.ui.api.IEEFTabDescriptorFilter</code> interface, and registering your implementation in the 
+			<code>org.eclipse.eef.properties.ui.eefTabDescriptorFilter</code> extension point defined in EEF.
+		</p>
+		<p>The interface defines a single method 
+			<code>boolean filter(IEEFTabDescriptor tabDescriptor)</code> which will be called for each candidate tab to display. If at least one of the 
+			<code>IEEFTabDescriptorFilter</code> registered indicates that the tab should be filtered, it will not be displayed.
+		</p>
+		<p>Please refer to the EEF extension point documentation for more details.</p>
+	</body>
+</html>

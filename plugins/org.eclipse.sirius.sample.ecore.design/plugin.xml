@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!--
+  Copyright (c) 2007, 2013 THALES GLOBAL SERVICES
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+
+  Contributors:
+       Obeo - Initial API and implementation
+-->
+
+<plugin>
+   <extension
+         point="org.eclipse.sirius.componentization">
+      <component
+            class="org.eclipse.sirius.ecore.design.service.EcoreSamplePlugin"
+            id="org.eclipse.sirius.sample.ecore.design"
+            name="Domain Model">
+      </component>
+   </extension>
+   <extension
+         point="org.eclipse.sirius.externalJavaAction">
+      <javaActions
+            actionClass="org.eclipse.sirius.sample.ecore.design.action.CreateDynamicInstanceAction"
+            id="org.eclipse.sirius.sample.ecore.design.action.createDynamicInstanceActionID">
+      </javaActions>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.sirius.sample.ecore.design.editor.EcoreEntitiesReadOnlyEditor"
+            contributorClass="org.eclipse.sirius.diagram.ui.part.SiriusDiagramActionBarContributor"
+            default="false"
+            extensions="ecore"
+            icon="icons/full/obj16/EcoreModelFile.gif"
+            id="org.eclipse.sirius.sample.ecore.design.editor.entities"
+            matchingStrategy="org.eclipse.sirius.sample.ecore.design.editor.EcoreEntitiesMatchingStrategy"
+            name="Sirius Ecore Editor">
+      </editor>
+   </extension>   
+</plugin>

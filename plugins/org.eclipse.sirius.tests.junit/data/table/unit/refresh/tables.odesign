@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="ASCII"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="UML2 Tables tests" version="10.1.0.201507271600">
+  <ownedViewpoints documentation="Sample of some UML tables " name="UML2 tables for tests" modelFileExtension="uml">
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="Colored Classes Table" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Model Classes" detailDescriptions="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Class%20and%20subClass%20with%20some%20attributes']/@ownedRepresentationCreationDescriptions[name='To%20Class%20and%20subClass%20with%20some%20attributes']" domainClass="Class" semanticCandidatesExpression="" headerLabelExpression="aql:'Class : ' + self.name">
+        <defaultForeground>
+          <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+        </defaultForeground>
+        <foregroundConditionalStyle predicateExpression="aql:self.isAbstract">
+          <style labelSize="9">
+            <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+          </style>
+        </foregroundConditionalStyle>
+        <ownedSubLines name="Property" domainClass="Property" headerLabelExpression="Property">
+          <defaultForeground labelSize="8">
+            <labelFormat>italic</labelFormat>
+            <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+          </defaultForeground>
+          <create name="Create Property" elementsToSelect="service:stdEmptyCollection">
+            <variables name="root" documentation="The semantic element of the table."/>
+            <variables name="element" documentation="The currently edited element."/>
+            <variables name="container" documentation="The semantic element corresponding to the view container."/>
+          </create>
+        </ownedSubLines>
+        <create name="Create Class" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Colored%20Classes%20Table']/@ownedLineMappings[name='Model%20Classes']">
+          <variables name="root" documentation="The semantic element of the table."/>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        </create>
+      </ownedLineMappings>
+      <ownedColumnMappings name="name" headerLabelExpression="name" featureName="name" labelExpression="aql:self.name">
+        <directEdit>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="root" documentation="The semantic element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:element">
+            <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'AA' + arg0"/>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </directEdit>
+        <defaultForeground>
+          <labelFormat>italic</labelFormat>
+          <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+        </defaultForeground>
+        <foregroundConditionalStyle predicateExpression="aql:self.isAbstract">
+          <style>
+            <labelFormat>bold</labelFormat>
+            <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </foregroundConditionalStyle>
+      </ownedColumnMappings>
+      <ownedColumnMappings name="isAbstract" headerLabelExpression="isAbstract ?" featureName="isAbstract" labelExpression="aql:self.isAbstract">
+        <backgroundConditionalStyle predicateExpression="aql:self.isAbstract">
+          <style>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+          </style>
+        </backgroundConditionalStyle>
+      </ownedColumnMappings>
+      <ownedColumnMappings name="is Active mapping" headerLabelExpression="Active ?" featureName="isActive" labelExpression="aql:self.isActive">
+        <foregroundConditionalStyle predicateExpression="aql:self.isActive">
+          <style labelSize="14">
+            <labelFormat>italic</labelFormat>
+            <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+          </style>
+        </foregroundConditionalStyle>
+      </ownedColumnMappings>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="Model Association Cross Table" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="CT Classes" domainClass="Class" headerLabelExpression="aql:self.name"/>
+      <ownedColumnMappings name="CT Classes Column" headerLabelExpression="aql:self.name" domainClass="Class"/>
+      <intersection name="Associations" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20Association%20Cross%20Table']/@ownedLineMappings[name='CT%20Classes']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20Association%20Cross%20Table']/@ownedColumnMappings.0" labelExpression="aql:self.name" useDomainClass="true" columnFinderExpression="aql:self.memberEnd->at(2).type" lineFinderExpression="aql:self.memberEnd->first().type" domainClass="Association">
+        <create name="New association">
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
+          <variables name="root" documentation="The semantic root element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
+            <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.eParent">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Association" referenceName="packagedElement" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="newAssociation"/>
+              </subModelOperations>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </create>
+      </intersection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="All Types and Instance" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="All EClasses" domainClass="EClass" semanticCandidatesExpression="aql:self.eAllContents().eClass()->asSet()" headerLabelExpression="aql:self.name">
+        <ownedSubLines name="Instances" domainClass="EObject" semanticCandidatesExpression="aql:root.eAllContents(container)" headerLabelExpression="aql:self.name"/>
+      </ownedLineMappings>
+      <ownedColumnMappings name="Instances count" headerLabelExpression="Count" featureName="Count" labelExpression="aql:container->filter(ecore::EClass).root.eAllContents(container)->size()"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="Model Generalization Cross Table" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="CT Generalization Classes" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents()->filter(uml::Class)->sortedBy(e | e.name)" headerLabelExpression="aql:self.name">
+        <create name="Create Line Class" elementsToSelect="service:stdEmptyCollection">
+          <variables name="root" documentation="The semantic element of the table."/>
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="aql:element.eContainer()">
+            <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'ClassLine' + element.eContainer().ownedType->size()"/>
+            </subModelOperations>
+          </firstModelOperation>
+        </create>
+      </ownedLineMappings>
+      <ownedColumnMappings name="CT Generalization Classes Column" headerLabelExpression="aql:self.name" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents()->filter(uml::Class)->sortedBy(e | e.name)">
+        <create name="Create Column Class" elementsToSelect="service:stdEmptyCollection">
+          <variables name="root" documentation="The semantic element of the table."/>
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="aql:element.eContainer()">
+            <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'ClassColumn' + element.eContainer().ownedType->size()"/>
+            </subModelOperations>
+          </firstModelOperation>
+        </create>
+      </ownedColumnMappings>
+      <intersection name="Generalization" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20Generalization%20Cross%20Table']/@ownedLineMappings[name='CT%20Generalization%20Classes']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20Generalization%20Cross%20Table']/@ownedColumnMappings.0" labelExpression="X" columnFinderExpression="aql:self.generalization.general" lineFinderExpression="" semanticCandidatesExpression="">
+        <directEdit>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
+          <variables name="root" documentation="The semantic element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = 'X'  and   self.generalization->select( e | e.general = columnSemantic)->size() = 0">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Generalization" referenceName="generalization" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="general" valueExpression="var:columnSemantic"/>
+              </subModelOperations>
+            </subModelOperations>
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 &lt;> 'X'  and  self.generalization->select( e | e.general = columnSemantic)">
+              <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.generalization->select( e | e.general = columnSemantic)">
+                <subModelOperations xsi:type="tool:RemoveElement"/>
+              </subModelOperations>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </directEdit>
+        <create>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
+          <variables name="root" documentation="The semantic root element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = 'X'  and   self.generalization->select( e | e.general = columnSemantic)->size() = 0">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Generalization" referenceName="generalization" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="general" valueExpression="var:columnSemantic"/>
+              </subModelOperations>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </create>
+      </intersection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="Class and subClass with some attributes" initialisation="true" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedRepresentationCreationDescriptions xsi:type="description_1:TableCreationDescription" name="To Class and subClass with some attributes" browseExpression="aql:self.eResource().getContents()->first()" tableDescription="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Class%20and%20subClass%20with%20some%20attributes']">
+        <containerViewVariable name="containerView"/>
+        <representationNameVariable name="tableName"/>
+      </ownedRepresentationCreationDescriptions>
+      <ownedLineMappings name="Class lines" detailDescriptions="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Just%20for%20test%20navigation']/@toolSection/@ownedTools[name='Test%20Diagram']" navigationDescriptions="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Just%20for%20test%20navigation']/@toolSection/@ownedTools[name='Test%20Diagram%20Navigation']" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents(uml::Class)->select( e | e.generalization->size()  = 0)" headerLabelExpression="">
+        <ownedSubLines name="SubClass lines" domainClass="Class" semanticCandidatesExpression="aql:root.eAllContents(uml::Class)->select( e | e.generalization.general->includes(container)) + root.eAllContents(uml::Class)->select( c | c.generalization.general = container).classifierBehavior + root.eAllContents(uml::Class)->select( c | c.generalization.general = container).useCase" headerLabelExpression="aql:self.name">
+          <create documentation="Create a concrete subclass (only for abstract class)" name="Create concrete subclass" precondition="aql:self.isAbstract" elementsToSelect="service:stdEmptyCollection">
+            <variables name="root" documentation="The semantic element of the table."/>
+            <variables name="element" documentation="The currently edited element."/>
+            <variables name="container" documentation="The semantic element corresponding to the view container."/>
+            <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="aql:element.eContainer()">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'SubclassOf' + element.name + element.eContainer().ownedType->size()"/>
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="Generalization" referenceName="generalization" variableName="&quot;&quot;">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="general" valueExpression="var:element"/>
+                </subModelOperations>
+              </subModelOperations>
+            </firstModelOperation>
+          </create>
+          <create name="Create a class in the first package of the model" elementsToSelect="service:stdEmptyCollection">
+            <variables name="root" documentation="The semantic element of the table.">
+              <subVariables xsi:type="tool:AcceleoVariable" name="premierPackage" computationExpression="aql:self.nestedPackage->first()"/>
+            </variables>
+            <variables name="element" documentation="The semantic currently edited element."/>
+            <variables name="container" documentation="The semantic element corresponding to the view container."/>
+            <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:premierPackage">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'Class' + premierPackage.ownedType->size()"/>
+              </subModelOperations>
+            </firstModelOperation>
+          </create>
+          <create name="Create a class in the selected package of the model" elementsToSelect="service:stdEmptyCollection">
+            <variables name="root" documentation="The semantic element of the table.">
+              <subVariables xsi:type="tool:SelectModelElementVariable" name="selectedPackage" candidatesExpression="aql:self.eAllContents()->filter(uml::Package)" message="Select the correct package"/>
+            </variables>
+            <variables name="element" documentation="The semantic currently edited element."/>
+            <variables name="container" documentation="The semantic element corresponding to the view container."/>
+            <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:selectedPackage">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'Class' + selectedPackage.ownedType->size()"/>
+              </subModelOperations>
+            </firstModelOperation>
+          </create>
+        </ownedSubLines>
+        <create name="New Class" elementsToSelect="service:stdEmptyCollection">
+          <variables name="root" documentation="The semantic element of the table."/>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="aql:element.eContainer()">
+            <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'Class' + element.eContainer().ownedType->size()"/>
+            </subModelOperations>
+          </firstModelOperation>
+        </create>
+        <create name="New other class" elementsToSelect="service:stdEmptyCollection">
+          <variables name="root" documentation="The semantic element of the table."/>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="aql:element.eContainer()">
+            <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'OtherClass' + element.eContainer().ownedType->size()"/>
+            </subModelOperations>
+          </firstModelOperation>
+        </create>
+        <create documentation="Create a concrete subclass (only for abstract class)" name="Create concrete subclass" precondition="aql:self.isAbstract" elementsToSelect="service:stdEmptyCollection">
+          <variables name="root" documentation="The semantic element of the table."/>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:container">
+            <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="&quot;&quot;">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'SubclassOf' + element.name + container.ownedType->size()"/>
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Generalization" referenceName="generalization" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="general" valueExpression="var:element"/>
+              </subModelOperations>
+            </subModelOperations>
+          </firstModelOperation>
+        </create>
+        <delete documentation="Delete all classes of the parent package" name="Delete all brothers classes" forceRefresh="true">
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="root" documentation="The semantic element corresponding to the current table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="aql:element.eContainer()">
+            <subModelOperations xsi:type="tool:For" expression="aql:self.ownedType">
+              <subModelOperations xsi:type="tool:RemoveElement"/>
+            </subModelOperations>
+          </firstModelOperation>
+        </delete>
+      </ownedLineMappings>
+      <ownedCreateLine name="New Line" precondition="aql:true" elementsToSelect="service:stdEmptyCollection">
+        <variables name="root" documentation="The semantic element of the table."/>
+        <variables name="element" documentation="The semantic currently edited element."/>
+        <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:element">
+          <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="newClass">
+            <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'Class' + element.ownedType->size()"/>
+          </subModelOperations>
+        </firstModelOperation>
+      </ownedCreateLine>
+      <ownedCreateLine name="New Abstract Line" elementsToSelect="service:stdEmptyCollection">
+        <variables name="root" documentation="The semantic element of the table."/>
+        <variables name="element" documentation="The semantic currently edited element."/>
+        <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:element">
+          <subModelOperations xsi:type="tool:CreateInstance" typeName="Class" referenceName="ownedType" variableName="newClass">
+            <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'AbstractClass' + element.ownedType->size()"/>
+            <subModelOperations xsi:type="tool:SetValue" featureName="isAbstract" valueExpression="aql:true"/>
+          </subModelOperations>
+        </firstModelOperation>
+      </ownedCreateLine>
+      <ownedColumnMappings name="Class name" headerLabelExpression="Name" initialWidth="200" canEdit="aql:self.isAbstract" featureName="name" labelExpression="aql:self.name"/>
+      <ownedColumnMappings name="Is class abstract" headerLabelExpression="IsAbstract" featureName="isAbstract" labelExpression="aql:self.isAbstract"/>
+      <ownedColumnMappings name="Visibility of class" headerLabelExpression="Visibility" featureName="visibility" labelExpression="aql:self.visibility"/>
+      <ownedColumnMappings name="CollaborationUse" headerLabelExpression="Representation" featureName="representation" labelExpression=""/>
+      <ownedColumnMappings name="OwnedUseCase" headerLabelExpression="OwnedUseCase" featureName="ownedUseCase" labelExpression=""/>
+      <ownedColumnMappings name="BehaviorDirectEdit" headerLabelExpression="BehaviorDirectEdit" featureName="classifierBehavior" labelExpression="aql:self.classifierBehavior.name">
+        <directEdit>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="root" documentation="The semantic element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:element">
+            <subModelOperations xsi:type="tool:ExternalJavaAction" name="Change behavior" id="org.eclipse.sirius.tests.table.action.changeBehavior">
+              <parameters name="classifierBehaviorName" value="var:arg0"/>
+              <parameters name="currentClass" value="var:element"/>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </directEdit>
+      </ownedColumnMappings>
+      <ownedColumnMappings name="UseCaseDirectEdit" headerLabelExpression="UseCaseDirectEdit" featureName="useCase" labelExpression="aql:if self.useCase->size() > 0  then '(' + self.useCase.name.sep(',') + ')' else '' endif">
+        <directEdit>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="root" documentation="The semantic element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:element">
+            <subModelOperations xsi:type="tool:ExternalJavaAction" name="Change use cases" id="org.eclipse.sirius.tests.table.action.changeUseCases">
+              <parameters name="useCasesName" value="var:arg0"/>
+              <parameters name="currentClass" value="var:element"/>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </directEdit>
+      </ownedColumnMappings>
+      <ownedColumnMappings name="Commentaire" headerLabelExpression="Comment" featureName="body" labelExpression="aql:self.body" featureParentExpression="aql:self.ownedComment">
+        <directEdit>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="root" documentation="The semantic element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:self.ownedComment->size() = 0">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Comment" referenceName="ownedComment" variableName="newComment"/>
+            </subModelOperations>
+            <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.ownedComment">
+              <subModelOperations xsi:type="tool:SetValue" featureName="body" valueExpression="var:arg0"/>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </directEdit>
+      </ownedColumnMappings>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_2:DiagramDescription" name="Just for test navigation" domainClass="Model">
+      <nodeMappings name="Package" detailDescriptions="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Class%20and%20subClass%20with%20some%20attributes']/@ownedRepresentationCreationDescriptions[name='To%20Class%20and%20subClass%20with%20some%20attributes']" semanticCandidatesExpression="feature:eAllContents" semanticElements="aql:self.packagedElement" domainClass="Package">
+        <style xsi:type="style:EllipseNodeDescription">
+          <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </style>
+      </nodeMappings>
+      <toolSection name="navigation">
+        <ownedTools xsi:type="tool_1:DiagramCreationDescription" name="Test Diagram" browseExpression="aql:self.eResource().getContents()->first()" diagramDescription="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Just%20for%20test%20navigation']">
+          <initialOperation/>
+          <containerViewVariable name="containerView"/>
+          <representationNameVariable name="diagramName"/>
+        </ownedTools>
+        <ownedTools xsi:type="description_1:TableCreationDescription">
+          <containerViewVariable name="containerView"/>
+          <representationNameVariable name="tableName"/>
+        </ownedTools>
+        <ownedTools xsi:type="tool_1:DiagramNavigationDescription" name="Test Diagram Navigation" browseExpression="aql:self.eResource().getContents()->first()" navigationNameExpression="" diagramDescription="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Just%20for%20test%20navigation']">
+          <containerViewVariable name="containerView"/>
+          <containerVariable name="container"/>
+          <representationNameVariable name="diagramName"/>
+        </ownedTools>
+      </toolSection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="Model all associations" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedRepresentationCreationDescriptions xsi:type="description_1:TableCreationDescription" name="To model all associations" browseExpression="aql:self.eResource().getContents()->first()" tableDescription="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20all%20associations']">
+        <containerViewVariable name="containerView"/>
+        <representationNameVariable name="tableName"/>
+      </ownedRepresentationCreationDescriptions>
+      <ownedLineMappings name="Line Classes" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents(uml::Class)->sortedBy( e | e.name)" headerLabelExpression="aql:self.name">
+        <ownedSubLines name="Associations" domainClass="Association" semanticCandidatesExpression="aql:root.eAllContents(uml::Association)->select( e | e.memberEnd->first().type = container)" headerLabelExpression="aql:self.name"/>
+      </ownedLineMappings>
+      <ownedColumnMappings name="Column Classes" headerLabelExpression="aql:self.name" domainClass="Class"/>
+      <intersection name="Associations" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20all%20associations']/@ownedLineMappings[name='Line%20Classes']/@ownedSubLines[name='Associations']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20all%20associations']/@ownedColumnMappings.0" labelExpression="aql:self.name" columnFinderExpression="aql: self.memberEnd->first().type" lineFinderExpression="" semanticCandidatesExpression="" domainClass="" preconditionExpression="">
+        <directEdit>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
+          <variables name="root" documentation="The semantic element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
+            <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:arg0"/>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </directEdit>
+      </intersection>
+      <intersection name="isAtLeastOneAssociation" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20all%20associations']/@ownedLineMappings[name='Line%20Classes']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20all%20associations']/@ownedColumnMappings.0" labelExpression="X" useDomainClass="true" columnFinderExpression="aql: self.memberEnd->first().type" lineFinderExpression="aql:self.memberEnd->first().type" domainClass="Association">
+        <create name="CreateAssociation">
+          <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
+          <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
+          <variables name="root" documentation="The semantic root element of the table."/>
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
+            <subModelOperations xsi:type="tool:ChangeContext" browseExpression="feature:eContainer">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="Association" referenceName="packagedElement" variableName="&quot;&quot;">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:arg0"/>
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="Property" referenceName="ownedEnd" variableName="&quot;&quot;">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:lineSemantic"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="Property" referenceName="ownedEnd" variableName="&quot;&quot;">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="type" valueExpression="var:columnSemantic"/>
+                </subModelOperations>
+              </subModelOperations>
+            </subModelOperations>
+          </firstModelOperation>
+          <mask mask="{0}"/>
+        </create>
+      </intersection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="Property" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Property lines" semanticElements="aql:OrderedSet{self , self.lowerValue , self.upperValue}" domainClass="Property" semanticCandidatesExpression="" headerLabelExpression="aql:'Property ' + self.name"/>
+      <ownedColumnMappings name="Property name" headerLabelExpression="Name" canEdit="" featureName="name" labelExpression="aql:self.name"/>
+      <ownedColumnMappings name="Property Lower" headerLabelExpression="Lower" canEdit="" featureName="lower" labelExpression="aql:self.lower"/>
+      <ownedColumnMappings name="Property Upper" headerLabelExpression="Upper" featureName="upper" labelExpression="aql:self.upper"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="Cross Table Colors" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Line Color Classes" detailDescriptions="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Model%20all%20associations']/@ownedRepresentationCreationDescriptions[name='To%20model%20all%20associations']" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents(uml::Class)->sortedBy( e | e.name)" headerLabelExpression="aql:self.name">
+        <defaultForeground>
+          <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+        </defaultForeground>
+        <ownedSubLines name="Properties Color" domainClass="Property" headerLabelExpression="aql:self.name">
+          <defaultForeground>
+            <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+          </defaultForeground>
+        </ownedSubLines>
+        <ownedSubLines name="Generalization colors" domainClass="Generalization" headerLabelExpression="extends">
+          <defaultBackground>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </defaultBackground>
+        </ownedSubLines>
+      </ownedLineMappings>
+      <ownedColumnMappings name="Column Color Classes" headerLabelExpression="aql:self.name" domainClass="Class">
+        <defaultForeground>
+          <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+        </defaultForeground>
+        <defaultBackground>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+        </defaultBackground>
+      </ownedColumnMappings>
+      <ownedColumnMappings name="Property  Column Color" headerLabelExpression="aql:self.name" domainClass="Property" semanticCandidatesExpression="aql:self.eAllContents(uml::Property)->first()">
+        <defaultBackground>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+        </defaultBackground>
+      </ownedColumnMappings>
+      <intersection name="Associations Color" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Cross%20Table%20Colors']/@ownedLineMappings[name='Line%20Color%20Classes']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Cross%20Table%20Colors']/@ownedColumnMappings.0" labelExpression="aql:self.name" useDomainClass="true" columnFinderExpression="aql:self.memberEnd->first().type" lineFinderExpression="aql:self.memberEnd->last().type" semanticCandidatesExpression="" domainClass="Association" preconditionExpression="">
+        <foregroundConditionalStyle predicateExpression="aql:self.isLeaf">
+          <style>
+            <labelFormat>bold</labelFormat>
+            <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+          </style>
+        </foregroundConditionalStyle>
+      </intersection>
+      <intersection name="Property To Container Color" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Cross%20Table%20Colors']/@ownedLineMappings[name='Line%20Color%20Classes']/@ownedSubLines[name='Properties%20Color']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Cross%20Table%20Colors']/@ownedColumnMappings.0" labelExpression="" columnFinderExpression="feature:eContainer">
+        <defaultBackground>
+          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
+        </defaultBackground>
+      </intersection>
+      <intersection name="Extends colors" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Cross%20Table%20Colors']/@ownedLineMappings[name='Line%20Color%20Classes']/@ownedSubLines[name='Generalization%20colors']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Cross%20Table%20Colors']/@ownedColumnMappings.0" labelExpression="extend" columnFinderExpression="aql:self.general"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="Simple hierarchy" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Class lines" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents(uml::Class)->select( e | e.generalization->size()  = 0)" headerLabelExpression="">
+        <ownedSubLines name="SubClass lines" domainClass="Class" semanticCandidatesExpression="aql:root.eAllContents(uml::Class)->select( e | e.generalization.general->includes(container)) + root.eAllContents(uml::Class)->select( c | c.generalization.general = container).classifierBehavior + root.eAllContents(uml::Class)->select( c | c.generalization.general = container).useCase" headerLabelExpression="aql:self.name">
+          <ownedSubLines name="SubClass lines 2" domainClass="Class" semanticCandidatesExpression="aql:root.eAllContents(uml::Class)->select( e | e.generalization.general->includes(container)) + root.eAllContents(uml::Class)->select( c | c.generalization.general = container).classifierBehavior + root.eAllContents(uml::Class)->select( c | c.generalization.general = container).useCase" headerLabelExpression="aql:self.name"/>
+        </ownedSubLines>
+      </ownedLineMappings>
+      <ownedColumnMappings name="Class name" headerLabelExpression="Name" initialWidth="200" canEdit="aql:self.isAbstract" featureName="name" labelExpression="aql:self.name"/>
+      <ownedColumnMappings name="Is class abstract" headerLabelExpression="IsAbstract" featureName="isAbstract" labelExpression="aql:self.isAbstract"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="Reused hierarchy" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Reused package lines" domainClass="Package" semanticCandidatesExpression="aql:self.packagedElement">
+        <ownedSubLines name="Class lines" domainClass="Class" semanticCandidatesExpression="aql:self.packagedElement" headerLabelExpression=""/>
+      </ownedLineMappings>
+      <ownedColumnMappings name="Name" headerLabelExpression="Name" initialWidth="200" canEdit="aql:self.isAbstract" featureName="name" labelExpression="aql:self.name"/>
+      <ownedColumnMappings name="Is class abstract" headerLabelExpression="IsAbstract" featureName="isAbstract" labelExpression="aql:self.isAbstract"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="VariablesAccess" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="VA_LineClasses" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents()->filter(uml::Class)->sortedBy(e | e.name)" headerLabelExpression="aql:self.name"/>
+      <ownedColumnMappings name="VA_ColumnClasses" headerLabelExpression="aql:self.name" domainClass="Class" semanticCandidatesExpression="aql:self.eAllContents()->filter(uml::Class)->sortedBy(e | e.name)"/>
+      <intersection name="Generalization" lineMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='VariablesAccess']/@ownedLineMappings[name='VA_LineClasses']" columnMapping="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='VariablesAccess']/@ownedColumnMappings.0" labelExpression="aql:line.target.name + ' ' + lineSemantic.name+ ' ' + column.target.name + ' ' +columnSemantic.name" columnFinderExpression="aql:self.generalization.general"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="TestInitialWidth" domainClass="Model" initialHeaderColumnWidth="200">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Class" domainClass="Class" semanticCandidatesExpression="feature:eContents" headerLabelExpression="aql:'Class ' + self.name"/>
+      <ownedColumnMappings name="ClassName" headerLabelExpression="Name" initialWidth="250" featureName="aql:self.name" labelExpression="aql:self.name"/>
+      <ownedColumnMappings name="ClassIsAbstract" headerLabelExpression="isAbstract" initialWidth="100" featureName="isAbstract" labelExpression="aql:self.isAbstract"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="TestColumnWithoutHeaderLabelExpression" domainClass="Model" initialHeaderColumnWidth="200">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Class" domainClass="Class" semanticCandidatesExpression="feature:eContents" headerLabelExpression="aql:'Class ' + self.name"/>
+      <ownedColumnMappings name="ClassName" headerLabelExpression="" initialWidth="250" featureName="aql:self.name" labelExpression="aql:self.name"/>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_2:DiagramDescription" name="Classes" initialisation="true" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="Class" semanticCandidatesExpression="feature:eAllContents" domainClass="Class">
+          <style xsi:type="style:SquareDescription" sizeComputationExpression="6" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </nodeMappings>
+        <toolSections name="tools">
+          <ownedTools xsi:type="tool_1:NodeCreationDescription" name="New class" nodeMappings="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Classes']/@defaultLayer/@nodeMappings[name='Class']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="uml.Class" referenceName="packagedElement">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="newClass"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DeleteElementDescription" name="DeleteClass">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="deleteClass" forceRefresh="true" id="org.eclipse.sirius.tests.table.action.deleteClass"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="Virtual columns" domainClass="Model">
+      <metamodel href="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#/"/>
+      <ownedLineMappings name="Model Classes" detailDescriptions="//@ownedViewpoints[name='UML2%20tables%20for%20tests']/@ownedRepresentations[name='Class%20and%20subClass%20with%20some%20attributes']/@ownedRepresentationCreationDescriptions[name='To%20Class%20and%20subClass%20with%20some%20attributes']" domainClass="Class" semanticCandidatesExpression="" headerLabelExpression="feature:name"/>
+      <ownedColumnMappings name="name" headerLabelExpression="name" featureName="name"/>
+      <ownedColumnMappings name="computedColumn" headerLabelExpression="ComputedLabel_featureName*" featureName="*" labelExpression="ComputedLabel"/>
+      <ownedColumnMappings name="colWithInvalidFeatureName" headerLabelExpression="NonExistingFeature" featureName="invalidFeatureName" labelExpression="ComputedLabel"/>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.sirius.common.tools.api.interpreter.StandardServices"/>
+  </ownedViewpoints>
+</description:Group>

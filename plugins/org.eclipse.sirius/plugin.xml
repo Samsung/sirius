@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+  Copyright (c) 2007, 2016 THALES GLOBAL SERVICES and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+
+  Contributors:
+       Obeo - Initial API and implementation
+-->
+
+<plugin>
+   <extension-point id="refreshExtensionProvider" name="%extension-point.refreshExtensionProvider.name" schema="schema/refreshExtensionProvider.exsd"/>
+   <extension-point id="dialect" name="%extension-point.dialect.name" schema="schema/dialect.exsd"/>
+   <extension-point id="mmdescriptor" name="%extension-point.mmdescriptor.name" schema="schema/mmdescriptor.exsd"/>
+   <extension-point id="featureExtensions" name="%extension-point.featureExtensions.name" schema="schema/featureExtensions.exsd"/>
+   <extension-point id="componentization" name="%extension-point.componentization.name" schema="schema/componentization.exsd"/>
+   <extension-point id="externalJavaAction" name="%extension-point.externalJavaAction" schema="schema/externalJavaAction.exsd"/>
+   <extension-point id="sessionManagerListener" name="%extension-point.sessionManagerListener.name" schema="schema/sessionManagerListener.exsd"/>
+   <extension-point id="analysisSelectorProvider" name="%extension-point.analysisSelectorProvider.name" schema="schema/analysisSelectorProvider.exsd"/>
+   <extension-point id="runtimeLogger" name="%extension-point.runtimeLogger.name" schema="schema/runtimeLogger.exsd"/>
+   <extension-point id="deleteHook" name="%extension-point.deleteHook.name" schema="schema/deleteHook.exsd"/>
+   <extension-point id="sessionFactory" name="%extension-point.sessionFactory.name" schema="schema/sessionFactory.exsd"/>
+   <extension-point id="viewpointSpecificationModel" name="%extension-point.viewpointSpecificationModel.name" schema="schema/viewpointSpecificationModel.exsd"/>
+   <extension-point id="viewpointResourceType" name="%extension-point.viewpointResourceType.name" schema="schema/viewpointResourceType.exsd"/>
+   <extension-point id="migrationParticipant" name="%extension-point.migration.name" schema="schema/migrationParticipant.exsd"/>
+   <extension-point id="repairParticipant" name="%extension-point.repairParticipant.name" schema="schema/repairParticipant.exsd"/>
+   <extension-point id="resourceStrategy" name="%extension-point.resourceStrategy.name" schema="schema/resourceStrategy.exsd"/>
+   <extension-point id="interpretedExpressionQueryProvider" name="%extension-point.interpretedExpressionQueryProvider.name" schema="schema/interpretedExpressionQueryProvider.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated viewpoint -->
+      <package
+            uri="http://www.eclipse.org/sirius/1.1.0"
+            class="org.eclipse.sirius.viewpoint.ViewpointPackage"
+            genModel="model/viewpoint.genmodel"/>
+   </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/sirius/description/1.1.0" 
+       class = "org.eclipse.sirius.viewpoint.description.DescriptionPackage"
+       genModel = "model/viewpoint.genmodel" /> 
+  </extension>
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/sirius/description/style/1.1.0" 
+       class = "org.eclipse.sirius.viewpoint.description.style.StylePackage"
+       genModel = "model/viewpoint.genmodel" /> 
+  </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated viewpoint -->
+      <package
+            uri="http://www.eclipse.org/sirius/description/tool/1.1.0"
+            class="org.eclipse.sirius.viewpoint.description.tool.ToolPackage"
+            genModel="model/viewpoint.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated viewpoint -->
+      <package
+            uri="http://www.eclipse.org/sirius/description/validation/1.1.0"
+            class="org.eclipse.sirius.viewpoint.description.validation.ValidationPackage"
+            genModel="model/viewpoint.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated viewpoint -->
+      <package
+            uri="http://www.eclipse.org/sirius/description/audit/1.1.0"
+            class="org.eclipse.sirius.viewpoint.description.audit.AuditPackage"
+            genModel="model/viewpoint.genmodel"/>
+   </extension>
+
+  <extension
+        point="org.eclipse.emf.ecore.protocol_parser">
+     <parser
+           class="org.eclipse.sirius.tools.internal.resource.InMemoryResourceFactoryImpl"
+           protocolName="memory">
+     </parser>
+  </extension>
+  
+  <extension
+        point="org.eclipse.emf.ecore.protocol_parser">
+     <parser
+           class="org.eclipse.sirius.viewpoint.description.util.DescriptionResourceFactoryImpl"
+           protocolName="environment">
+     </parser>
+  </extension>
+  
+  <extension
+        point="org.eclipse.core.contenttype.contentTypes">
+     <file-association
+           content-type="org.eclipse.emf.compare.content.type"
+           file-extensions="odesign"
+           file-names="*"/>
+  </extension>
+
+  <extension
+         point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext
+            default="true"
+            id="org.eclipse.sirius.context">
+         <selector class="org.eclipse.sirius.tools.internal.validation.Context"/>
+      </clientContext>
+      <binding
+            context="org.eclipse.sirius.context"
+            category="org.eclipse.sirius.category"/>
+  </extension>  
+  
+  <extension
+         point="org.eclipse.emf.validation.constraintProviders"> 
+      <category
+            name="%constraint.category.name"
+            id="org.eclipse.sirius.constraints"/>
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package namespaceUri="http://www.eclipse.org/sirius/1.1.0"/>
+         <package namespaceUri="http://www.eclipse.org/sirius/description/1.1.0"/>
+         <package
+               namespaceUri="http://www.eclipse.org/sirius/description/style/1.1.0">
+         </package>
+         <constraints categories="org.eclipse.sirius.constraints">
+            <constraint
+                  lang="Java"
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.ExistingExpressionVariablesConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%constraint.validVariables.name"
+                  id="org.eclipse.sirius.constraints.ValidAcceleoVariable"
+                  statusCode="1">
+               <description>
+                  %constraint.validVariables.description
+               </description>
+               <message>
+                  %constraint.validVariables.message
+               </message>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.ValidImageConstraint"
+                  id="org.eclipse.sirius.constraints.ValidImagePathConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validImagePath.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validImagePath.message
+               </message>
+               <description>
+                  %constraint.validImagePath.description
+               </description>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.ValidInterpretedExpressionConstraint"
+                  id="org.eclipse.sirius.constraints.ValidInterpretedExpressionConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validExpression.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validExpression.message
+               </message>
+               <description>
+                  %constraint.validExpression.description
+               </description>
+            </constraint>
+             <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.EAttributeCustomizationAttributeNameCommonToAppliedOnConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.EAttributeCustomizationAttributeNameCommonToAppliedOnConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validAttributeCustomization.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validAttributeCustomization.message
+               </message>
+               <description>
+                  %constraint.validAttributeCustomization.description
+               </description>
+               <target
+                     class="EAttributeCustomization">
+               </target>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.EReferenceCustomizationReferenceNameCommonToAppliedOnConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.EReferenceCustomizationReferenceNameCommonToAppliedOnConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validReferenceCustomization.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validReferenceCustomization.message
+               </message>
+               <description>
+                  %constraint.validReferenceCustomization.description
+               </description>
+               <target
+                     class="EReferenceCustomization">
+               </target>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.VSMElementCustomizationReuseValidConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.VSMElementCustomizationReuseValidConstraint"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validVSMElementCustomization.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validVSMElementCustomization.message
+               </message>
+               <description>
+                  %constraint.validVSMElementCustomization.description
+               </description>
+               <target
+                     class="VSMElementCustomizationReuse">
+               </target>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.EmptyAppliedOnListConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.EmptyAppliedOnListConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validAppliedOn.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validAppliedOn.message
+               </message>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.VSMElementNameValidConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.VSMElementNameValidConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.validVSMElementName.name"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  %constraint.validVSMElementName.message
+               </message>
+               <description>
+                  %constraint.validVSMElementName.description
+               </description>    
+               <target
+                     class="IdentifiedElement">
+               </target>
+               <target
+                     class="AbstractVariable">
+               </target>
+            </constraint>
+            <constraint
+                  class="org.eclipse.sirius.tools.internal.validation.description.constraints.RepresentationDescriptionMetaModelsConstraint"
+                  id="org.eclipse.sirius.tools.internal.validation.description.constraints.metaModelConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="%constraint.metaModels.name"
+                  severity="WARNING"
+                  statusCode="1">
+               <description>
+                  %constraint.metaModels.description
+               </description>
+               <message>
+                  %constraint.metaModels.message
+               </message>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+   </extension>
+  
+  <extension
+        point="org.eclipse.sirius.mmdescriptor">
+     <descriptorprovider
+           class="org.eclipse.sirius.business.internal.extender.EcoreIntrinsicMetamodelDescriptorProvider">
+     </descriptorprovider>
+  </extension>
+  
+  <extension
+        point="org.eclipse.emf.ecore.protocol_parser">
+     <parser
+           class="org.eclipse.sirius.tools.internal.uri.ViewpointProtocolParser"
+           protocolName="viewpoint">
+     </parser>
+  </extension>
+  
+ <extension
+       point="org.eclipse.emf.ecore.uri_mapping">
+    <mapping
+          source="environment:/viewpoint"
+          target="platform:/plugin/org.eclipse.sirius/model/Environment.odesign">
+    </mapping>
+ </extension>
+
+  <!-- Standard External Java Actions usable from VSMs. --> 
+  <extension point="org.eclipse.sirius.externalJavaAction">
+     <javaActions id="org.eclipse.sirius.business.api.action.moveElement"
+                  actionClass="org.eclipse.sirius.business.api.action.MoveElementInListAction" />
+     <javaActions id="org.eclipse.sirius.business.api.action.printVariables"
+                  actionClass="org.eclipse.sirius.business.api.action.PrintInterpreterVariablesAction" />
+  </extension>
+  <extension
+        id="LocalSessionEditingDomainFactory"
+        name="%extension.sessionEditingDomainFactory.name"
+        point="org.eclipse.sirius.common.editingDomainFactory">
+     <editingDomainFactory
+           class="org.eclipse.sirius.business.internal.session.LocalSessionEditingDomainFactory">
+     </editingDomainFactory>
+  </extension>
+  <extension
+        id="nature.modelingproject"
+        point="org.eclipse.core.resources.natures">
+     <runtime>
+        <run
+              class="org.eclipse.sirius.business.api.modelingproject.ModelingProject">
+        </run>
+     </runtime>
+  </extension>  
+  <extension point="org.eclipse.sirius.runtimeLogger">
+     <logger
+           class="org.eclipse.sirius.business.internal.logger.MarkerRuntimeLoggerImpl">
+     </logger>
+  </extension>
+
+   <extension
+         id="viewpointMarker"
+         name="%extension.siriusMarker.name"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <attribute
+            name="viewpointURIMarker">
+      </attribute>
+      <persistent value="true"/>
+   </extension>
+   <extension
+         id="modelingMarker"
+         name="%extension.modelingMarker.name"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.sirius.viewpointMarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.sirius.viewpoint.description.util.DescriptionResourceFactoryImpl"
+            type="odesign">
+      </parser>
+   </extension>
+      <extension
+         point="org.eclipse.sirius.migrationParticipant">
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.RemoveOldMigrationAnnotations"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.NsURIMigrationParticipant"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.description.RemoveOldMigrationAnnotations"
+            kind="VSM">
+      </participant>
+       <participant
+            class="org.eclipse.sirius.business.internal.migration.NsURIMigrationParticipant"
+            kind="VSM">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.RGBValuesToDataTypeMigrationParticipant"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.FontFormatMigrationParticipant"
+            kind="VSM">
+       </participant>
+       <participant
+            class="org.eclipse.sirius.business.internal.migration.FontFormatMigrationParticipant"
+            kind="RepresentationsFile">
+       </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.Sirius3CleanUpParticipant"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.ReplaceModelsBySemanticResources"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.DRepresentationContainerToDViewMigrationParticipant"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.DRepresentationDescriptorCreationMigrationParticipant"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.DRepresentationMoveFromDViewToRootObjectsMigrationParticipant"
+            kind="RepresentationsFile">
+      </participant>
+      <participant
+            class="org.eclipse.sirius.business.internal.migration.EmptyMigrationForPropertyViewMigrationParticipant"
+            kind="VSM">
+      </participant>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated contribution -->
+      <package
+            uri="http://www.eclipse.org/sirius/description/contribution/1.0.0"
+            class="org.eclipse.sirius.description.contribution.ContributionPackage"
+            genModel="model/contribution.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <?gmfgen generated="false"?>
+      <parser
+         type="aird"
+         class="org.eclipse.sirius.business.internal.resource.AirDResourceFactory">
+      </parser>
+   </extension>
+   <extension
+         point="org.eclipse.sirius.mmdescriptor">
+      <descriptorprovider
+            class="org.eclipse.sirius.business.internal.dialect.ViewpointMetamodelsProvider">
+      </descriptorprovider>
+   </extension>
+
+</plugin>
