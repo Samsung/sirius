@@ -5,12 +5,11 @@ Modification Base on:  v4.1.3
 https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/tag/?h=v4.1.3
 
 tag name	v4.1.3 (293d1b35141f7e1cd215b24b3f3c19cabd072a4f)
+
 tag date	2017-01-31 03:37:12 -0500
+
 tagged by	Pierre-Charles David
-tagged object	commit dabed5af63...
-download	org.eclipse.sirius-4.1.3.tar.gz
-org.eclipse.sirius-4.1.3.tar.xz
-org.eclipse.sirius-4.1.3.zip
+
 
 # -- Original Sirius Information -- 
 [![Build Status](https://travis-ci.org/pcdavid/org.eclipse.sirius.svg?branch=master)](https://travis-ci.org/pcdavid/org.eclipse.sirius)
