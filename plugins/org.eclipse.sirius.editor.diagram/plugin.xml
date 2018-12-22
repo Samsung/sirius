@@ -755,6 +755,23 @@
         <input type="org.eclipse.sirius.diagram.description.style.NodeStyleDescription"/>
      </propertySection>
   	  <propertySection
+               class="org.eclipse.sirius.diagram.editor.properties.sections.style.nodestyledescription.NodeStyleDescriptionLabelDirectionPropertySection"
+               id="style.section.nodeStyleDescription.LabelDirection"
+               filter="org.eclipse.sirius.diagram.editor.properties.filters.style.nodestyledescription.NodeStyleDescriptionLabelDirectionFilter"
+               afterSection="style.section.nodeStyleDescription.SizeComputationExpression"
+                tab="viewpoint.tab.label">
+        <input type="org.eclipse.sirius.diagram.description.style.NodeStyleDescription"/>
+      </propertySection>
+              
+      <propertySection
+               class="org.eclipse.sirius.diagram.editor.properties.sections.style.containerstyledescription.ContainerStyleDescriptionLabelDirectionPropertySection"
+               id="style.section.containerStyleDescription.LabelDirection"
+               filter="org.eclipse.sirius.diagram.editor.properties.filters.style.containerstyledescription.ContainerStyleDescriptionLabelDirectionFilter"
+               afterSection="style.section.nodeStyleDescription.SizeComputationExpression"
+                tab="viewpoint.tab.label">
+        <input type="org.eclipse.sirius.diagram.description.style.ContainerStyleDescription"/>
+      </propertySection>  
+  	  <propertySection
                class="org.eclipse.sirius.diagram.editor.properties.sections.style.borderedstyledescription.BorderedStyleDescriptionBorderSizeComputationExpressionPropertySection"
                id="style.section.borderedStyleDescription.BorderSizeComputationExpression"
                filter="org.eclipse.sirius.diagram.editor.properties.filters.style.borderedstyledescription.BorderedStyleDescriptionBorderSizeComputationExpressionFilter"

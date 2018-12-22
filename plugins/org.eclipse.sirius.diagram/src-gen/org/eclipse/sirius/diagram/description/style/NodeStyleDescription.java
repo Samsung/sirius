@@ -12,6 +12,7 @@
 package org.eclipse.sirius.diagram.description.style;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.sirius.diagram.LabelDirection;
 import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.ResizeKind;
 import org.eclipse.sirius.viewpoint.description.style.LabelStyleDescription;
@@ -19,8 +20,8 @@ import org.eclipse.sirius.viewpoint.description.style.StyleDescription;
 import org.eclipse.sirius.viewpoint.description.style.TooltipStyleDescription;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Node Style Description</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Node
+ * Style Description</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc --> Style of a node. <!-- end-model-doc -->
  *
@@ -28,18 +29,16 @@ import org.eclipse.sirius.viewpoint.description.style.TooltipStyleDescription;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getSizeComputationExpression
+ * <li>{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getSizeComputationExpression
  * <em>Size Computation Expression</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getLabelPosition
+ * <li>{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getLabelPosition
  * <em>Label Position</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getResizeKind
+ * <li>{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getResizeKind
  * <em>Resize Kind</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getForbiddenSides
+ * <li>{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getForbiddenSides
  * <em>Forbidden Sides</em>}</li>
+ * <li>{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getLabelDirection
+ * <em>Label Direction</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.diagram.description.style.StylePackage#getNodeStyleDescription()
@@ -60,17 +59,18 @@ public interface NodeStyleDescription extends StyleDescription, BorderedStyleDes
      * @model default="3" dataType=
      *        "org.eclipse.sirius.viewpoint.description.InterpretedExpression"
      *        annotation=
-     *        "http://www.eclipse.org/sirius/interpreted/expression/returnType returnType='an integer.'"
+     *        "http://www.eclipse.org/sirius/interpreted/expression/returnType
+     *        returnType='an integer.'"
      * @generated
      */
     String getSizeComputationExpression();
 
     /**
-     * Sets the value of the '
-     * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getSizeComputationExpression
+     * Sets the value of the
+     * '{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getSizeComputationExpression
      * <em>Size Computation Expression</em>}' attribute. <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     *
+     * 
      * @param value
      *            the new value of the '<em>Size Computation Expression</em>'
      *            attribute.
@@ -96,11 +96,11 @@ public interface NodeStyleDescription extends StyleDescription, BorderedStyleDes
     LabelPosition getLabelPosition();
 
     /**
-     * Sets the value of the '
-     * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getLabelPosition
+     * Sets the value of the
+     * '{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getLabelPosition
      * <em>Label Position</em>}' attribute. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @param value
      *            the new value of the '<em>Label Position</em>' attribute.
      * @see org.eclipse.sirius.diagram.LabelPosition
@@ -126,11 +126,11 @@ public interface NodeStyleDescription extends StyleDescription, BorderedStyleDes
     ResizeKind getResizeKind();
 
     /**
-     * Sets the value of the '
-     * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getResizeKind
+     * Sets the value of the
+     * '{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getResizeKind
      * <em>Resize Kind</em>}' attribute. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @param value
      *            the new value of the '<em>Resize Kind</em>' attribute.
      * @see org.eclipse.sirius.diagram.ResizeKind
@@ -159,5 +159,39 @@ public interface NodeStyleDescription extends StyleDescription, BorderedStyleDes
      * @generated
      */
     EList<Side> getForbiddenSides();
+
+    /**
+     * Returns the value of the '<em><b>Label Direction</b></em>' attribute. The
+     * literals are from the enumeration
+     * {@link org.eclipse.sirius.diagram.LabelDirection}. <!-- begin-user-doc
+     * -->
+     * <p>
+     * If the meaning of the '<em>Label Direction</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * 
+     * @return the value of the '<em>Label Direction</em>' attribute.
+     * @see org.eclipse.sirius.diagram.LabelDirection
+     * @see #setLabelDirection(LabelDirection)
+     * @see org.eclipse.sirius.diagram.description.style.StylePackage#getNodeStyleDescription_LabelDirection()
+     * @model
+     * @generated
+     */
+    LabelDirection getLabelDirection();
+
+    /**
+     * Sets the value of the
+     * '{@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription#getLabelDirection
+     * <em>Label Direction</em>}' attribute. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @param value
+     *            the new value of the '<em>Label Direction</em>' attribute.
+     * @see org.eclipse.sirius.diagram.LabelDirection
+     * @see #getLabelDirection()
+     * @generated
+     */
+    void setLabelDirection(LabelDirection value);
 
 } // NodeStyleDescription

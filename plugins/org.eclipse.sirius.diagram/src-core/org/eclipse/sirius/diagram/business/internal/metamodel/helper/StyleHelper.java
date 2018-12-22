@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Obeo - initial API and implementation
+ *    SAMSUNG - let label support vertical display
  *******************************************************************************/
 package org.eclipse.sirius.diagram.business.internal.metamodel.helper;
 
@@ -569,6 +570,10 @@ public final class StyleHelper {
         }
         if (style != null) {
             style.setHideLabelByDefault(description.isHideLabelByDefault());
+            
+            // add container label direction
+            style.setContainerLabelDirection(description.getContainerLabelDirection());
+            
             Option<Style> noPreviousStyle = Options.newNone();
             refreshColors(description, style, noPreviousStyle);
         }
@@ -601,6 +606,18 @@ public final class StyleHelper {
         } else {
             Option<BorderedStyle> noPreviousBorderedStyle = Options.newNone();
             updateBorderedStyleFeatures(description, style, noPreviousBorderedStyle);
+        }        
+                
+        // add label direction
+        if (previousStyle.some() && previousStyle.get().getCustomFeatures().contains(DiagramPackage.Literals.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION.getName())) {
+            if (previousStyle.get() instanceof NodeStyle) {
+                style.setContainerLabelDirection(((ContainerStyle) previousStyle.get()).getContainerLabelDirection());
+            }
+            style.getCustomFeatures().add(DiagramPackage.Literals.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION.getName());
+        } else {
+            if (!style.getCustomFeatures().contains(DiagramPackage.Literals.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION.getName())) {
+                style.setContainerLabelDirection(description.getContainerLabelDirection());
+            }
         }
 
         updateHideLabelCapabilityFeature(description, style, previousStyle);
@@ -665,6 +682,10 @@ public final class StyleHelper {
         }
         if (style != null) {
             style.setLabelPosition(description.getLabelPosition());
+
+            // add set label direction
+            style.setLabelDirection(description.getLabelDirection());
+
             style.setHideLabelByDefault(description.isHideLabelByDefault());
             Option<Style> noPreviousStyle = Options.newNone();
             refreshColors(description, style, noPreviousStyle);
@@ -762,6 +783,19 @@ public final class StyleHelper {
         } else {
             if (style.getLabelPosition() != description.getLabelPosition() && !style.getCustomFeatures().contains(DiagramPackage.Literals.NODE_STYLE__LABEL_POSITION.getName())) {
                 style.setLabelPosition(description.getLabelPosition());
+            }
+        }
+
+        // add label direction
+
+        if (previousStyle.some() && previousStyle.get().getCustomFeatures().contains(DiagramPackage.Literals.NODE_STYLE__LABEL_DIRECTION.getName())) {
+            if (previousStyle.get() instanceof NodeStyle) {
+                style.setLabelDirection(((NodeStyle) previousStyle.get()).getLabelDirection());
+            }
+            style.getCustomFeatures().add(DiagramPackage.Literals.NODE_STYLE__LABEL_DIRECTION.getName());
+        } else {
+            if (!style.getCustomFeatures().contains(DiagramPackage.Literals.NODE_STYLE__LABEL_DIRECTION.getName())) {
+                style.setLabelDirection(description.getLabelDirection());
             }
         }
 

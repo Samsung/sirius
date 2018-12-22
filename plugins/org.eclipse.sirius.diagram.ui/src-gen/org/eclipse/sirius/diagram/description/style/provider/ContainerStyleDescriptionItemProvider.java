@@ -27,7 +27,7 @@ import org.eclipse.sirius.diagram.description.style.StylePackage;
  * This is the item provider adapter for a
  * {@link org.eclipse.sirius.diagram.description.style.ContainerStyleDescription}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- *
+ * 
  * @generated
  */
 public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDescriptionItemProvider {
@@ -65,6 +65,7 @@ public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDes
             addTooltipExpressionPropertyDescriptor(object);
             addHideLabelByDefaultPropertyDescriptor(object);
             addRoundedCornerPropertyDescriptor(object);
+            addContainerLabelDirectionPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
@@ -72,7 +73,7 @@ public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDes
     /**
      * This adds a property descriptor for the Border Size Computation
      * Expression feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addBorderSizeComputationExpressionPropertyDescriptor(Object object) {
@@ -236,7 +237,7 @@ public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDes
     /**
      * This adds a property descriptor for the Hide Label By Default feature.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addHideLabelByDefaultPropertyDescriptor(Object object) {
@@ -263,9 +264,22 @@ public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDes
     }
 
     /**
+     * This adds a property descriptor for the Container Label Direction
+     * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void addContainerLabelDirectionPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+                getString("_UI_ContainerStyleDescription_containerLabelDirection_feature"), //$NON-NLS-1$
+                getString("_UI_PropertyDescriptor_description", "_UI_ContainerStyleDescription_containerLabelDirection_feature", "_UI_ContainerStyleDescription_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                StylePackage.Literals.CONTAINER_STYLE_DESCRIPTION__CONTAINER_LABEL_DIRECTION, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
+
+    /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -281,7 +295,7 @@ public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDes
      * update any cached children and by creating a viewer notification, which
      * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -301,6 +315,7 @@ public class ContainerStyleDescriptionItemProvider extends RoundedCornerStyleDes
         case StylePackage.CONTAINER_STYLE_DESCRIPTION__TOOLTIP_EXPRESSION:
         case StylePackage.CONTAINER_STYLE_DESCRIPTION__HIDE_LABEL_BY_DEFAULT:
         case StylePackage.CONTAINER_STYLE_DESCRIPTION__ROUNDED_CORNER:
+        case StylePackage.CONTAINER_STYLE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
             return;
         }

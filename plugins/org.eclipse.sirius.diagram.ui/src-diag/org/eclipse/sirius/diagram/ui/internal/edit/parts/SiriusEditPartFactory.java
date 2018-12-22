@@ -222,10 +222,11 @@ public class SiriusEditPartFactory implements EditPartFactory {
         @Override
         public void relocate(CellEditor celleditor) {
             final Text text = (Text) celleditor.getControl();
+            boolean isVertical = getWrapLabel().isVertical();
             final Rectangle rect = new Rectangle(getWrapLabel().getTextBounds());
             getWrapLabel().translateToAbsolute(rect);
             if (getWrapLabel().isTextWrapped() && getWrapLabel().getText().length() > 0) {
-                rect.setSize(new Dimension(text.computeSize(rect.width, SWT.DEFAULT)));
+                rect.setSize(new Dimension(text.computeSize(isVertical ? rect.height : rect.width, SWT.DEFAULT)));
             } else {
                 Font font = text.getFont();
                 if (font != null && !font.isDisposed()) {

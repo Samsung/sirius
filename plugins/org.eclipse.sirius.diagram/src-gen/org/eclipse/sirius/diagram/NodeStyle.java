@@ -64,4 +64,8 @@ public interface NodeStyle extends LabelStyle, Style, BorderedStyle, HideLabelCa
      */
     void setLabelPosition(LabelPosition value);
 
+    LabelDirection getLabelDirection();
+
+    void setLabelDirection(LabelDirection value);
+
 } // NodeStyle

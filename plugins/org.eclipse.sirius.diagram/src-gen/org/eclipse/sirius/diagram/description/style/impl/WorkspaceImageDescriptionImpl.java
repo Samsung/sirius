@@ -14,6 +14,7 @@ package org.eclipse.sirius.diagram.description.style.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.sirius.diagram.ContainerLabelDirection;
 import org.eclipse.sirius.diagram.description.style.ContainerStyleDescription;
 import org.eclipse.sirius.diagram.description.style.RoundedCornerStyleDescription;
 import org.eclipse.sirius.diagram.description.style.StylePackage;
@@ -26,17 +27,15 @@ import org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getArcWidth
+ * <li>{@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getArcWidth
  * <em>Arc Width</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getArcHeight
+ * <li>{@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getArcHeight
  * <em>Arc Height</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#isRoundedCorner
+ * <li>{@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#isRoundedCorner
  * <em>Rounded Corner</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getWorkspacePath
+ * <li>{@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getContainerLabelDirection
+ * <em>Container Label Direction</em>}</li>
+ * <li>{@link org.eclipse.sirius.diagram.description.style.impl.WorkspaceImageDescriptionImpl#getWorkspacePath
  * <em>Workspace Path</em>}</li>
  * </ul>
  *
@@ -46,7 +45,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     /**
      * The default value of the '{@link #getArcWidth() <em>Arc Width</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getArcWidth()
      * @generated
      * @ordered
@@ -56,7 +55,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     /**
      * The cached value of the '{@link #getArcWidth() <em>Arc Width</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getArcWidth()
      * @generated
      * @ordered
@@ -66,7 +65,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     /**
      * The default value of the '{@link #getArcHeight() <em>Arc Height</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getArcHeight()
      * @generated
      * @ordered
@@ -76,7 +75,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     /**
      * The cached value of the '{@link #getArcHeight() <em>Arc Height</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getArcHeight()
      * @generated
      * @ordered
@@ -84,10 +83,9 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     protected Integer arcHeight = WorkspaceImageDescriptionImpl.ARC_HEIGHT_EDEFAULT;
 
     /**
-     * The default value of the '{@link #isRoundedCorner()
-     * <em>Rounded Corner</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The default value of the '{@link #isRoundedCorner() <em>Rounded
+     * Corner</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #isRoundedCorner()
      * @generated
      * @ordered
@@ -95,10 +93,9 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     protected static final boolean ROUNDED_CORNER_EDEFAULT = false;
 
     /**
-     * The cached value of the '{@link #isRoundedCorner()
-     * <em>Rounded Corner</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The cached value of the '{@link #isRoundedCorner() <em>Rounded
+     * Corner</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #isRoundedCorner()
      * @generated
      * @ordered
@@ -106,10 +103,31 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     protected boolean roundedCorner = WorkspaceImageDescriptionImpl.ROUNDED_CORNER_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getWorkspacePath()
-     * <em>Workspace Path</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The default value of the '{@link #getContainerLabelDirection()
+     * <em>Container Label Direction</em>}' attribute. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @see #getContainerLabelDirection()
+     * @generated
+     * @ordered
+     */
+    protected static final ContainerLabelDirection CONTAINER_LABEL_DIRECTION_EDEFAULT = ContainerLabelDirection.HORIZONTAL;
+
+    /**
+     * The cached value of the '{@link #getContainerLabelDirection()
+     * <em>Container Label Direction</em>}' attribute. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @see #getContainerLabelDirection()
+     * @generated
+     * @ordered
+     */
+    protected ContainerLabelDirection containerLabelDirection = WorkspaceImageDescriptionImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getWorkspacePath() <em>Workspace
+     * Path</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #getWorkspacePath()
      * @generated
      * @ordered
@@ -117,10 +135,9 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
     protected static final String WORKSPACE_PATH_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getWorkspacePath()
-     * <em>Workspace Path</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The cached value of the '{@link #getWorkspacePath() <em>Workspace
+     * Path</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #getWorkspacePath()
      * @generated
      * @ordered
@@ -129,7 +146,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected WorkspaceImageDescriptionImpl() {
@@ -138,7 +155,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -148,7 +165,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -158,7 +175,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -172,7 +189,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -182,7 +199,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -196,7 +213,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -206,7 +223,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -220,7 +237,31 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
+     * @generated
+     */
+    @Override
+    public ContainerLabelDirection getContainerLabelDirection() {
+        return containerLabelDirection;
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
+    public void setContainerLabelDirection(ContainerLabelDirection newContainerLabelDirection) {
+        ContainerLabelDirection oldContainerLabelDirection = containerLabelDirection;
+        containerLabelDirection = newContainerLabelDirection == null ? WorkspaceImageDescriptionImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT : newContainerLabelDirection;
+        if (eNotificationRequired()) {
+            eNotify(new ENotificationImpl(this, Notification.SET, StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION, oldContainerLabelDirection, containerLabelDirection));
+        }
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @generated
      */
     @Override
@@ -230,7 +271,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -244,7 +285,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -256,6 +297,8 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
             return getArcHeight();
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER:
             return isRoundedCorner();
+        case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
+            return getContainerLabelDirection();
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__WORKSPACE_PATH:
             return getWorkspacePath();
         }
@@ -264,7 +307,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -279,6 +322,9 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER:
             setRoundedCorner((Boolean) newValue);
             return;
+        case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
+            setContainerLabelDirection((ContainerLabelDirection) newValue);
+            return;
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__WORKSPACE_PATH:
             setWorkspacePath((String) newValue);
             return;
@@ -288,7 +334,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -303,6 +349,9 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER:
             setRoundedCorner(WorkspaceImageDescriptionImpl.ROUNDED_CORNER_EDEFAULT);
             return;
+        case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
+            setContainerLabelDirection(WorkspaceImageDescriptionImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT);
+            return;
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__WORKSPACE_PATH:
             setWorkspacePath(WorkspaceImageDescriptionImpl.WORKSPACE_PATH_EDEFAULT);
             return;
@@ -312,7 +361,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -324,6 +373,8 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
             return WorkspaceImageDescriptionImpl.ARC_HEIGHT_EDEFAULT == null ? arcHeight != null : !WorkspaceImageDescriptionImpl.ARC_HEIGHT_EDEFAULT.equals(arcHeight);
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER:
             return roundedCorner != WorkspaceImageDescriptionImpl.ROUNDED_CORNER_EDEFAULT;
+        case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
+            return containerLabelDirection != WorkspaceImageDescriptionImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT;
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__WORKSPACE_PATH:
             return WorkspaceImageDescriptionImpl.WORKSPACE_PATH_EDEFAULT == null ? workspacePath != null : !WorkspaceImageDescriptionImpl.WORKSPACE_PATH_EDEFAULT.equals(workspacePath);
         }
@@ -332,7 +383,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -351,6 +402,8 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
             switch (derivedFeatureID) {
             case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER:
                 return StylePackage.CONTAINER_STYLE_DESCRIPTION__ROUNDED_CORNER;
+            case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
+                return StylePackage.CONTAINER_STYLE_DESCRIPTION__CONTAINER_LABEL_DIRECTION;
             default:
                 return -1;
             }
@@ -360,7 +413,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -379,6 +432,8 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
             switch (baseFeatureID) {
             case StylePackage.CONTAINER_STYLE_DESCRIPTION__ROUNDED_CORNER:
                 return StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER;
+            case StylePackage.CONTAINER_STYLE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
+                return StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION;
             default:
                 return -1;
             }
@@ -388,7 +443,7 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -404,6 +459,8 @@ public class WorkspaceImageDescriptionImpl extends NodeStyleDescriptionImpl impl
         result.append(arcHeight);
         result.append(", roundedCorner: "); //$NON-NLS-1$
         result.append(roundedCorner);
+        result.append(", containerLabelDirection: "); //$NON-NLS-1$
+        result.append(containerLabelDirection);
         result.append(", workspacePath: "); //$NON-NLS-1$
         result.append(workspacePath);
         result.append(')');

@@ -494,6 +494,7 @@
         <details key="documentation" value="The position of the label :&#xD;&#xA;BORDER : The label is around the node, on the border.&#xD;&#xA;NODE : the label is in the node."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelDirection" eType="#//LabelDirection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dot" eSuperTypes="#//NodeStyle">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -558,6 +559,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="The style of a container."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerLabelDirection"
+        eType="#//ContainerLabelDirection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FlatContainerStyle" eSuperTypes="#//ContainerStyle">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="backgroundStyle" lowerBound="1"
@@ -985,6 +988,14 @@
         eType="ecore:EClass ../../org.eclipse.sirius/model/viewpoint.ecore#//description/tool/SelectModelElementVariable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LabelDirection">
+    <eLiterals name="Horizontal"/>
+    <eLiterals name="Vertical" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ContainerLabelDirection">
+    <eLiterals name="Horizontal"/>
+    <eLiterals name="Vertical" value="1"/>
   </eClassifiers>
   <eSubpackages name="description" nsURI="http://www.eclipse.org/sirius/diagram/description/1.1.0"
       nsPrefix="description">
@@ -1834,6 +1845,7 @@
             <details key="documentation" value="Select which side of the container is authorized or not."/>
           </eAnnotations>
         </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelDirection" eType="#//LabelDirection"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CustomStyleDescription" eSuperTypes="#//description/style/NodeStyleDescription">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString">
@@ -2087,6 +2099,8 @@
             <details key="documentation" value=""/>
           </eAnnotations>
         </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerLabelDirection"
+            eType="#//ContainerLabelDirection"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="FlatContainerStyleDescription" eSuperTypes="#//description/style/ContainerStyleDescription #//description/style/SizeComputationContainerStyleDescription">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="backgroundStyle" lowerBound="1"

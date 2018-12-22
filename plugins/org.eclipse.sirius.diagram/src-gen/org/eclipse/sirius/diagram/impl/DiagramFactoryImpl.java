@@ -30,6 +30,7 @@ import org.eclipse.sirius.diagram.BundledImageShape;
 import org.eclipse.sirius.diagram.CenterLabelStyle;
 import org.eclipse.sirius.diagram.CollapseFilter;
 import org.eclipse.sirius.diagram.ComputedStyleDescriptionRegistry;
+import org.eclipse.sirius.diagram.ContainerLabelDirection;
 import org.eclipse.sirius.diagram.ContainerLayout;
 import org.eclipse.sirius.diagram.ContainerShape;
 import org.eclipse.sirius.diagram.CustomStyle;
@@ -59,6 +60,7 @@ import org.eclipse.sirius.diagram.GaugeSection;
 import org.eclipse.sirius.diagram.HideFilter;
 import org.eclipse.sirius.diagram.HideLabelFilter;
 import org.eclipse.sirius.diagram.IndirectlyCollapseFilter;
+import org.eclipse.sirius.diagram.LabelDirection;
 import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.LineStyle;
 import org.eclipse.sirius.diagram.Lozenge;
@@ -242,6 +244,10 @@ public class DiagramFactoryImpl extends EFactoryImpl implements DiagramFactory {
             return createResizeKindFromString(eDataType, initialValue);
         case DiagramPackage.ARRANGE_CONSTRAINT:
             return createArrangeConstraintFromString(eDataType, initialValue);
+        case DiagramPackage.LABEL_DIRECTION:
+            return createLabelDirectionFromString(eDataType, initialValue);
+        case DiagramPackage.CONTAINER_LABEL_DIRECTION:
+            return createContainerLabelDirectionFromString(eDataType, initialValue);
         default:
             throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -277,6 +283,10 @@ public class DiagramFactoryImpl extends EFactoryImpl implements DiagramFactory {
             return convertResizeKindToString(eDataType, instanceValue);
         case DiagramPackage.ARRANGE_CONSTRAINT:
             return convertArrangeConstraintToString(eDataType, instanceValue);
+        case DiagramPackage.LABEL_DIRECTION:
+            return convertLabelDirectionToString(eDataType, instanceValue);
+        case DiagramPackage.CONTAINER_LABEL_DIRECTION:
+            return convertContainerLabelDirectionToString(eDataType, instanceValue);
         default:
             throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -947,6 +957,26 @@ public class DiagramFactoryImpl extends EFactoryImpl implements DiagramFactory {
      *
      * @generated
      */
+    public LabelDirection createLabelDirectionFromString(EDataType eDataType, String initialValue) {
+        LabelDirection result = LabelDirection.get(initialValue);
+        if (result == null) {
+            throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        }
+        return result;
+    }
+    public String convertLabelDirectionToString(EDataType eDataType, Object instanceValue) {
+        return instanceValue == null ? null : instanceValue.toString();
+    }
+    public ContainerLabelDirection createContainerLabelDirectionFromString(EDataType eDataType, String initialValue) {
+        ContainerLabelDirection result = ContainerLabelDirection.get(initialValue);
+        if (result == null) {
+            throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        }
+        return result;
+    }
+    public String convertContainerLabelDirectionToString(EDataType eDataType, Object instanceValue) {
+        return instanceValue == null ? null : instanceValue.toString();
+    }
     @Override
     public DiagramPackage getDiagramPackage() {
         return (DiagramPackage) getEPackage();

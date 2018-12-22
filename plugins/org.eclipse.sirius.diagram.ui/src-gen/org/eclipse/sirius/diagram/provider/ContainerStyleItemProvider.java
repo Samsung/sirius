@@ -17,11 +17,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.sirius.diagram.ContainerStyle;
+import org.eclipse.sirius.diagram.DNodeContainer;
+import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.ui.provider.DiagramUIPlugin;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
@@ -31,10 +34,17 @@ import org.eclipse.sirius.viewpoint.provider.LabelStyleItemProvider;
  * This is the item provider adapter for a
  * {@link org.eclipse.sirius.diagram.ContainerStyle} object. <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- *
- * @generated
+ * 
+ * @not-generated
  */
 public class ContainerStyleItemProvider extends LabelStyleItemProvider {
+
+    private List<IItemPropertyDescriptor> itemPropertyDescriptors_container;
+
+    private List<IItemPropertyDescriptor> itemPropertyDescriptors_listcontainer;
+
+    private List<IItemPropertyDescriptor> itemPropertyDescriptors_others;
+
     /**
      * This constructs an instance from a factory and a notifier. <!--
      * begin-user-doc --> <!-- end-user-doc -->
@@ -61,6 +71,29 @@ public class ContainerStyleItemProvider extends LabelStyleItemProvider {
             addBorderColorPropertyDescriptor(object);
             addBorderLineStylePropertyDescriptor(object);
             addHideLabelByDefaultPropertyDescriptor(object);
+
+            ContainerStyle containerstyle = (ContainerStyle) object;
+            EObject container = containerstyle.eContainer();
+            if (container instanceof DNodeContainer) {
+                addContainerLabelDirectionPropertyDescriptor(object);
+                itemPropertyDescriptors_container = itemPropertyDescriptors;
+            } else if (container instanceof DNodeList) {
+                itemPropertyDescriptors_listcontainer = itemPropertyDescriptors;
+            } else {
+                itemPropertyDescriptors_others = itemPropertyDescriptors;
+            }
+        } else {
+
+            ContainerStyle containerstyle = (ContainerStyle) object;
+            EObject container = containerstyle.eContainer();
+            if (container instanceof DNodeContainer) {
+                itemPropertyDescriptors = itemPropertyDescriptors_container;
+            } else if (container instanceof DNodeList) {
+                itemPropertyDescriptors = itemPropertyDescriptors_listcontainer;
+            } else {
+                itemPropertyDescriptors = itemPropertyDescriptors_others;
+            }
+
         }
         return itemPropertyDescriptors;
     }
@@ -122,7 +155,7 @@ public class ContainerStyleItemProvider extends LabelStyleItemProvider {
     /**
      * This adds a property descriptor for the Hide Label By Default feature.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addHideLabelByDefaultPropertyDescriptor(Object object) {
@@ -133,9 +166,22 @@ public class ContainerStyleItemProvider extends LabelStyleItemProvider {
     }
 
     /**
+     * This adds a property descriptor for the Container Label Direction
+     * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void addContainerLabelDirectionPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+                getString("_UI_ContainerStyle_containerLabelDirection_feature"), //$NON-NLS-1$
+                getString("_UI_PropertyDescriptor_description", "_UI_ContainerStyle_containerLabelDirection_feature", "_UI_ContainerStyle_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                DiagramPackage.Literals.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
+
+    /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -149,7 +195,7 @@ public class ContainerStyleItemProvider extends LabelStyleItemProvider {
      * update any cached children and by creating a viewer notification, which
      * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -162,6 +208,7 @@ public class ContainerStyleItemProvider extends LabelStyleItemProvider {
         case DiagramPackage.CONTAINER_STYLE__BORDER_COLOR:
         case DiagramPackage.CONTAINER_STYLE__BORDER_LINE_STYLE:
         case DiagramPackage.CONTAINER_STYLE__HIDE_LABEL_BY_DEFAULT:
+        case DiagramPackage.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
             return;
         }

@@ -41,6 +41,11 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
+import org.eclipse.sirius.diagram.ContainerLabelDirection;
+import org.eclipse.sirius.diagram.DNode;
+import org.eclipse.sirius.diagram.DNodeContainer;
+import org.eclipse.sirius.diagram.LabelDirection;
+import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.ui.edit.api.part.AbstractDiagramNameEditPart;
 import org.eclipse.sirius.diagram.ui.internal.edit.policies.SiriusTextSelectionEditPolicy;
 import org.eclipse.sirius.diagram.ui.internal.providers.SiriusParserProvider;
@@ -462,5 +467,41 @@ public abstract class AbstractGeneratedDiagramNameEditPart extends AbstractDiagr
             }
         }
         super.handleNotificationEvent(event);
+    }
+
+    // add for sirius vertical label
+    @Override
+    public void refresh() {
+        super.refresh();
+        refreshVertical();
+    }
+
+    private void refreshVertical() {
+
+        if (figure instanceof SiriusWrapLabel) {
+            EObject object = this.resolveSemanticElement();
+
+            if (object instanceof DNodeContainer) {
+
+                ContainerLabelDirection labelDirection = ((DNodeContainer) object).getOwnedStyle().getContainerLabelDirection();
+                if (labelDirection.equals(ContainerLabelDirection.VERTICAL)) {
+                    ((SiriusWrapLabel) figure).setVertical(true);
+                } else {
+                    ((SiriusWrapLabel) figure).setVertical(false);
+                }
+
+            } else if (object instanceof DNode) {
+
+                if (((DNode) object).getOwnedStyle().getLabelPosition().equals(LabelPosition.BORDER_LITERAL)) {
+                    LabelDirection labelDirection = ((DNode) object).getOwnedStyle().getLabelDirection();
+                    if (labelDirection.equals(LabelDirection.VERTICAL)) {
+                        ((SiriusWrapLabel) figure).setVertical(true);
+                    } else {
+                        ((SiriusWrapLabel) figure).setVertical(false);
+                    }
+                }
+            }
+        }
+
     }
 }

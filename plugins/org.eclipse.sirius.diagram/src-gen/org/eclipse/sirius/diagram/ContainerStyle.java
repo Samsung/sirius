@@ -26,4 +26,6 @@ import org.eclipse.sirius.viewpoint.Style;
  * @generated
  */
 public interface ContainerStyle extends LabelStyle, Style, BorderedStyle, HideLabelCapabilityStyle {
+    ContainerLabelDirection getContainerLabelDirection();
+    void setContainerLabelDirection(ContainerLabelDirection value);
 } // ContainerStyle

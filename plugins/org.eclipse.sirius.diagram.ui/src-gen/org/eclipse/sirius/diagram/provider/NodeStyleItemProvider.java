@@ -17,10 +17,13 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.sirius.diagram.DNode;
+import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.NodeStyle;
 import org.eclipse.sirius.diagram.ui.provider.DiagramUIPlugin;
@@ -31,10 +34,17 @@ import org.eclipse.sirius.viewpoint.provider.LabelStyleItemProvider;
  * This is the item provider adapter for a
  * {@link org.eclipse.sirius.diagram.NodeStyle} object. <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- *
+ * 
  * @generated
  */
 public class NodeStyleItemProvider extends LabelStyleItemProvider {
+
+    private List<IItemPropertyDescriptor> itemPropertyDescriptors_node;
+
+    private List<IItemPropertyDescriptor> itemPropertyDescriptors_nodecontainer;
+
+    private List<IItemPropertyDescriptor> itemPropertyDescriptors_others;
+
     /**
      * This constructs an instance from a factory and a notifier. <!--
      * begin-user-doc --> <!-- end-user-doc -->
@@ -62,6 +72,30 @@ public class NodeStyleItemProvider extends LabelStyleItemProvider {
             addBorderLineStylePropertyDescriptor(object);
             addHideLabelByDefaultPropertyDescriptor(object);
             addLabelPositionPropertyDescriptor(object);
+
+            NodeStyle nodestyle = (NodeStyle) object;
+            EObject node = nodestyle.eContainer();
+
+            if (node instanceof DNode) {
+                addLabelDirectionPropertyDescriptor(object);
+                itemPropertyDescriptors_node = itemPropertyDescriptors;
+            } else if (node instanceof DNodeContainer) {
+                itemPropertyDescriptors_nodecontainer = itemPropertyDescriptors;
+            } else {
+                itemPropertyDescriptors_others = itemPropertyDescriptors;
+            }
+        } else {
+
+            NodeStyle nodestyle = (NodeStyle) object;
+            EObject node = nodestyle.eContainer();
+            if (node instanceof DNode) {
+                itemPropertyDescriptors = itemPropertyDescriptors_node;
+            } else if (node instanceof DNodeContainer) {
+                itemPropertyDescriptors = itemPropertyDescriptors_nodecontainer;
+            } else {
+                itemPropertyDescriptors = itemPropertyDescriptors_others;
+            }
+
         }
         return itemPropertyDescriptors;
     }
@@ -134,9 +168,22 @@ public class NodeStyleItemProvider extends LabelStyleItemProvider {
     }
 
     /**
+     * This adds a property descriptor for the Label Direction feature. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void addLabelDirectionPropertyDescriptor(Object object) {
+        itemPropertyDescriptors
+                .add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_NodeStyle_labelDirection_feature"), //$NON-NLS-1$
+                        getString("_UI_PropertyDescriptor_description", "_UI_NodeStyle_labelDirection_feature", "_UI_NodeStyle_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        DiagramPackage.Literals.NODE_STYLE__LABEL_DIRECTION, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
+
+    /**
      * This adds a property descriptor for the Hide Label By Default feature.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addHideLabelByDefaultPropertyDescriptor(Object object) {
@@ -149,7 +196,7 @@ public class NodeStyleItemProvider extends LabelStyleItemProvider {
     /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -163,7 +210,7 @@ public class NodeStyleItemProvider extends LabelStyleItemProvider {
      * update any cached children and by creating a viewer notification, which
      * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -177,6 +224,7 @@ public class NodeStyleItemProvider extends LabelStyleItemProvider {
         case DiagramPackage.NODE_STYLE__BORDER_LINE_STYLE:
         case DiagramPackage.NODE_STYLE__HIDE_LABEL_BY_DEFAULT:
         case DiagramPackage.NODE_STYLE__LABEL_POSITION:
+        case DiagramPackage.NODE_STYLE__LABEL_DIRECTION:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
             return;
         }

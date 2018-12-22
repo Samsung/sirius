@@ -27,7 +27,7 @@ import org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription;
  * This is the item provider adapter for a
  * {@link org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- *
+ * 
  * @generated
  */
 public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionItemProvider {
@@ -55,6 +55,7 @@ public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionI
             addArcWidthPropertyDescriptor(object);
             addArcHeightPropertyDescriptor(object);
             addRoundedCornerPropertyDescriptor(object);
+            addContainerLabelDirectionPropertyDescriptor(object);
             addWorkspacePathPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
@@ -103,6 +104,19 @@ public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionI
     }
 
     /**
+     * This adds a property descriptor for the Container Label Direction
+     * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    protected void addContainerLabelDirectionPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+                getString("_UI_ContainerStyleDescription_containerLabelDirection_feature"), //$NON-NLS-1$
+                getString("_UI_PropertyDescriptor_description", "_UI_ContainerStyleDescription_containerLabelDirection_feature", "_UI_ContainerStyleDescription_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                StylePackage.Literals.CONTAINER_STYLE_DESCRIPTION__CONTAINER_LABEL_DIRECTION, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
+
+    /**
      * This adds a property descriptor for the Workspace Path feature. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      *
@@ -119,7 +133,7 @@ public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionI
     /**
      * This returns WorkspaceImageDescription.gif. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -130,7 +144,7 @@ public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionI
     /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -145,7 +159,7 @@ public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionI
      * update any cached children and by creating a viewer notification, which
      * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -156,6 +170,7 @@ public class WorkspaceImageDescriptionItemProvider extends NodeStyleDescriptionI
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ARC_WIDTH:
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ARC_HEIGHT:
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__ROUNDED_CORNER:
+        case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__CONTAINER_LABEL_DIRECTION:
         case StylePackage.WORKSPACE_IMAGE_DESCRIPTION__WORKSPACE_PATH:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
             return;

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.sirius.diagram.BorderedStyle;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.HideLabelCapabilityStyle;
+import org.eclipse.sirius.diagram.LabelDirection;
 import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.LineStyle;
 import org.eclipse.sirius.diagram.NodeStyle;
@@ -193,6 +194,25 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
      * @ordered
      */
     protected LabelPosition labelPosition = NodeStyleImpl.LABEL_POSITION_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getLabelDirection() <em>Label
+     * Direction</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see #getLabelDirection()
+     * @generated
+     * @ordered
+     */
+    protected static final LabelDirection LABEL_DIRECTION_EDEFAULT = LabelDirection.HORIZONTAL;
+    /**
+     * The cached value of the '{@link #getLabelDirection() <em>Label
+     * Direction</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see #getLabelDirection()
+     * @generated
+     * @ordered
+     */
+    protected LabelDirection labelDirection = NodeStyleImpl.LABEL_DIRECTION_EDEFAULT;
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -381,6 +401,18 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
      * @generated
      */
     @Override
+    public LabelDirection getLabelDirection() {
+        return labelDirection;
+    }
+    @Override
+    public void setLabelDirection(LabelDirection newLabelDirection) {
+        LabelDirection oldLabelDirection = labelDirection;
+        labelDirection = newLabelDirection == null ? NodeStyleImpl.LABEL_DIRECTION_EDEFAULT : newLabelDirection;
+        if (eNotificationRequired()) {
+            eNotify(new ENotificationImpl(this, Notification.SET, DiagramPackage.NODE_STYLE__LABEL_DIRECTION, oldLabelDirection, labelDirection));
+        }
+    }
+    @Override
     public boolean isHideLabelByDefault() {
         return hideLabelByDefault;
     }
@@ -436,6 +468,8 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
             return isHideLabelByDefault();
         case DiagramPackage.NODE_STYLE__LABEL_POSITION:
             return getLabelPosition();
+        case DiagramPackage.NODE_STYLE__LABEL_DIRECTION:
+            return getLabelDirection();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -468,6 +502,9 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
             return;
         case DiagramPackage.NODE_STYLE__LABEL_POSITION:
             setLabelPosition((LabelPosition) newValue);
+            return;
+        case DiagramPackage.NODE_STYLE__LABEL_DIRECTION:
+            setLabelDirection((LabelDirection) newValue);
             return;
         }
         super.eSet(featureID, newValue);
@@ -502,6 +539,9 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
         case DiagramPackage.NODE_STYLE__LABEL_POSITION:
             setLabelPosition(NodeStyleImpl.LABEL_POSITION_EDEFAULT);
             return;
+        case DiagramPackage.NODE_STYLE__LABEL_DIRECTION:
+            setLabelDirection(NodeStyleImpl.LABEL_DIRECTION_EDEFAULT);
+            return;
         }
         super.eUnset(featureID);
     }
@@ -529,6 +569,8 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
             return hideLabelByDefault != NodeStyleImpl.HIDE_LABEL_BY_DEFAULT_EDEFAULT;
         case DiagramPackage.NODE_STYLE__LABEL_POSITION:
             return labelPosition != NodeStyleImpl.LABEL_POSITION_EDEFAULT;
+        case DiagramPackage.NODE_STYLE__LABEL_DIRECTION:
+            return labelDirection != NodeStyleImpl.LABEL_DIRECTION_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
@@ -649,6 +691,8 @@ public abstract class NodeStyleImpl extends LabelStyleImpl implements NodeStyle 
         result.append(hideLabelByDefault);
         result.append(", labelPosition: "); //$NON-NLS-1$
         result.append(labelPosition);
+        result.append(", labelDirection: "); //$NON-NLS-1$
+        result.append(labelDirection);
         result.append(')');
         return result.toString();
     }

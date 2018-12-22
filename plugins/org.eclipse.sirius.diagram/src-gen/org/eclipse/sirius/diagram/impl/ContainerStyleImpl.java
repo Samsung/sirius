@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.sirius.diagram.BorderedStyle;
+import org.eclipse.sirius.diagram.ContainerLabelDirection;
 import org.eclipse.sirius.diagram.ContainerStyle;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.HideLabelCapabilityStyle;
@@ -39,17 +40,16 @@ import org.eclipse.sirius.viewpoint.impl.LabelStyleImpl;
  * <em>Description</em>}</li>
  * <li>{@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getBorderSize
  * <em>Border Size</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getBorderSizeComputationExpression
+ * <li>{@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getBorderSizeComputationExpression
  * <em>Border Size Computation Expression</em>}</li>
  * <li>{@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getBorderColor
  * <em>Border Color</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getBorderLineStyle
+ * <li>{@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getBorderLineStyle
  * <em>Border Line Style</em>}</li>
- * <li>
- * {@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#isHideLabelByDefault
+ * <li>{@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#isHideLabelByDefault
  * <em>Hide Label By Default</em>}</li>
+ * <li>{@link org.eclipse.sirius.diagram.impl.ContainerStyleImpl#getContainerLabelDirection
+ * <em>Container Label Direction</em>}</li>
  * </ul>
  *
  * @generated
@@ -58,7 +58,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     /**
      * The cached value of the '{@link #getDescription() <em>Description</em>}'
      * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getDescription()
      * @generated
      * @ordered
@@ -68,7 +68,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     /**
      * The default value of the '{@link #getBorderSize() <em>Border Size</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getBorderSize()
      * @generated
      * @ordered
@@ -78,7 +78,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     /**
      * The cached value of the '{@link #getBorderSize() <em>Border Size</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getBorderSize()
      * @generated
      * @ordered
@@ -108,9 +108,9 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     protected String borderSizeComputationExpression = ContainerStyleImpl.BORDER_SIZE_COMPUTATION_EXPRESSION_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getBorderColor() <em>Border Color</em>}
-     * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * The default value of the '{@link #getBorderColor() <em>Border
+     * Color</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #getBorderColor()
      * @generated
      * @ordered
@@ -120,7 +120,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     /**
      * The cached value of the '{@link #getBorderColor() <em>Border Color</em>}'
      * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @see #getBorderColor()
      * @generated
      * @ordered
@@ -128,10 +128,9 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     protected RGBValues borderColor = ContainerStyleImpl.BORDER_COLOR_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getBorderLineStyle()
-     * <em>Border Line Style</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The default value of the '{@link #getBorderLineStyle() <em>Border Line
+     * Style</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #getBorderLineStyle()
      * @generated
      * @ordered
@@ -139,10 +138,9 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     protected static final LineStyle BORDER_LINE_STYLE_EDEFAULT = LineStyle.SOLID_LITERAL;
 
     /**
-     * The cached value of the '{@link #getBorderLineStyle()
-     * <em>Border Line Style</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The cached value of the '{@link #getBorderLineStyle() <em>Border Line
+     * Style</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #getBorderLineStyle()
      * @generated
      * @ordered
@@ -150,9 +148,9 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     protected LineStyle borderLineStyle = ContainerStyleImpl.BORDER_LINE_STYLE_EDEFAULT;
 
     /**
-     * The default value of the '{@link #isHideLabelByDefault()
-     * <em>Hide Label By Default</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
+     * The default value of the '{@link #isHideLabelByDefault() <em>Hide Label
+     * By Default</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+     * -->
      *
      * @see #isHideLabelByDefault()
      * @generated
@@ -161,10 +159,9 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     protected static final boolean HIDE_LABEL_BY_DEFAULT_EDEFAULT = false;
 
     /**
-     * The cached value of the '{@link #isHideLabelByDefault()
-     * <em>Hide Label By Default</em>}' attribute. <!-- begin-user-doc --> <!--
-     * end-user-doc -->
-     *
+     * The cached value of the '{@link #isHideLabelByDefault() <em>Hide Label By
+     * Default</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see #isHideLabelByDefault()
      * @generated
      * @ordered
@@ -172,8 +169,30 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
     protected boolean hideLabelByDefault = ContainerStyleImpl.HIDE_LABEL_BY_DEFAULT_EDEFAULT;
 
     /**
+     * The default value of the '{@link #getContainerLabelDirection()
+     * <em>Container Label Direction</em>}' attribute. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @see #getContainerLabelDirection()
+     * @generated
+     * @ordered
+     */
+    protected static final ContainerLabelDirection CONTAINER_LABEL_DIRECTION_EDEFAULT = ContainerLabelDirection.HORIZONTAL;
+
+    /**
+     * The cached value of the '{@link #getContainerLabelDirection()
+     * <em>Container Label Direction</em>}' attribute. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @see #getContainerLabelDirection()
+     * @generated
+     * @ordered
+     */
+    protected ContainerLabelDirection containerLabelDirection = ContainerStyleImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT;
+
+    /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected ContainerStyleImpl() {
@@ -182,7 +201,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -192,7 +211,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -211,7 +230,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     public StyleDescription basicGetDescription() {
@@ -220,7 +239,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -234,7 +253,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -244,7 +263,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -258,7 +277,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -268,7 +287,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -283,7 +302,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -293,7 +312,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -307,7 +326,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -317,7 +336,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -331,7 +350,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -341,7 +360,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -355,7 +374,31 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
+     * @generated
+     */
+    @Override
+    public ContainerLabelDirection getContainerLabelDirection() {
+        return containerLabelDirection;
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    @Override
+    public void setContainerLabelDirection(ContainerLabelDirection newContainerLabelDirection) {
+        ContainerLabelDirection oldContainerLabelDirection = containerLabelDirection;
+        containerLabelDirection = newContainerLabelDirection == null ? ContainerStyleImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT : newContainerLabelDirection;
+        if (eNotificationRequired()) {
+            eNotify(new ENotificationImpl(this, Notification.SET, DiagramPackage.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION, oldContainerLabelDirection, containerLabelDirection));
+        }
+    }
+
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @generated
      */
     @Override
@@ -367,7 +410,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -388,13 +431,15 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
             return getBorderLineStyle();
         case DiagramPackage.CONTAINER_STYLE__HIDE_LABEL_BY_DEFAULT:
             return isHideLabelByDefault();
+        case DiagramPackage.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION:
+            return getContainerLabelDirection();
         }
         return super.eGet(featureID, resolve, coreType);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -418,13 +463,16 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
         case DiagramPackage.CONTAINER_STYLE__HIDE_LABEL_BY_DEFAULT:
             setHideLabelByDefault((Boolean) newValue);
             return;
+        case DiagramPackage.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION:
+            setContainerLabelDirection((ContainerLabelDirection) newValue);
+            return;
         }
         super.eSet(featureID, newValue);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -448,13 +496,16 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
         case DiagramPackage.CONTAINER_STYLE__HIDE_LABEL_BY_DEFAULT:
             setHideLabelByDefault(ContainerStyleImpl.HIDE_LABEL_BY_DEFAULT_EDEFAULT);
             return;
+        case DiagramPackage.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION:
+            setContainerLabelDirection(ContainerStyleImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT);
+            return;
         }
         super.eUnset(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -473,13 +524,15 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
             return borderLineStyle != ContainerStyleImpl.BORDER_LINE_STYLE_EDEFAULT;
         case DiagramPackage.CONTAINER_STYLE__HIDE_LABEL_BY_DEFAULT:
             return hideLabelByDefault != ContainerStyleImpl.HIDE_LABEL_BY_DEFAULT_EDEFAULT;
+        case DiagramPackage.CONTAINER_STYLE__CONTAINER_LABEL_DIRECTION:
+            return containerLabelDirection != ContainerStyleImpl.CONTAINER_LABEL_DIRECTION_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -525,7 +578,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -571,7 +624,7 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -591,6 +644,8 @@ public abstract class ContainerStyleImpl extends LabelStyleImpl implements Conta
         result.append(borderLineStyle);
         result.append(", hideLabelByDefault: "); //$NON-NLS-1$
         result.append(hideLabelByDefault);
+        result.append(", containerLabelDirection: "); //$NON-NLS-1$
+        result.append(containerLabelDirection);
         result.append(')');
         return result.toString();
     }

@@ -8,6 +8,7 @@
  * Contributors:
  *    IBM Corporation - initial API and implementation 
  *    Obeo - Duplication to keep the same behavior as GMF 2.0.1
+ *    SAMSUNG - let label support vertical display
  ****************************************************************************/
 //CHECKSTYLE:OFF
 package org.eclipse.sirius.diagram.ui.tools.api.figure;
@@ -425,6 +426,17 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
 
     private int cachedTextSizeHint_height;
 
+    // add for vertical label
+
+    private boolean isVertical = false;
+
+    private boolean isTop2Down = true;
+
+    // before rotate to getClip
+    Rectangle verticalClipRec;
+
+    // end
+
     /**
      * Construct an empty Label.
      * 
@@ -438,6 +450,18 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         setAlignmentFlags(CENTER, FLAG_LABEL_ALIGN);
         setAlignmentFlags(LEFT, FLAG_WRAP_ALIGN);
         setPlacementFlags(EAST, FLAG_TEXT_PLACEMENT);
+    }
+
+    // set method
+    public boolean isVertical() {
+        return this.isVertical;
+    }
+
+    public void setVertical(boolean value) {
+        if (this.isVertical != value) {
+            this.isVertical = value;
+            this.invalidate();
+        }
     }
 
     /**
@@ -520,7 +544,11 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
             loc.y = bounds.height - size.height - getInsets().bottom;
             break;
         default:
-            loc.y = (bounds.height - size.height) / 2;
+            if (this.isVertical) {
+                loc.y = (bounds.width - size.width) / 2;
+            } else {
+                loc.y = (bounds.height - size.height) / 2;
+            }
         }
     }
 
@@ -573,7 +601,11 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         int gap = (len == 0 || isEmpty) ? 0 : getIconTextGap();
         int placement = getTextPlacement();
         if (placement == WEST || placement == EAST) {
-            return new Dimension(iconSize.width + gap + txtSize.width, Math.max(iconSize.height, txtSize.height));
+            if (this.isVertical) {
+                return new Dimension(Math.max(iconSize.width, txtSize.width), iconSize.height + gap + txtSize.height);
+            } else {
+                return new Dimension(iconSize.width + gap + txtSize.width, Math.max(iconSize.height, txtSize.height));
+            }
         } else {
             return new Dimension(Math.max(iconSize.width, txtSize.width), iconSize.height + gap + txtSize.height);
         }
@@ -590,6 +622,12 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         Dimension ps = getPreferredSize(r.width, r.height);
         int w = (r.width - ps.width) + (getTextSize().width - getSubStringTextSize().width);
         int h = r.height - ps.height;
+
+        if (this.isVertical) {
+            h = (r.width - ps.width) + (getTextSize().width - getSubStringTextSize().width);
+            w = r.height - ps.height;
+        }
+
         if (w == 0 && h == 0) {
             return;
         }
@@ -841,7 +879,10 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         IMapMode mm = getFigureMapMode();
         int fontHeight = mm.DPtoLP(metrics.getHeight());
         int charAverageWidth = mm.DPtoLP(metrics.getAverageCharWidth());
-        int maxLines = (int) (effectiveSize.height / (double) fontHeight);
+
+        // int maxLines = (int) (effectiveSize.height / (double) fontHeight);
+        int maxLines = (int) ((this.isVertical ? effectiveSize.width : effectiveSize.height) / (double) fontHeight);
+
         if (maxLines == 0) {
             return subStringText = "";//$NON-NLS-1$
         }
@@ -849,7 +890,10 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         StringBuffer accumlatedText = new StringBuffer();
         StringBuffer remainingText = new StringBuffer(theText);
 
-        int effectiveSizeWidth = effectiveSize.width;
+        // int effectiveSizeWidth = effectiveSize.width;
+
+        int effectiveSizeWidth = this.isVertical ? effectiveSize.height : effectiveSize.width;
+
         int widthHint = Math.max(effectiveSizeWidth - getEllipseTextSize().width, 0);
         int i = 0, j = 0;
         while (remainingText.length() > 0 && j++ < maxLines) {
@@ -879,7 +923,11 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
      */
     private String getWrappedText(int wHint, int hHint) {
         String theText = getText();
-        if (wHint == -1 || theText.length() == 0 || !isTextWrapped())
+
+        if (this.isVertical) {
+            if (hHint == -1 || theText.length() == 0 || !isTextWrapped())
+                return theText;
+        } else if (wHint == -1 || theText.length() == 0 || !isTextWrapped())
             return theText;
 
         Dimension iconSize = getTotalIconSize();
@@ -887,7 +935,12 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
             switch (getTextPlacement()) {
             case EAST:
             case WEST:
-                wHint -= iconSize.width + getIconTextGap();
+                // wHint -= iconSize.width + getIconTextGap();
+                if (this.isVertical) {
+                    hHint -= iconSize.height + getIconTextGap();
+                } else {
+                    wHint -= iconSize.width + getIconTextGap();
+                }
                 break;
             case NORTH:
             case SOUTH:
@@ -907,7 +960,8 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         int fontHeight = getFigureMapMode().DPtoLP(FigureUtilities.getFontMetrics(f).getHeight());
         int maxLines = Integer.MAX_VALUE;
         if (hHint != -1) {
-            maxLines = (int) (hHint / (double) fontHeight);
+            // maxLines = (int) (hHint / (double) fontHeight);
+            maxLines = (int) ((this.isVertical ? wHint : hHint) / (double) fontHeight);
             if (maxLines == 0) {
                 return "";//$NON-NLS-1$
             }
@@ -918,7 +972,8 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         int i = 0, j = 0;
 
         while (remainingText.length() > 0 && j++ < maxLines) {
-            if ((i = getLineWrapPosition(remainingText.toString(), f, wHint, fontHeight)) == 0)
+            int whint = this.isVertical ? hHint : wHint;
+            if ((i = getLineWrapPosition(remainingText.toString(), f, whint, fontHeight)) == 0)
                 break;
 
             if (accumlatedText.length() > 0)
@@ -1106,7 +1161,22 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
             super.paintFigure(graphics);
         Rectangle figBounds = getBounds();
 
-        graphics.translate(figBounds.x, figBounds.y);
+        // get vertical rectangle
+        if (this.isVertical)
+            setVerticalClip(graphics);
+
+        if (this.isVertical()) {
+            if (this.isTop2Down) {
+                graphics.translate(figBounds.x + figBounds.width, figBounds.y);
+                graphics.rotate(90);
+            } else {
+                graphics.translate(figBounds.x, figBounds.y + figBounds.height);
+                graphics.rotate(-90);
+            }
+        } else {
+            graphics.translate(figBounds.x, figBounds.y);
+        }
+
         if (hasIcons())
             paintIcons(graphics);
 
@@ -1119,10 +1189,44 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
                 graphics.translate(-1, -1);
                 graphics.setForegroundColor(ColorConstants.buttonDarker);
             } else {
+
+                if (this.isVertical) {
+                    /*
+                     * int w = this.textSize.width; int h =
+                     * this.textSize.height; if((w != figBounds.width) || (h !=
+                     * figBounds.height)) { this.textSize.width = h;
+                     * this.textSize.height = w; }
+                     */
+                    int pre_h = this.prefSize.height;
+                    int pre_w = this.prefSize.width;
+                    if ((pre_w != figBounds.width) || (pre_h != figBounds.height)) {
+                        this.prefSize.height = pre_w;
+                        this.prefSize.width = pre_h;
+                    }
+                }
+
                 paintText(graphics, subString);
             }
         }
-        graphics.translate(-figBounds.x, -figBounds.y);
+
+        if (this.isVertical()) {
+            if (this.isTop2Down) {
+                graphics.translate(-(figBounds.x + figBounds.width), -figBounds.y);
+
+            } else {
+                graphics.translate(-figBounds.x, -(figBounds.y + figBounds.height));
+
+            }
+        } else {
+            graphics.translate(-figBounds.x, -figBounds.y);
+        }
+    }
+
+    public void setVerticalClip(Graphics graphics) {
+
+        Rectangle clipRect = new Rectangle();
+        graphics.getClip(clipRect);
+        verticalClipRec = new Rectangle(0, 0, clipRect.width, clipRect.height);
     }
 
     /**
@@ -1141,7 +1245,13 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         FontMetrics fontMetrics = FigureUtilities.getFontMetrics(f);
         int fontHeight = getFigureMapMode().DPtoLP(fontMetrics.getHeight());
         int fontHeightHalf = fontHeight / 2;
-        int textWidth = getTextExtents(subString, f, fontHeight).width;
+        int textWidth = 0;
+        if (this.isVertical) {
+            textWidth = getTextExtents(subString, f, fontHeight).height;
+        } else {
+            textWidth = getTextExtents(subString, f, fontHeight).width;
+        }
+
         Point p = getTextLocation();
         int y = p.y;
         int x = p.x;
@@ -1149,7 +1259,15 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         boolean isUnderlined = isTextUnderlined();
         boolean isStrikedThrough = isTextStrikedThrough();
         Rectangle clipRect = new Rectangle();
-        graphics.getClip(clipRect);
+
+        if (this.isVertical) {
+            // clipRect = new Rectangle(0, 0, this.getBounds().height,
+            // this.getBounds().width);
+            clipRect = this.verticalClipRec;
+        } else {
+            graphics.getClip(clipRect);
+        }
+
         int clipRectTopRight_x = clipRect.getTopRight().x;
         // If the font's leading area is 0 then we need to add an offset to
         // avoid truncating at the top (e.g. Korean fonts)
@@ -1161,7 +1279,12 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
         while (tokenizer.hasMoreTokens()) {
             x = p.x;
             String token = tokenizer.nextToken();
-            int tokenWidth = getTextExtents(token, f, fontHeight).width;
+            int tokenWidth = 0;
+            if (this.isVertical) {
+                tokenWidth = getTextExtents(token, f, fontHeight).height;
+            } else {
+                tokenWidth = getTextExtents(token, f, fontHeight).width;
+            }
 
             switch (wrapAlignment) {
             case CENTER:
@@ -1171,6 +1294,9 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
                 x += textWidth - tokenWidth;
                 break;
             default:
+                if (this.isVertical) {
+                    x = this.hasIcons() ? (this.getIconBounds().height) : 0;
+                }
                 break;
             }
 
@@ -1185,7 +1311,10 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
             }
 
             graphics.drawText(token, x, y);
-            graphics.setClip(clipRect);
+
+            if (!this.isVertical) {
+                graphics.setClip(clipRect);
+            }
 
             y += fontHeight;
 
@@ -1209,6 +1338,10 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
     private void paintIcons(Graphics graphics) {
         Point p = Point.SINGLETON;
         p.setLocation(getIconLocation());
+
+        if (this.isVertical) {
+            p.setLocation(0, getIconLocation().y);
+        }
 
         int num = getNumberofIcons();
         for (int i = 0; i < num; i++) {
@@ -1672,8 +1805,15 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
      *            int <b>mapped already to logical units</b>.
      */
     private int getLineWrapPosition(String s, Font f, int w, int fontHeight) {
-        if (getTextExtents(s, f, fontHeight).width <= w) {
-            return s.length();
+
+        if (this.isVertical) {
+            if (getTextExtents(s, f, fontHeight).height <= w) {
+                return s.length();
+            }
+        } else {
+            if (getTextExtents(s, f, fontHeight).width <= w) {
+                return s.length();
+            }
         }
         // create an iterator for line breaking positions
         BreakIterator iter = BreakIterator.getLineInstance();
@@ -1683,16 +1823,26 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
 
         // if the first line segment does not fit in the width,
         // determine the position within it where we need to cut
-        if (getTextExtents(s.substring(start, end), f, fontHeight).width > w) {
-            iter = BreakIterator.getCharacterInstance();
-            iter.setText(s);
-            start = iter.first();
+
+        if (this.isVertical) {
+            if (getTextExtents(s.substring(start, end), f, fontHeight).height > w) {
+                iter = BreakIterator.getCharacterInstance();
+                iter.setText(s);
+                start = iter.first();
+            }
+
+        } else {
+            if (getTextExtents(s.substring(start, end), f, fontHeight).width > w) {
+                iter = BreakIterator.getCharacterInstance();
+                iter.setText(s);
+                start = iter.first();
+            }
         }
 
         // keep iterating as long as width permits
         do
             end = iter.next();
-        while (end != BreakIterator.DONE && getTextExtents(s.substring(start, end), f, fontHeight).width <= w);
+        while (end != BreakIterator.DONE && ((this.isVertical ? getTextExtents(s.substring(start, end), f, fontHeight).height : getTextExtents(s.substring(start, end), f, fontHeight).width) <= w));
         return (end == BreakIterator.DONE) ? iter.last() : iter.previous();
     }
 
@@ -1732,7 +1882,7 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
                 guess = min + 1;
 
             // Measure the current guess
-            guessSize = getTextExtents(s.substring(0, guess), f, fontHeight).width;
+            guessSize = (this.isVertical) ? getTextExtents(s.substring(0, guess), f, fontHeight).height : getTextExtents(s.substring(0, guess), f, fontHeight).width;
 
             if (guessSize < w)
                 // We did not use the available width
@@ -1757,6 +1907,13 @@ public class SiriusWrapLabel extends Figure implements PositionConstants {
             IMapMode mapMode = getFigureMapMode();
             d.width = mapMode.DPtoLP(d.width);
             d.height = fontHeight * new StringTokenizer(s, "\n").countTokens();//$NON-NLS-1$
+
+            if (this.isVertical) {
+                int w = d.width;
+                int h = d.height;
+                d.width = h;
+                d.height = (w > fontHeight) ? w : fontHeight;
+            }
             return d;
         }
     }

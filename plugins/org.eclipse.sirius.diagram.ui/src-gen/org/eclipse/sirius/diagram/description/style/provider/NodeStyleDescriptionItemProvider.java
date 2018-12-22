@@ -35,7 +35,7 @@ import org.eclipse.sirius.diagram.ui.provider.DiagramUIPlugin;
  * This is the item provider adapter for a
  * {@link org.eclipse.sirius.diagram.description.style.NodeStyleDescription}
  * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- *
+ * 
  * @generated
  */
 public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
@@ -77,6 +77,7 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
             addLabelPositionPropertyDescriptor(object);
             addResizeKindPropertyDescriptor(object);
             addForbiddenSidesPropertyDescriptor(object);
+            addLabelDirectionPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
@@ -84,7 +85,7 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
     /**
      * This adds a property descriptor for the Border Size Computation
      * Expression feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addBorderSizeComputationExpressionPropertyDescriptor(Object object) {
@@ -248,7 +249,7 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
     /**
      * This adds a property descriptor for the Size Computation Expression
      * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addSizeComputationExpressionPropertyDescriptor(Object object) {
@@ -276,7 +277,7 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
     /**
      * This adds a property descriptor for the Hide Label By Default feature.
      * <!-- begin-user-doc --> <!-- end-user-doc -->
-     *
+     * 
      * @generated
      */
     protected void addHideLabelByDefaultPropertyDescriptor(Object object) {
@@ -317,6 +318,19 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
     }
 
     /**
+     * This adds a property descriptor for the Label Direction feature. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     *
+     * @generated
+     */
+    protected void addLabelDirectionPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add(
+                createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_NodeStyleDescription_labelDirection_feature"), //$NON-NLS-1$
+                        getString("_UI_PropertyDescriptor_description", "_UI_NodeStyleDescription_labelDirection_feature", "_UI_NodeStyleDescription_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        StylePackage.Literals.NODE_STYLE_DESCRIPTION__LABEL_DIRECTION, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+    }
+
+    /**
      * This returns the label text for the adapted class. <!-- begin-user-doc
      * --> <!-- end-user-doc -->
      *
@@ -333,7 +347,7 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
      * update any cached children and by creating a viewer notification, which
      * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     *
+     * 
      * @generated
      */
     @Override
@@ -356,6 +370,7 @@ public class NodeStyleDescriptionItemProvider extends ItemProviderAdapter
         case StylePackage.NODE_STYLE_DESCRIPTION__LABEL_POSITION:
         case StylePackage.NODE_STYLE_DESCRIPTION__RESIZE_KIND:
         case StylePackage.NODE_STYLE_DESCRIPTION__FORBIDDEN_SIDES:
+        case StylePackage.NODE_STYLE_DESCRIPTION__LABEL_DIRECTION:
             fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
             return;
         }

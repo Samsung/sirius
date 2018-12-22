@@ -51,6 +51,7 @@ import org.eclipse.sirius.diagram.ui.internal.edit.parts.SquareEditPart;
 import org.eclipse.sirius.diagram.ui.internal.operation.RegionContainerUpdateLayoutOperation;
 import org.eclipse.sirius.diagram.ui.internal.view.factories.AbstractContainerViewFactory;
 import org.eclipse.sirius.diagram.ui.provider.DiagramUIPlugin;
+import org.eclipse.sirius.diagram.ui.tools.api.figure.SiriusWrapLabel;
 import org.eclipse.sirius.diagram.ui.tools.internal.edit.command.CommandFactory;
 import org.eclipse.sirius.diagram.ui.tools.internal.layout.provider.AbstractCompositeLayoutProvider;
 import org.eclipse.sirius.diagram.ui.tools.internal.preferences.SiriusDiagramUiInternalPreferencesKeys;
@@ -391,7 +392,21 @@ public class ArrangeAllWithAutoSize {
             Rectangle extendedBoxName = new Rectangle();
             for (AbstractDiagramNameEditPart nameNode : Iterables.filter(gep.getChildren(), AbstractDiagramNameEditPart.class)) {
                 Rectangle translate = nameNode.getFigure().getBounds().getCopy();
-                extendedBoxName.union(new Dimension(0, translate.height));
+
+                if (nameNode.getFigure() instanceof SiriusWrapLabel) {
+
+                    SiriusWrapLabel verticalfigure = (SiriusWrapLabel) nameNode.getFigure();
+                    if (verticalfigure.isVertical()) {
+                        extendedBoxName.union(new Dimension(0, translate.width));
+                    } else {
+                        extendedBoxName.union(new Dimension(0, translate.height));
+                    }
+
+                } else {
+
+                    extendedBoxName.union(new Dimension(0, translate.height));
+                }
+               
             }
             for (SquareEditPart nameNode : Iterables.filter(gep.getChildren(), SquareEditPart.class)) {
                 Dimension translate = gep.getFigure().getMinimumSize().getCopy();
